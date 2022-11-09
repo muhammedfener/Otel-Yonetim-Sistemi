@@ -30,7 +30,7 @@ namespace Otel_Yonetim_Sistemi
             SqlDataReader odalar = baglanti.SorguVeriOku("SELECT * FROM odalar");
             while (odalar.Read())
             {
-                OdaNumaraListe.Add((string)odalar["odaNumara"]);
+                OdaNumaraListe.Add(odalar["odaNumara"].ToString());
                 string[] satir = { odalar["odaNumara"].ToString(),odalar["odaKat"].ToString(), odalar["odaKisiSayisi"].ToString(), odalar["odaFiyat"].ToString() };
                 var listViewItem = new ListViewItem(satir);
 

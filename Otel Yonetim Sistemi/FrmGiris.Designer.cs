@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtKullaniciAd = new System.Windows.Forms.TextBox();
+            this.txtSifre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnGiris = new System.Windows.Forms.Button();
@@ -38,19 +38,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbOtelIcon)).BeginInit();
             this.SuspendLayout();
             // 
-            // textBox1
+            // txtKullaniciAd
             // 
-            this.textBox1.Location = new System.Drawing.Point(101, 89);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(124, 20);
-            this.textBox1.TabIndex = 1;
+            this.txtKullaniciAd.Location = new System.Drawing.Point(101, 89);
+            this.txtKullaniciAd.Name = "txtKullaniciAd";
+            this.txtKullaniciAd.Size = new System.Drawing.Size(124, 20);
+            this.txtKullaniciAd.TabIndex = 1;
             // 
-            // textBox2
+            // txtSifre
             // 
-            this.textBox2.Location = new System.Drawing.Point(101, 115);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(124, 20);
-            this.textBox2.TabIndex = 1;
+            this.txtSifre.Location = new System.Drawing.Point(101, 115);
+            this.txtSifre.Name = "txtSifre";
+            this.txtSifre.Size = new System.Drawing.Size(124, 20);
+            this.txtSifre.TabIndex = 1;
             // 
             // label1
             // 
@@ -111,8 +111,8 @@
             this.Controls.Add(this.btnGiris);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtSifre);
+            this.Controls.Add(this.txtKullaniciAd);
             this.Controls.Add(this.pbOtelIcon);
             this.Name = "FrmGiris";
             this.Text = "Giriş Ekranı";
@@ -125,8 +125,8 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pbOtelIcon;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtKullaniciAd;
+        private System.Windows.Forms.TextBox txtSifre;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnGiris;

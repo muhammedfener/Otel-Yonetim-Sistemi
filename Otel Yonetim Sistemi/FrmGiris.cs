@@ -27,16 +27,27 @@ namespace Otel_Yonetim_Sistemi
         private void btnGiris_Click(object sender, EventArgs e)
         {
             string connectionString = $"Server={Properties.Settings.Default.dbip};Database={Properties.Settings.Default.dbname};User Id={Properties.Settings.Default.dbuser};Password={Properties.Settings.Default.dbpass};";
-            
-            SqlConnection con = new SqlConnection(connectionString);
-            try
+
+            Baglanti baglanti = new Baglanti(connectionString);
+            string Command = "SELECT kullaniciAdi,kullaniciSifre FROM Kullanicilar";
+            SqlDataReader reader = baglanti.SorguVeriOku(Command);
+
+            List<string> kullaniciadlari = new List<string>();
+            List<string> kullanicisifreler = new List<string>();
+
+            while (reader.Read())
             {
-                con.Open();
-                MessageBox.Show("Bağlantı Başarılı");
+                kullaniciadlari.Add((string)reader["kullaniciAdi"]);
+                kullanicisifreler.Add((string)reader["kullaniciSifre"]);
             }
-            catch (Exception ex)
+            
+            reader.Close();
+
+            string girilenkullaniciad = txtKullaniciAd.Text;
+
+            if(kullaniciadlari.Exists(x => x == girilenkullaniciad))
             {
-                MessageBox.Show(ex.Message);
+
             }
         }
     }

@@ -16,7 +16,7 @@ namespace Otel_Yonetim_Sistemi
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmYonetici());
+            Application.Run(new FrmGiris());
         }
     }
 }
