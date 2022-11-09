@@ -28,6 +28,16 @@ namespace Otel_Yonetim_Sistemi
             }
         }
 
+        public SqlDataReader SorguVeriOku(string Command)
+        {
+            this.command.Connection = connection;
+            this.command.CommandText = Command;
+
+            this.reader = this.command.ExecuteReader();
+
+            return reader;
+        }
+
         public SqlDataReader SorguVeriOku(SqlCommand Command)
         {
             this.command.Connection = connection;
@@ -48,12 +58,32 @@ namespace Otel_Yonetim_Sistemi
             return DonecekDeger;
         }
 
+        public int SorguNonQuery(string Command)
+        {
+            this.command.Connection = this.connection;
+            this.command.CommandText = Command;
+
+            int DonecekDeger = this.command.ExecuteNonQuery();
+
+            return DonecekDeger;
+        }
+
         public decimal SorguScalar(SqlCommand Command)
         {
             this.command.Connection = this.connection;
             this.command.CommandText = Command.CommandText;
 
             decimal DonecekDeger = (decimal) this.command.ExecuteScalar();
+
+            return DonecekDeger;
+        }
+
+        public decimal SorguScalar(string Command)
+        {
+            this.command.Connection = this.connection;
+            this.command.CommandText = Command;
+
+            decimal DonecekDeger = (decimal)this.command.ExecuteScalar();
 
             return DonecekDeger;
         }

@@ -15,6 +15,7 @@ namespace Otel_Yonetim_Sistemi
     {
         Baglanti baglanti;
 
+        List<string> OdaNumaraListe = new List<string>();
         public FrmYonetici()
         {
             InitializeComponent();
@@ -29,8 +30,9 @@ namespace Otel_Yonetim_Sistemi
             SqlDataReader odalar = baglanti.SorguVeriOku("SELECT * FROM odalar");
             while (odalar.Read())
             {
-                string[] row = { odalar["odaNumara"].ToString(),odalar["odaKat"].ToString(), odalar["odaKisiSayisi"].ToString(), odalar["odaFiyat"].ToString() };
-                var listViewItem = new ListViewItem(row);
+                OdaNumaraListe.Add((string)odalar["odaNumara"]);
+                string[] satir = { odalar["odaNumara"].ToString(),odalar["odaKat"].ToString(), odalar["odaKisiSayisi"].ToString(), odalar["odaFiyat"].ToString() };
+                var listViewItem = new ListViewItem(satir);
 
                 lvwOdaListesi.Items.Add(listViewItem);
             }
@@ -40,12 +42,14 @@ namespace Otel_Yonetim_Sistemi
         
         private void btnOdaDuzenle_Click(object sender, EventArgs e)
         {
+
             if(lvwOdaListesi.SelectedItems.Count != 1)
             {
                 MessageBox.Show("Oda Seçin!");
             }
             else
             {
+                VerileriTemizle();
                 string odaNumarasi = lvwOdaListesi.SelectedItems[0].SubItems[0].Text;
                 SqlDataReader odalar = baglanti.SorguVeriOku($"SELECT * FROM odalar WHERE odaNumara = {odaNumarasi}");
 
@@ -91,7 +95,6 @@ namespace Otel_Yonetim_Sistemi
 
                 SqlDataReader odaYataklar = baglanti.SorguVeriOku($"SELECT * FROM odalar_odaYataklar WHERE odaNumara = {odaNumarasi}");
 
-                NuDTemizle();
 
 
                 while (odaYataklar.Read())
@@ -105,7 +108,7 @@ namespace Otel_Yonetim_Sistemi
                             nudCiftKisilikYatak.Value = Convert.ToDecimal(odaYataklar["yatakAdet"]);
                             break;
                         case 3:
-                            nudTekKisilikYatak.Value = Convert.ToDecimal(odaYataklar["yatakAdet"]);
+                            chkKralOdasi.Checked = true;
                             break;
                     }
                 }
@@ -115,26 +118,62 @@ namespace Otel_Yonetim_Sistemi
             }
         }
 
-        private void NuDTemizle()
+        private void VerileriTemizle()
         {
            
             foreach (var item in pnlOdaEkle.Controls)
             {
+               
                 if (item is NumericUpDown)
                 {
-                   NumericUpDown nud = (NumericUpDown)item;
-                    nud.Value=0;
-
+                    NumericUpDown nud = (NumericUpDown)item;
+                    nud.Value = 0;
                 }
-               
+
+                if (item is CheckedListBox)
+                {
+                    CheckedListBox ckl = (CheckedListBox)item;
+                    for(int i = 0; i < ckl.Items.Count; i++)
+                    {
+                        ckl.SetItemCheckState(i, CheckState.Unchecked);
+                    }
+                }
+
+                if(item is RichTextBox)
+                {
+                    RichTextBox rich = (RichTextBox)item;
+                    rich.Text = "";
+                }
+
             }
         }
 
         private void btnOdaEkle_Click(object sender, EventArgs e)
         {
-            string commandstring = "INSERT INTO Odalar (odaNumara,odaKat,odaKisiSayisi,odaFiyat,odaAciklama,odaDoluMu,odaAktifMi) VALUES (@odaNumara,@odaKat,@odaKisiSayisi,@odaFiyat,@odaAciklama,0,1); SELECT SCOPE_IDENTITY();";
+            if(OdaNumaraListe.Exists(x => x == nudOdaNumara.Value.ToString()))
+            {
+                MessageBox.Show("Oda Numarasına Sahip Bir Oda Zaten Var!");
+            }
+            else 
+            {
+                string odaNumara = nudOdaNumara.Value.ToString();
+                string odaKat = nudOdaKat.Value.ToString();
+                string odaKisiSayisi = nudOdaKisi.Value.ToString();
+                string odaFiyat = nudOdaFiyat.Value.ToString();
+                string odaAciklama = rtxOdaAciklama.Text;
 
-            baglanti.SorguScalar(commandstring);
+                string commandstring = "INSERT INTO Odalar (odaNumara,odaKat,odaKisiSayisi,odaFiyat,odaAciklama,odaDoluMu,odaAktifMi) VALUES (@odaNumara,@odaKat,@odaKisiSayisi,@odaFiyat,@odaAciklama,0,1); SELECT SCOPE_IDENTITY();";
+                SqlCommand sorgu = new SqlCommand(commandstring);
+                sorgu.Parameters.AddWithValue("@odaNumara",odaNumara);
+                sorgu.Parameters.AddWithValue("@odaKat", odaKat);
+                sorgu.Parameters.AddWithValue("@odaKisiSayisi", odaKisiSayisi);
+                sorgu.Parameters.AddWithValue("@odaFiyat", odaFiyat);
+                sorgu.Parameters.AddWithValue("@odaAciklama", odaAciklama);
+
+                int id = (int) baglanti.SorguScalar(sorgu);
+            }
+                
+           
         }
 
         private void btnOdaDegistir_Click(object sender, EventArgs e)
