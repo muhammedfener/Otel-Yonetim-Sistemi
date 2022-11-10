@@ -145,6 +145,11 @@ namespace Otel_Yonetim_Sistemi
                     rich.Text = "";
                 }
 
+                if (chkKralOdasi.Checked)
+                {
+                    chkKralOdasi.CheckState = CheckState.Unchecked;
+                }
+
             }
         }
 
@@ -172,13 +177,28 @@ namespace Otel_Yonetim_Sistemi
 
                 int id = (int) baglanti.SorguScalar(sorgu);
             }
-                
-           
         }
 
         private void btnOdaDegistir_Click(object sender, EventArgs e)
-        {
+        {  
+            string odaNumara = nudOdaNumara.Value.ToString();
+            string odaKat = nudOdaKat.Value.ToString();
+            string odaKisiSayisi = nudOdaKisi.Value.ToString();
+            string odaFiyat = nudOdaFiyat.Value.ToString();
+            string odaAciklama = rtxOdaAciklama.Text;
 
+            if (OdaNumaraListe.Exists(x => x == nudOdaNumara.Value.ToString()))
+            {
+                string commandstring = "INSERT INTO Odalar (odaNumara,odaKat,odaKisiSayisi,odaFiyat,odaAciklama,odaDoluMu,odaAktifMi) VALUES(@odaNumara,@odaKat,@odaKisiSayisi,@odaFiyat,@odaAciklama,0,1); SELECT SCOPE_IDENTITY();";
+                SqlCommand sorgu = new SqlCommand(commandstring);
+                sorgu.Parameters.AddWithValue("@odaNumara", odaNumara);
+                sorgu.Parameters.AddWithValue("@odaKat", odaKat);
+                sorgu.Parameters.AddWithValue("@odaKisiSayisi", odaKisiSayisi);
+                sorgu.Parameters.AddWithValue("@odaFiyat", odaFiyat);
+                sorgu.Parameters.AddWithValue("@odaAciklama", odaAciklama);
+
+                int id = (int)baglanti.SorguScalar(sorgu);
+            }
         }
     }
 }

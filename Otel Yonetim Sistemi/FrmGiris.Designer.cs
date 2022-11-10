@@ -44,6 +44,7 @@
             this.txtKullaniciAd.Name = "txtKullaniciAd";
             this.txtKullaniciAd.Size = new System.Drawing.Size(124, 20);
             this.txtKullaniciAd.TabIndex = 1;
+            this.txtKullaniciAd.Text = "sakipkoc";
             // 
             // txtSifre
             // 
@@ -51,6 +52,7 @@
             this.txtSifre.Name = "txtSifre";
             this.txtSifre.Size = new System.Drawing.Size(124, 20);
             this.txtSifre.TabIndex = 1;
+            this.txtSifre.Text = "test123";
             // 
             // label1
             // 

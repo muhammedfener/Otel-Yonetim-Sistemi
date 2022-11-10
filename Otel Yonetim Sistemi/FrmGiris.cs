@@ -28,27 +28,42 @@ namespace Otel_Yonetim_Sistemi
         {
             string connectionString = $"Server={Properties.Settings.Default.dbip};Database={Properties.Settings.Default.dbname};User Id={Properties.Settings.Default.dbuser};Password={Properties.Settings.Default.dbpass};";
 
+            string kullaniciAd = txtKullaniciAd.Text;
+            string kullaniciSifre = txtSifre.Text;
+
             Baglanti baglanti = new Baglanti(connectionString);
-            string Command = "SELECT kullaniciAdi,kullaniciSifre FROM Kullanicilar";
+            string Command = $"SELECT * FROM kullanicilar WHERE kullaniciAdi = '{kullaniciAd}' AND kullaniciSifre = '{kullaniciSifre}'";
             SqlDataReader reader = baglanti.SorguVeriOku(Command);
 
-            List<string> kullaniciadlari = new List<string>();
-            List<string> kullanicisifreler = new List<string>();
-
-            while (reader.Read())
+            if (!reader.HasRows)
             {
-                kullaniciadlari.Add((string)reader["kullaniciAdi"]);
-                kullanicisifreler.Add((string)reader["kullaniciSifre"]);
+                MessageBox.Show("Hatalı Kullanıcı Adı veya Şifre!");
             }
-            
-            reader.Close();
-
-            string girilenkullaniciad = txtKullaniciAd.Text;
-
-            if(kullaniciadlari.Exists(x => x == girilenkullaniciad))
+            else
             {
+                while (reader.Read())
+                {
 
-            }
+                    if (reader[5] == DBNull.Value)
+                    {
+                        FrmYonetici yoneticiForm = new FrmYonetici();
+                        yoneticiForm.Show();
+                        this.Hide();
+                        return;
+                    }
+
+                    if (reader.IsDBNull(6))
+                    {
+                        FrmResepsiyon resepsiyonForm = new FrmResepsiyon();
+                        resepsiyonForm.Show();
+                        this.Hide();
+                        return;
+                    }
+                    MessageBox.Show("Hesabınız İçin Yetkilendirme Yapılmamış!");
+                }
+
         }
+
+    }
     }
 }
