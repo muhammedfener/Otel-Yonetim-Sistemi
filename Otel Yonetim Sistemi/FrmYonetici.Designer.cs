@@ -34,6 +34,7 @@
             this.CalisanDuzenleMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.kullaniciEkleDuzenleMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlOdaEkle = new System.Windows.Forms.Panel();
+            this.chkKralOdasi = new System.Windows.Forms.CheckBox();
             this.rtxOdaAciklama = new System.Windows.Forms.RichTextBox();
             this.btnOdaDuzenle = new System.Windows.Forms.Button();
             this.lvwOdaListesi = new System.Windows.Forms.ListView();
@@ -58,7 +59,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.nudOdaNumara = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
-            this.chkKralOdasi = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.pnlOdaEkle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudCiftKisilikYatak)).BeginInit();
@@ -134,6 +134,16 @@
             this.pnlOdaEkle.Name = "pnlOdaEkle";
             this.pnlOdaEkle.Size = new System.Drawing.Size(800, 426);
             this.pnlOdaEkle.TabIndex = 2;
+            // 
+            // chkKralOdasi
+            // 
+            this.chkKralOdasi.AutoSize = true;
+            this.chkKralOdasi.Location = new System.Drawing.Point(37, 361);
+            this.chkKralOdasi.Name = "chkKralOdasi";
+            this.chkKralOdasi.Size = new System.Drawing.Size(74, 17);
+            this.chkKralOdasi.TabIndex = 9;
+            this.chkKralOdasi.Text = "Kral Odası";
+            this.chkKralOdasi.UseVisualStyleBackColor = true;
             // 
             // rtxOdaAciklama
             // 
@@ -381,16 +391,6 @@
             this.label1.Text = "Oda Numara: ";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // chkKralOdasi
-            // 
-            this.chkKralOdasi.AutoSize = true;
-            this.chkKralOdasi.Location = new System.Drawing.Point(37, 361);
-            this.chkKralOdasi.Name = "chkKralOdasi";
-            this.chkKralOdasi.Size = new System.Drawing.Size(74, 17);
-            this.chkKralOdasi.TabIndex = 9;
-            this.chkKralOdasi.Text = "Kral Odası";
-            this.chkKralOdasi.UseVisualStyleBackColor = true;
-            // 
             // FrmYonetici
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -401,6 +401,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FrmYonetici";
             this.Text = "FrmYonetici";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmYonetici_FormClosed);
             this.Load += new System.EventHandler(this.FrmYonetici_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

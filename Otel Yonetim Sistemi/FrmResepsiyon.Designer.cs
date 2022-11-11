@@ -92,7 +92,6 @@
             this.txtEskiSifre = new System.Windows.Forms.TextBox();
             this.txtYeniSifre = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.tpnlOdaDurum.SuspendLayout();
             this.gbBosOdalar.SuspendLayout();
@@ -116,7 +115,6 @@
             this.tpnlKullaniciIslemler.SuspendLayout();
             this.gbKullaniciBilgileri.SuspendLayout();
             this.tpnlKullaniciBilgiler.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -165,14 +163,14 @@
             // ms_KullaniciSifreDegis
             // 
             this.ms_KullaniciSifreDegis.Name = "ms_KullaniciSifreDegis";
-            this.ms_KullaniciSifreDegis.Size = new System.Drawing.Size(180, 22);
+            this.ms_KullaniciSifreDegis.Size = new System.Drawing.Size(162, 22);
             this.ms_KullaniciSifreDegis.Text = "Kullanıcı Ayarları";
             this.ms_KullaniciSifreDegis.Click += new System.EventHandler(this.ms_KullaniciSifreDegis_Click);
             // 
             // ms_CikisYap
             // 
             this.ms_CikisYap.Name = "ms_CikisYap";
-            this.ms_CikisYap.Size = new System.Drawing.Size(180, 22);
+            this.ms_CikisYap.Size = new System.Drawing.Size(162, 22);
             this.ms_CikisYap.Text = "Çıkış Yap";
             this.ms_CikisYap.Click += new System.EventHandler(this.ms_CikisYap_Click);
             // 
@@ -844,18 +842,10 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.textBox2);
             this.panel1.Location = new System.Drawing.Point(445, 3);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(436, 227);
             this.panel1.TabIndex = 1;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(24, 23);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(400, 20);
-            this.textBox2.TabIndex = 1;
             // 
             // FrmResepsiyon
             // 
@@ -898,8 +888,6 @@
             this.gbKullaniciBilgileri.ResumeLayout(false);
             this.tpnlKullaniciBilgiler.ResumeLayout(false);
             this.tpnlKullaniciBilgiler.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -971,6 +959,5 @@
         private System.Windows.Forms.TextBox txtEskiSifre;
         private System.Windows.Forms.TextBox txtYeniSifre;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TextBox textBox2;
     }
 }

@@ -167,7 +167,7 @@ namespace Otel_Yonetim_Sistemi
                 string odaFiyat = nudOdaFiyat.Value.ToString();
                 string odaAciklama = rtxOdaAciklama.Text;
 
-                string commandstring = "INSERT INTO Odalar (odaNumara,odaKat,odaKisiSayisi,odaFiyat,odaAciklama,odaDoluMu,odaAktifMi) VALUES (@odaNumara,@odaKat,@odaKisiSayisi,@odaFiyat,@odaAciklama,0,1); SELECT SCOPE_IDENTITY();";
+                string commandstring = "INSERT INTO Odalar (odaNumara,odaKat,odaKisiSayisi,odaFiyat,odaAciklama,odaDoluMu,odaAktifMi) VALUES (@odaNumara,@odaKat,@odaKisiSayisi,@odaFiyat,@odaAciklama,0,1);";
                 SqlCommand sorgu = new SqlCommand(commandstring);
                 sorgu.Parameters.AddWithValue("@odaNumara",odaNumara);
                 sorgu.Parameters.AddWithValue("@odaKat", odaKat);
@@ -175,7 +175,23 @@ namespace Otel_Yonetim_Sistemi
                 sorgu.Parameters.AddWithValue("@odaFiyat", odaFiyat);
                 sorgu.Parameters.AddWithValue("@odaAciklama", odaAciklama);
 
-                int id = (int) baglanti.SorguScalar(sorgu);
+                try
+                {
+                    int id = (int)baglanti.SorguScalar(sorgu);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Oda Eklenirken Hata Oluştu! Hata Mesajı: " + ex.Message);
+                }
+
+
+                foreach (int itemIndices in cklOzellikler.CheckedIndices)
+                {
+
+                    commandstring = $"INSERT INTO odalar_odaOzellik (odaNumara,ozellikID) VALUES({odaNumara},{itemIndices+1})";
+
+
+                }
             }
         }
 
@@ -197,8 +213,15 @@ namespace Otel_Yonetim_Sistemi
                 sorgu.Parameters.AddWithValue("@odaFiyat", odaFiyat);
                 sorgu.Parameters.AddWithValue("@odaAciklama", odaAciklama);
 
-                int id = (int)baglanti.SorguScalar(sorgu);
+                int id = baglanti.SorguNonQuery(sorgu);
+
+                
             }
+        }
+
+        private void FrmYonetici_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
