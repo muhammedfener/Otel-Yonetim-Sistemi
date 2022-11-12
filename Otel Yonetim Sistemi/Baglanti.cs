@@ -22,9 +22,9 @@ namespace Otel_Yonetim_Sistemi
                 command = new SqlCommand();
                 connection.Open();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show("Veritabanına Bağlanılamadı!");
+                System.Windows.Forms.MessageBox.Show("Veritabanına Bağlanılamadı! Hata Mesajı: " +ex.Message);
             }
         }
 

@@ -264,7 +264,6 @@
             // 
             // nudOdaFiyat
             // 
-            this.nudOdaFiyat.DecimalPlaces = 2;
             this.nudOdaFiyat.Location = new System.Drawing.Point(162, 107);
             this.nudOdaFiyat.Maximum = new decimal(new int[] {
             10000,

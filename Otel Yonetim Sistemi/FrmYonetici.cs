@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,6 +17,7 @@ namespace Otel_Yonetim_Sistemi
         Baglanti baglanti;
 
         List<string> OdaNumaraListe = new List<string>();
+        string eskiOdaNumara;
         public FrmYonetici()
         {
             InitializeComponent();
@@ -23,21 +25,29 @@ namespace Otel_Yonetim_Sistemi
 
         private void FrmYonetici_Load(object sender, EventArgs e)
         {
-            string connectionString = $"Server={Properties.Settings.Default.dbip};Database={Properties.Settings.Default.dbname};User Id={Properties.Settings.Default.dbuser};Password={Properties.Settings.Default.dbpass};";
-            
+            //string connectionString = $"Server={Properties.Settings.Default.dbip};Database={Properties.Settings.Default.dbname};User Id={Properties.Settings.Default.dbuser};Password={Properties.Settings.Default.dbpass};";
+
+            //string connectionString = $"Server=DESKTOP-RN1H7KK\\SQLEXPRESS;Database=BilgiHotel; User Id=MFener; Password=123;";
+            string connectionString = "Server=DESKTOP-RN1H7KK\\SQLEXPRESS;Database=BilgiHotel;Trusted_Connection=True;";
+
             baglanti = new Baglanti(connectionString);
 
+            OdaListele();
+            
+        }
+        private void OdaListele()
+        {
+            lvwOdaListesi.Items.Clear();
             SqlDataReader odalar = baglanti.SorguVeriOku("SELECT * FROM odalar");
             while (odalar.Read())
             {
                 OdaNumaraListe.Add(odalar["odaNumara"].ToString());
-                string[] satir = { odalar["odaNumara"].ToString(),odalar["odaKat"].ToString(), odalar["odaKisiSayisi"].ToString(), odalar["odaFiyat"].ToString() };
+                string[] satir = { odalar["odaNumara"].ToString(), odalar["odaKat"].ToString(), odalar["odaKisiSayisi"].ToString(), odalar["odaFiyat"].ToString() };
                 var listViewItem = new ListViewItem(satir);
 
                 lvwOdaListesi.Items.Add(listViewItem);
             }
             odalar.Close();
-            
         }
         
         private void btnOdaDuzenle_Click(object sender, EventArgs e)
@@ -115,6 +125,7 @@ namespace Otel_Yonetim_Sistemi
 
                 odaYataklar.Close();
 
+                eskiOdaNumara = odaNumarasi;
             }
         }
 
@@ -197,25 +208,75 @@ namespace Otel_Yonetim_Sistemi
 
         private void btnOdaDegistir_Click(object sender, EventArgs e)
         {  
-            string odaNumara = nudOdaNumara.Value.ToString();
-            string odaKat = nudOdaKat.Value.ToString();
-            string odaKisiSayisi = nudOdaKisi.Value.ToString();
-            string odaFiyat = nudOdaFiyat.Value.ToString();
+            int odaNumara = (int) nudOdaNumara.Value;
+            int odaKat = (int) nudOdaKat.Value;
+            int odaKisiSayisi = (int) nudOdaKisi.Value;
+            int odaFiyat = (int) nudOdaFiyat.Value;
             string odaAciklama = rtxOdaAciklama.Text;
+            int tekKisilikYatakAdet = (int) nudTekKisilikYatak.Value;
+            int ciftKisilikYatakAdet = (int) nudCiftKisilikYatak.Value;
 
             if (OdaNumaraListe.Exists(x => x == nudOdaNumara.Value.ToString()))
             {
-                string commandstring = "INSERT INTO Odalar (odaNumara,odaKat,odaKisiSayisi,odaFiyat,odaAciklama,odaDoluMu,odaAktifMi) VALUES(@odaNumara,@odaKat,@odaKisiSayisi,@odaFiyat,@odaAciklama,0,1); SELECT SCOPE_IDENTITY();";
-                SqlCommand sorgu = new SqlCommand(commandstring);
-                sorgu.Parameters.AddWithValue("@odaNumara", odaNumara);
-                sorgu.Parameters.AddWithValue("@odaKat", odaKat);
-                sorgu.Parameters.AddWithValue("@odaKisiSayisi", odaKisiSayisi);
-                sorgu.Parameters.AddWithValue("@odaFiyat", odaFiyat);
-                sorgu.Parameters.AddWithValue("@odaAciklama", odaAciklama);
+                if(cklOzellikler.CheckedItems.Count == 0)
+                {
+                    MessageBox.Show("En Az Bir Özellik Seçmelisiniz!");
+                    return;
+                }
 
-                int id = baglanti.SorguNonQuery(sorgu);
+                string commandstring = $"UPDATE odalar SET odaNumara = {odaNumara}, odaKat= {odaKat}, odaKisiSayisi = {odaKisiSayisi}, odaFiyat = {odaFiyat}, odaAciklama = '{odaAciklama}' WHERE odaNumara = {Convert.ToInt32(eskiOdaNumara)}";
 
-                
+                //MessageBox.Show(commandstring);
+
+                int id = baglanti.SorguNonQuery(commandstring);
+
+                if (id != 1)
+                {
+                    MessageBox.Show("Oda Düzenlenirken Hata Oluştu!");
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show("Oda Düzenlendi!");
+                }
+
+                OdaListele();
+                //Yatakları sil
+                commandstring = $"DELETE FROM odalar_odaYataklar WHERE odaNumara = {odaNumara};";
+                //Yatakları ekle
+
+                baglanti.SorguNonQuery(commandstring);
+
+                commandstring = $"INSERT INTO odalar_odaYataklar (odaNumara,yatakID,yatakAdet) VALUES({odaNumara},1,{tekKisilikYatakAdet}),({odaNumara},2,{ciftKisilikYatakAdet});";
+
+                //commandstring = "UPDATE odalar_odaYataklar SET odaNumara = {odaNumara}, yatakAdet ={tekKisilikYatakAdet} WHERE odaNumara = {eskiOdaNumara};";
+
+                baglanti.SorguNonQuery(commandstring);
+
+                //commandstring = "UPDATE odalar_odaYataklar SET odaNumara = {odaNumara}, yatakAdet ={tekKisilikYatakAdet} WHERE odaNumara = {eskiOdaNumara} AND yatakID = 2;";
+
+                //Oda Özelliklerini Sil
+                commandstring = "DELETE FROM odalar_odaOzellikler WHERE odaNumara = {eskiOdaNumara};";
+
+                baglanti.SorguNonQuery(commandstring);
+
+                //Oda Özelliklerini Ekle
+                ArrayList ozellikler = new ArrayList();
+
+                foreach(int itemIndices in cklOzellikler.CheckedIndices)
+                {
+                    ozellikler.Add(itemIndices + 1);
+                }
+
+                commandstring = "INSERT INTO odalar_odaOzellikler (odaNumara,ozellikID) VALUES";
+                foreach(int ozellik in ozellikler)
+                {
+                    commandstring += $"({odaNumara},{ozellik}),";
+                }
+                commandstring += ";";
+
+                baglanti.SorguNonQuery(commandstring);
+
             }
         }
 
