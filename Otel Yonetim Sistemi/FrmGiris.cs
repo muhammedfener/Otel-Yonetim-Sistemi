@@ -61,9 +61,7 @@ namespace Otel_Yonetim_Sistemi
                     }
                     MessageBox.Show("Hesabınız İçin Yetkilendirme Yapılmamış!");
                 }
-
+            }
         }
-
-    }
     }
 }
