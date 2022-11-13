@@ -16,6 +16,7 @@ namespace Otel_Yonetim_Sistemi
     public partial class FrmYonetici : Form
     {
         Baglanti baglanti;
+        List<Panel> panels;
 
         List<int> OdaNumaraListe = new List<int>();
         int eskiOdaNumara;
@@ -30,12 +31,27 @@ namespace Otel_Yonetim_Sistemi
             //string connectionString = $"Server={Properties.Settings.Default.dbip};Database={Properties.Settings.Default.dbname};User Id={Properties.Settings.Default.dbuser};Password={Properties.Settings.Default.dbpass};";
 
             //string connectionString = $"Server=DESKTOP-RN1H7KK\\SQLEXPRESS;Database=BilgiHotel; User Id=MFener; Password=123;";
+
             string connectionString = "Server=DESKTOP-RN1H7KK\\SQLEXPRESS;Database=BilgiHotel;Trusted_Connection=True;";
 
             baglanti = new Baglanti(connectionString);
 
+
+            panels = new List<Panel> { pnlOdaEkle,pnlCalisanEkle };
+
+            PanelAc(pnlOdaEkle);
+
             OdaListele();
 
+        }
+
+        private void PanelAc(Panel acilacakPanel)
+        {
+            foreach(Panel panel in panels)
+            {
+                panel.Visible = false;
+            }
+            acilacakPanel.Visible = true;
         }
 
         private void OdaListele()
@@ -366,6 +382,16 @@ namespace Otel_Yonetim_Sistemi
 
             MessageBox.Show("Oda Başarıyla Silindi!");
             OdaListele();
+        }
+
+        private void odaDuzenleMenu_Click(object sender, EventArgs e)
+        {
+            PanelAc(pnlOdaEkle);
+        }
+
+        private void calisanEkleMenu_Click(object sender, EventArgs e)
+        {
+            PanelAc(pnlCalisanEkle);
         }
     }
 }

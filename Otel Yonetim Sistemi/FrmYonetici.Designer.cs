@@ -32,7 +32,6 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.odaDuzenleMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.calisanEkleMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.CalisanDuzenleMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.kullaniciEkleDuzenleMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlOdaEkle = new System.Windows.Forms.Panel();
             this.chkKralOdasi = new System.Windows.Forms.CheckBox();
@@ -64,6 +63,23 @@
             this.rightClickMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.edit = new System.Windows.Forms.ToolStripMenuItem();
             this.delete = new System.Windows.Forms.ToolStripMenuItem();
+            this.pnlCalisanEkle = new System.Windows.Forms.Panel();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.label16 = new System.Windows.Forms.Label();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.menuStrip1.SuspendLayout();
             this.pnlOdaEkle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudCiftKisilikYatak)).BeginInit();
@@ -73,6 +89,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudOdaKat)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudOdaNumara)).BeginInit();
             this.rightClickMenu.SuspendLayout();
+            this.pnlCalisanEkle.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -80,7 +97,6 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.odaDuzenleMenu,
             this.calisanEkleMenu,
-            this.CalisanDuzenleMenu,
             this.kullaniciEkleDuzenleMenu});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -93,18 +109,14 @@
             this.odaDuzenleMenu.Name = "odaDuzenleMenu";
             this.odaDuzenleMenu.Size = new System.Drawing.Size(117, 20);
             this.odaDuzenleMenu.Text = "Oda Ekle&&Duzenle";
+            this.odaDuzenleMenu.Click += new System.EventHandler(this.odaDuzenleMenu_Click);
             // 
             // calisanEkleMenu
             // 
             this.calisanEkleMenu.Name = "calisanEkleMenu";
-            this.calisanEkleMenu.Size = new System.Drawing.Size(81, 20);
-            this.calisanEkleMenu.Text = "Çalışan Ekle";
-            // 
-            // CalisanDuzenleMenu
-            // 
-            this.CalisanDuzenleMenu.Name = "CalisanDuzenleMenu";
-            this.CalisanDuzenleMenu.Size = new System.Drawing.Size(102, 20);
-            this.CalisanDuzenleMenu.Text = "Çalışan Düzenle";
+            this.calisanEkleMenu.Size = new System.Drawing.Size(133, 20);
+            this.calisanEkleMenu.Text = "Çalışan Ekle&&Düzenle";
+            this.calisanEkleMenu.Click += new System.EventHandler(this.calisanEkleMenu_Click);
             // 
             // kullaniciEkleDuzenleMenu
             // 
@@ -137,9 +149,9 @@
             this.pnlOdaEkle.Controls.Add(this.nudOdaNumara);
             this.pnlOdaEkle.Controls.Add(this.label1);
             this.pnlOdaEkle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlOdaEkle.Location = new System.Drawing.Point(0, 24);
+            this.pnlOdaEkle.Location = new System.Drawing.Point(0, 0);
             this.pnlOdaEkle.Name = "pnlOdaEkle";
-            this.pnlOdaEkle.Size = new System.Drawing.Size(800, 426);
+            this.pnlOdaEkle.Size = new System.Drawing.Size(800, 450);
             this.pnlOdaEkle.TabIndex = 2;
             // 
             // chkKralOdasi
@@ -182,9 +194,9 @@
             this.lvwOdaListesi.ContextMenuStrip = this.rightClickMenu;
             this.lvwOdaListesi.FullRowSelect = true;
             this.lvwOdaListesi.HideSelection = false;
-            this.lvwOdaListesi.Location = new System.Drawing.Point(458, 29);
+            this.lvwOdaListesi.Location = new System.Drawing.Point(455, 29);
             this.lvwOdaListesi.Name = "lvwOdaListesi";
-            this.lvwOdaListesi.Size = new System.Drawing.Size(330, 230);
+            this.lvwOdaListesi.Size = new System.Drawing.Size(333, 230);
             this.lvwOdaListesi.TabIndex = 6;
             this.lvwOdaListesi.UseCompatibleStateImageBehavior = false;
             this.lvwOdaListesi.View = System.Windows.Forms.View.Details;
@@ -416,7 +428,7 @@
             this.edit,
             this.delete});
             this.rightClickMenu.Name = "rightClickMenu";
-            this.rightClickMenu.Size = new System.Drawing.Size(181, 70);
+            this.rightClickMenu.Size = new System.Drawing.Size(117, 48);
             // 
             // edit
             // 
@@ -428,17 +440,170 @@
             // delete
             // 
             this.delete.Name = "delete";
-            this.delete.Size = new System.Drawing.Size(180, 22);
+            this.delete.Size = new System.Drawing.Size(116, 22);
             this.delete.Text = "Sil";
             this.delete.Click += new System.EventHandler(this.delete_Click);
+            // 
+            // pnlCalisanEkle
+            // 
+            this.pnlCalisanEkle.Controls.Add(this.dateTimePicker2);
+            this.pnlCalisanEkle.Controls.Add(this.dateTimePicker1);
+            this.pnlCalisanEkle.Controls.Add(this.richTextBox1);
+            this.pnlCalisanEkle.Controls.Add(this.textBox6);
+            this.pnlCalisanEkle.Controls.Add(this.textBox4);
+            this.pnlCalisanEkle.Controls.Add(this.textBox3);
+            this.pnlCalisanEkle.Controls.Add(this.label16);
+            this.pnlCalisanEkle.Controls.Add(this.label15);
+            this.pnlCalisanEkle.Controls.Add(this.label14);
+            this.pnlCalisanEkle.Controls.Add(this.textBox2);
+            this.pnlCalisanEkle.Controls.Add(this.label12);
+            this.pnlCalisanEkle.Controls.Add(this.label13);
+            this.pnlCalisanEkle.Controls.Add(this.textBox1);
+            this.pnlCalisanEkle.Controls.Add(this.label11);
+            this.pnlCalisanEkle.Controls.Add(this.label10);
+            this.pnlCalisanEkle.Controls.Add(this.label9);
+            this.pnlCalisanEkle.Location = new System.Drawing.Point(0, 26);
+            this.pnlCalisanEkle.Name = "pnlCalisanEkle";
+            this.pnlCalisanEkle.Size = new System.Drawing.Size(800, 426);
+            this.pnlCalisanEkle.TabIndex = 11;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(34, 26);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(20, 13);
+            this.label9.TabIndex = 1;
+            this.label9.Text = "Ad";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(28, 62);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(37, 13);
+            this.label10.TabIndex = 2;
+            this.label10.Text = "Soyad";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(109, 23);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 3;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(109, 59);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 20);
+            this.textBox2.TabIndex = 3;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(22, 95);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(43, 13);
+            this.label11.TabIndex = 1;
+            this.label11.Text = "Telefon";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(15, 131);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(51, 13);
+            this.label12.TabIndex = 2;
+            this.label12.Text = "TC Kimlik";
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(109, 92);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(100, 20);
+            this.textBox3.TabIndex = 3;
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(109, 128);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(100, 20);
+            this.textBox4.TabIndex = 3;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(34, 161);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(71, 13);
+            this.label13.TabIndex = 1;
+            this.label13.Text = "Çalışan Adres";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(28, 264);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(72, 13);
+            this.label14.TabIndex = 2;
+            this.label14.Text = "İrtibat Telefon";
+            // 
+            // textBox6
+            // 
+            this.textBox6.Location = new System.Drawing.Point(109, 261);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(100, 20);
+            this.textBox6.TabIndex = 3;
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(109, 161);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(100, 96);
+            this.richTextBox1.TabIndex = 4;
+            this.richTextBox1.Text = "";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(3, 294);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(93, 13);
+            this.label15.TabIndex = 2;
+            this.label15.Text = "İşe Başlama Tarihi";
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(106, 288);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(103, 20);
+            this.dateTimePicker1.TabIndex = 5;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(1, 321);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(95, 13);
+            this.label16.TabIndex = 2;
+            this.label16.Text = "İşten Ayrılma Tarihi";
+            // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.Location = new System.Drawing.Point(106, 315);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(103, 20);
+            this.dateTimePicker2.TabIndex = 5;
             // 
             // FrmYonetici
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.pnlOdaEkle);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.pnlCalisanEkle);
+            this.Controls.Add(this.pnlOdaEkle);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FrmYonetici";
             this.Text = "FrmYonetici";
@@ -455,6 +620,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudOdaKat)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudOdaNumara)).EndInit();
             this.rightClickMenu.ResumeLayout(false);
+            this.pnlCalisanEkle.ResumeLayout(false);
+            this.pnlCalisanEkle.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -464,7 +631,6 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem odaDuzenleMenu;
         private System.Windows.Forms.ToolStripMenuItem calisanEkleMenu;
-        private System.Windows.Forms.ToolStripMenuItem CalisanDuzenleMenu;
         private System.Windows.Forms.ToolStripMenuItem kullaniciEkleDuzenleMenu;
         private System.Windows.Forms.Panel pnlOdaEkle;
         private System.Windows.Forms.Button btnOdaDuzenle;
@@ -496,5 +662,22 @@
         private System.Windows.Forms.ContextMenuStrip rightClickMenu;
         private System.Windows.Forms.ToolStripMenuItem edit;
         private System.Windows.Forms.ToolStripMenuItem delete;
+        private System.Windows.Forms.Panel pnlCalisanEkle;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
     }
 }
