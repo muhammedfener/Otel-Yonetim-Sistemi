@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.odaDuzenleMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.calisanEkleMenu = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,6 +60,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.nudOdaNumara = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnTemizle = new System.Windows.Forms.Button();
+            this.rightClickMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.edit = new System.Windows.Forms.ToolStripMenuItem();
+            this.delete = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.pnlOdaEkle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudCiftKisilikYatak)).BeginInit();
@@ -67,6 +72,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudOdaKisi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudOdaKat)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudOdaNumara)).BeginInit();
+            this.rightClickMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -108,6 +114,7 @@
             // 
             // pnlOdaEkle
             // 
+            this.pnlOdaEkle.Controls.Add(this.btnTemizle);
             this.pnlOdaEkle.Controls.Add(this.chkKralOdasi);
             this.pnlOdaEkle.Controls.Add(this.rtxOdaAciklama);
             this.pnlOdaEkle.Controls.Add(this.btnOdaDuzenle);
@@ -144,6 +151,7 @@
             this.chkKralOdasi.TabIndex = 9;
             this.chkKralOdasi.Text = "Kral Odası";
             this.chkKralOdasi.UseVisualStyleBackColor = true;
+            this.chkKralOdasi.CheckedChanged += new System.EventHandler(this.chkKralOdasi_CheckedChanged);
             // 
             // rtxOdaAciklama
             // 
@@ -171,6 +179,7 @@
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4});
+            this.lvwOdaListesi.ContextMenuStrip = this.rightClickMenu;
             this.lvwOdaListesi.FullRowSelect = true;
             this.lvwOdaListesi.HideSelection = false;
             this.lvwOdaListesi.Location = new System.Drawing.Point(458, 29);
@@ -203,9 +212,9 @@
             // btnOdaDegistir
             // 
             this.btnOdaDegistir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnOdaDegistir.Location = new System.Drawing.Point(63, 384);
+            this.btnOdaDegistir.Location = new System.Drawing.Point(92, 384);
             this.btnOdaDegistir.Name = "btnOdaDegistir";
-            this.btnOdaDegistir.Size = new System.Drawing.Size(119, 30);
+            this.btnOdaDegistir.Size = new System.Drawing.Size(108, 30);
             this.btnOdaDegistir.TabIndex = 5;
             this.btnOdaDegistir.Text = "Odayı Değiştir";
             this.btnOdaDegistir.UseVisualStyleBackColor = true;
@@ -214,9 +223,9 @@
             // btnOdaEkle
             // 
             this.btnOdaEkle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnOdaEkle.Location = new System.Drawing.Point(188, 384);
+            this.btnOdaEkle.Location = new System.Drawing.Point(206, 384);
             this.btnOdaEkle.Name = "btnOdaEkle";
-            this.btnOdaEkle.Size = new System.Drawing.Size(94, 30);
+            this.btnOdaEkle.Size = new System.Drawing.Size(76, 30);
             this.btnOdaEkle.TabIndex = 5;
             this.btnOdaEkle.Text = "Oda Ekle";
             this.btnOdaEkle.UseVisualStyleBackColor = true;
@@ -390,6 +399,39 @@
             this.label1.Text = "Oda Numara: ";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // btnTemizle
+            // 
+            this.btnTemizle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnTemizle.Location = new System.Drawing.Point(13, 384);
+            this.btnTemizle.Name = "btnTemizle";
+            this.btnTemizle.Size = new System.Drawing.Size(73, 30);
+            this.btnTemizle.TabIndex = 10;
+            this.btnTemizle.Text = "Temizle";
+            this.btnTemizle.UseVisualStyleBackColor = true;
+            this.btnTemizle.Click += new System.EventHandler(this.btnTemizle_Click);
+            // 
+            // rightClickMenu
+            // 
+            this.rightClickMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.edit,
+            this.delete});
+            this.rightClickMenu.Name = "rightClickMenu";
+            this.rightClickMenu.Size = new System.Drawing.Size(181, 70);
+            // 
+            // edit
+            // 
+            this.edit.Name = "edit";
+            this.edit.Size = new System.Drawing.Size(116, 22);
+            this.edit.Text = "Düzenle";
+            this.edit.Click += new System.EventHandler(this.edit_Click);
+            // 
+            // delete
+            // 
+            this.delete.Name = "delete";
+            this.delete.Size = new System.Drawing.Size(180, 22);
+            this.delete.Text = "Sil";
+            this.delete.Click += new System.EventHandler(this.delete_Click);
+            // 
             // FrmYonetici
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -412,6 +454,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudOdaKisi)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudOdaKat)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudOdaNumara)).EndInit();
+            this.rightClickMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -449,5 +492,9 @@
         private System.Windows.Forms.RichTextBox rtxOdaAciklama;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.CheckBox chkKralOdasi;
+        private System.Windows.Forms.Button btnTemizle;
+        private System.Windows.Forms.ContextMenuStrip rightClickMenu;
+        private System.Windows.Forms.ToolStripMenuItem edit;
+        private System.Windows.Forms.ToolStripMenuItem delete;
     }
 }
