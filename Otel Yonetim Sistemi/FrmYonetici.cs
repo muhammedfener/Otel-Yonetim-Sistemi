@@ -71,6 +71,13 @@ namespace Otel_Yonetim_Sistemi
             odalar.Close();
         }
 
+        private void CalisanListele()
+        {
+            lvwCalisanListesi.Items.Clear();
+
+            SqlDataReader calisanlar = baglanti.SorguVeriOku("SELECT calisanAd,calisanSoyad,calisanTelefon,calisanTCKimlik,calisanAdres,calisanIrtibatTelefon,calisanSaatlikUcret,meslekAd FROM calisanlar JOIN meslekler ON meslekler.meslekID = calisanlar.calisanMeslekID");
+        }
+
         private void btnOdaDuzenle_Click(object sender, EventArgs e)
         {
 
