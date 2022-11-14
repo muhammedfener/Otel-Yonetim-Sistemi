@@ -64,37 +64,37 @@
             this.nudOdaNumara = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.pnlCalisanEkle = new System.Windows.Forms.Panel();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.label18 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             this.lvwCalisanListesi = new System.Windows.Forms.ListView();
             this.calisanAdSoyad = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.calisanTC = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.calisanMeslek = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.calisanTelefon = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.calisanMeslek = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.calisanAdres = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.calisanUcret = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.btnCalisanKaydet = new System.Windows.Forms.Button();
+            this.nudSaatlikUcret = new System.Windows.Forms.NumericUpDown();
+            this.cmbMeslek = new System.Windows.Forms.ComboBox();
+            this.dtpIstenAyrilma = new System.Windows.Forms.DateTimePicker();
+            this.dtpIseBaslama = new System.Windows.Forms.DateTimePicker();
+            this.rtxAdres = new System.Windows.Forms.RichTextBox();
+            this.txtIrtibat = new System.Windows.Forms.TextBox();
+            this.txtTC = new System.Windows.Forms.TextBox();
+            this.txtTel = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.txtSoyad = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.txtAd = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.pnlOdaEkle.SuspendLayout();
             this.rightClickMenu.SuspendLayout();
@@ -105,7 +105,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudOdaKat)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudOdaNumara)).BeginInit();
             this.pnlCalisanEkle.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSaatlikUcret)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -466,22 +466,22 @@
             this.pnlCalisanEkle.Controls.Add(this.lvwCalisanListesi);
             this.pnlCalisanEkle.Controls.Add(this.button3);
             this.pnlCalisanEkle.Controls.Add(this.button2);
-            this.pnlCalisanEkle.Controls.Add(this.button1);
-            this.pnlCalisanEkle.Controls.Add(this.numericUpDown1);
-            this.pnlCalisanEkle.Controls.Add(this.comboBox1);
-            this.pnlCalisanEkle.Controls.Add(this.dateTimePicker2);
-            this.pnlCalisanEkle.Controls.Add(this.dateTimePicker1);
-            this.pnlCalisanEkle.Controls.Add(this.richTextBox1);
-            this.pnlCalisanEkle.Controls.Add(this.textBox6);
-            this.pnlCalisanEkle.Controls.Add(this.textBox4);
-            this.pnlCalisanEkle.Controls.Add(this.textBox3);
+            this.pnlCalisanEkle.Controls.Add(this.btnCalisanKaydet);
+            this.pnlCalisanEkle.Controls.Add(this.nudSaatlikUcret);
+            this.pnlCalisanEkle.Controls.Add(this.cmbMeslek);
+            this.pnlCalisanEkle.Controls.Add(this.dtpIstenAyrilma);
+            this.pnlCalisanEkle.Controls.Add(this.dtpIseBaslama);
+            this.pnlCalisanEkle.Controls.Add(this.rtxAdres);
+            this.pnlCalisanEkle.Controls.Add(this.txtIrtibat);
+            this.pnlCalisanEkle.Controls.Add(this.txtTC);
+            this.pnlCalisanEkle.Controls.Add(this.txtTel);
             this.pnlCalisanEkle.Controls.Add(this.label16);
             this.pnlCalisanEkle.Controls.Add(this.label15);
             this.pnlCalisanEkle.Controls.Add(this.label14);
-            this.pnlCalisanEkle.Controls.Add(this.textBox2);
+            this.pnlCalisanEkle.Controls.Add(this.txtSoyad);
             this.pnlCalisanEkle.Controls.Add(this.label12);
             this.pnlCalisanEkle.Controls.Add(this.label13);
-            this.pnlCalisanEkle.Controls.Add(this.textBox1);
+            this.pnlCalisanEkle.Controls.Add(this.txtAd);
             this.pnlCalisanEkle.Controls.Add(this.label11);
             this.pnlCalisanEkle.Controls.Add(this.label18);
             this.pnlCalisanEkle.Controls.Add(this.label10);
@@ -492,194 +492,14 @@
             this.pnlCalisanEkle.Size = new System.Drawing.Size(800, 426);
             this.pnlCalisanEkle.TabIndex = 11;
             // 
-            // dateTimePicker2
+            // button4
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(128, 273);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(112, 20);
-            this.dateTimePicker2.TabIndex = 5;
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(128, 247);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(112, 20);
-            this.dateTimePicker1.TabIndex = 5;
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(128, 119);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(112, 96);
-            this.richTextBox1.TabIndex = 4;
-            this.richTextBox1.Text = "";
-            // 
-            // textBox6
-            // 
-            this.textBox6.Location = new System.Drawing.Point(128, 221);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(112, 20);
-            this.textBox6.TabIndex = 3;
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(128, 93);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(112, 20);
-            this.textBox4.TabIndex = 3;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(128, 67);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(112, 20);
-            this.textBox3.TabIndex = 3;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(27, 279);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(95, 13);
-            this.label16.TabIndex = 2;
-            this.label16.Text = "İşten Ayrılma Tarihi";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(29, 253);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(93, 13);
-            this.label15.TabIndex = 2;
-            this.label15.Text = "İşe Başlama Tarihi";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(50, 224);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(72, 13);
-            this.label14.TabIndex = 2;
-            this.label14.Text = "İrtibat Telefon";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(128, 41);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(112, 20);
-            this.textBox2.TabIndex = 3;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(71, 96);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(51, 13);
-            this.label12.TabIndex = 2;
-            this.label12.Text = "TC Kimlik";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(51, 122);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(71, 13);
-            this.label13.TabIndex = 1;
-            this.label13.Text = "Çalışan Adres";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(128, 15);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(112, 20);
-            this.textBox1.TabIndex = 3;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(79, 70);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(43, 13);
-            this.label11.TabIndex = 1;
-            this.label11.Text = "Telefon";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(85, 44);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(37, 13);
-            this.label10.TabIndex = 2;
-            this.label10.Text = "Soyad";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(102, 18);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(20, 13);
-            this.label9.TabIndex = 1;
-            this.label9.Text = "Ad";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(128, 299);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(112, 21);
-            this.comboBox1.TabIndex = 6;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(81, 302);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(41, 13);
-            this.label17.TabIndex = 1;
-            this.label17.Text = "Meslek";
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(128, 326);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(112, 20);
-            this.numericUpDown1.TabIndex = 7;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(54, 328);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(68, 13);
-            this.label18.TabIndex = 2;
-            this.label18.Text = "Saatlik Ücret";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(165, 358);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "Çalışan Ekle";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(63, 358);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(96, 23);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "Çalışan Düzenle";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(3, 358);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(54, 23);
-            this.button3.TabIndex = 8;
-            this.button3.Text = "Temizle";
-            this.button3.UseVisualStyleBackColor = true;
+            this.button4.Location = new System.Drawing.Point(706, 197);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(82, 23);
+            this.button4.TabIndex = 10;
+            this.button4.Text = "Çalışan Seç";
+            this.button4.UseVisualStyleBackColor = true;
             // 
             // lvwCalisanListesi
             // 
@@ -708,14 +528,14 @@
             this.calisanTC.Text = "TC Kimlik";
             this.calisanTC.Width = 83;
             // 
-            // calisanMeslek
-            // 
-            this.calisanMeslek.Text = "Meslek";
-            // 
             // calisanTelefon
             // 
             this.calisanTelefon.Text = "Telefon";
             this.calisanTelefon.Width = 89;
+            // 
+            // calisanMeslek
+            // 
+            this.calisanMeslek.Text = "Meslek";
             // 
             // calisanAdres
             // 
@@ -727,14 +547,196 @@
             this.calisanUcret.Text = "Ücret";
             this.calisanUcret.Width = 67;
             // 
-            // button4
+            // button3
             // 
-            this.button4.Location = new System.Drawing.Point(706, 197);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(82, 23);
-            this.button4.TabIndex = 10;
-            this.button4.Text = "Çalışan Seç";
-            this.button4.UseVisualStyleBackColor = true;
+            this.button3.Location = new System.Drawing.Point(3, 358);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(54, 23);
+            this.button3.TabIndex = 8;
+            this.button3.Text = "Temizle";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(63, 358);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(96, 23);
+            this.button2.TabIndex = 8;
+            this.button2.Text = "Çalışan Düzenle";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // btnCalisanKaydet
+            // 
+            this.btnCalisanKaydet.Location = new System.Drawing.Point(165, 358);
+            this.btnCalisanKaydet.Name = "btnCalisanKaydet";
+            this.btnCalisanKaydet.Size = new System.Drawing.Size(75, 23);
+            this.btnCalisanKaydet.TabIndex = 8;
+            this.btnCalisanKaydet.Text = "Çalışan Ekle";
+            this.btnCalisanKaydet.UseVisualStyleBackColor = true;
+            this.btnCalisanKaydet.Click += new System.EventHandler(this.btnCalisanKaydet_Click);
+            // 
+            // nudSaatlikUcret
+            // 
+            this.nudSaatlikUcret.DecimalPlaces = 2;
+            this.nudSaatlikUcret.Location = new System.Drawing.Point(128, 326);
+            this.nudSaatlikUcret.Name = "nudSaatlikUcret";
+            this.nudSaatlikUcret.Size = new System.Drawing.Size(112, 20);
+            this.nudSaatlikUcret.TabIndex = 7;
+            // 
+            // cmbMeslek
+            // 
+            this.cmbMeslek.FormattingEnabled = true;
+            this.cmbMeslek.Location = new System.Drawing.Point(128, 299);
+            this.cmbMeslek.Name = "cmbMeslek";
+            this.cmbMeslek.Size = new System.Drawing.Size(112, 21);
+            this.cmbMeslek.TabIndex = 6;
+            // 
+            // dtpIstenAyrilma
+            // 
+            this.dtpIstenAyrilma.Location = new System.Drawing.Point(128, 273);
+            this.dtpIstenAyrilma.Name = "dtpIstenAyrilma";
+            this.dtpIstenAyrilma.Size = new System.Drawing.Size(112, 20);
+            this.dtpIstenAyrilma.TabIndex = 5;
+            // 
+            // dtpIseBaslama
+            // 
+            this.dtpIseBaslama.Location = new System.Drawing.Point(128, 247);
+            this.dtpIseBaslama.Name = "dtpIseBaslama";
+            this.dtpIseBaslama.Size = new System.Drawing.Size(112, 20);
+            this.dtpIseBaslama.TabIndex = 5;
+            // 
+            // rtxAdres
+            // 
+            this.rtxAdres.Location = new System.Drawing.Point(128, 119);
+            this.rtxAdres.Name = "rtxAdres";
+            this.rtxAdres.Size = new System.Drawing.Size(112, 96);
+            this.rtxAdres.TabIndex = 4;
+            this.rtxAdres.Text = "";
+            // 
+            // txtIrtibat
+            // 
+            this.txtIrtibat.Location = new System.Drawing.Point(128, 221);
+            this.txtIrtibat.Name = "txtIrtibat";
+            this.txtIrtibat.Size = new System.Drawing.Size(112, 20);
+            this.txtIrtibat.TabIndex = 3;
+            // 
+            // txtTC
+            // 
+            this.txtTC.Location = new System.Drawing.Point(128, 93);
+            this.txtTC.Name = "txtTC";
+            this.txtTC.Size = new System.Drawing.Size(112, 20);
+            this.txtTC.TabIndex = 3;
+            // 
+            // txtTel
+            // 
+            this.txtTel.Location = new System.Drawing.Point(128, 67);
+            this.txtTel.Name = "txtTel";
+            this.txtTel.Size = new System.Drawing.Size(112, 20);
+            this.txtTel.TabIndex = 3;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(27, 279);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(95, 13);
+            this.label16.TabIndex = 2;
+            this.label16.Text = "İşten Ayrılma Tarihi";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(29, 253);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(93, 13);
+            this.label15.TabIndex = 2;
+            this.label15.Text = "İşe Başlama Tarihi";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(50, 224);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(72, 13);
+            this.label14.TabIndex = 2;
+            this.label14.Text = "İrtibat Telefon";
+            // 
+            // txtSoyad
+            // 
+            this.txtSoyad.Location = new System.Drawing.Point(128, 41);
+            this.txtSoyad.Name = "txtSoyad";
+            this.txtSoyad.Size = new System.Drawing.Size(112, 20);
+            this.txtSoyad.TabIndex = 3;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(71, 96);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(51, 13);
+            this.label12.TabIndex = 2;
+            this.label12.Text = "TC Kimlik";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(51, 122);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(71, 13);
+            this.label13.TabIndex = 1;
+            this.label13.Text = "Çalışan Adres";
+            // 
+            // txtAd
+            // 
+            this.txtAd.Location = new System.Drawing.Point(128, 15);
+            this.txtAd.Name = "txtAd";
+            this.txtAd.Size = new System.Drawing.Size(112, 20);
+            this.txtAd.TabIndex = 3;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(79, 70);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(43, 13);
+            this.label11.TabIndex = 1;
+            this.label11.Text = "Telefon";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(54, 328);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(68, 13);
+            this.label18.TabIndex = 2;
+            this.label18.Text = "Saatlik Ücret";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(85, 44);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(37, 13);
+            this.label10.TabIndex = 2;
+            this.label10.Text = "Soyad";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(81, 302);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(41, 13);
+            this.label17.TabIndex = 1;
+            this.label17.Text = "Meslek";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(102, 18);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(20, 13);
+            this.label9.TabIndex = 1;
+            this.label9.Text = "Ad";
             // 
             // FrmYonetici
             // 
@@ -762,7 +764,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudOdaNumara)).EndInit();
             this.pnlCalisanEkle.ResumeLayout(false);
             this.pnlCalisanEkle.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSaatlikUcret)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -804,23 +806,23 @@
         private System.Windows.Forms.ToolStripMenuItem edit;
         private System.Windows.Forms.ToolStripMenuItem delete;
         private System.Windows.Forms.Panel pnlCalisanEkle;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.DateTimePicker dtpIstenAyrilma;
+        private System.Windows.Forms.DateTimePicker dtpIseBaslama;
+        private System.Windows.Forms.RichTextBox rtxAdres;
+        private System.Windows.Forms.TextBox txtIrtibat;
+        private System.Windows.Forms.TextBox txtTC;
+        private System.Windows.Forms.TextBox txtTel;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtSoyad;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtAd;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmbMeslek;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.ListView lvwCalisanListesi;
         private System.Windows.Forms.ColumnHeader calisanAdSoyad;
@@ -831,8 +833,8 @@
         private System.Windows.Forms.ColumnHeader calisanUcret;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Button btnCalisanKaydet;
+        private System.Windows.Forms.NumericUpDown nudSaatlikUcret;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
     }

@@ -19,6 +19,9 @@ namespace Otel_Yonetim_Sistemi
         List<Panel> panels;
 
         List<int> OdaNumaraListe = new List<int>();
+        List<string> CalisanTC = new List<string>();
+        Dictionary<int,string> MeslekListesi = new Dictionary<int, string>();
+
         int eskiOdaNumara;
 
         public FrmYonetici()
@@ -28,11 +31,11 @@ namespace Otel_Yonetim_Sistemi
 
         private void FrmYonetici_Load(object sender, EventArgs e)
         {
-            //string connectionString = $"Server={Properties.Settings.Default.dbip};Database={Properties.Settings.Default.dbname};User Id={Properties.Settings.Default.dbuser};Password={Properties.Settings.Default.dbpass};";
+            string connectionString = $"Server={Properties.Settings.Default.dbip};Database={Properties.Settings.Default.dbname};User Id={Properties.Settings.Default.dbuser};Password={Properties.Settings.Default.dbpass};";
 
             //string connectionString = $"Server=DESKTOP-RN1H7KK\\SQLEXPRESS;Database=BilgiHotel; User Id=MFener; Password=123;";
 
-            string connectionString = "Server=DESKTOP-RN1H7KK\\SQLEXPRESS;Database=BilgiHotel;Trusted_Connection=True;";
+            //string connectionString = "Server=DESKTOP-RN1H7KK\\SQLEXPRESS;Database=BilgiHotel;Trusted_Connection=True;";
 
             baglanti = new Baglanti(connectionString);
 
@@ -76,6 +79,15 @@ namespace Otel_Yonetim_Sistemi
             lvwCalisanListesi.Items.Clear();
 
             SqlDataReader calisanlar = baglanti.SorguVeriOku("SELECT calisanAd,calisanSoyad,calisanTelefon,calisanTCKimlik,calisanAdres,calisanIrtibatTelefon,calisanSaatlikUcret,meslekAd FROM calisanlar JOIN meslekler ON meslekler.meslekID = calisanlar.calisanMeslekID");
+
+            while (calisanlar.Read())
+            {
+                CalisanTC.Add(calisanlar["calisanTCKimlik"].ToString());
+                string[] satir = { calisanlar["calisanAd"].ToString() + " " +calisanlar["calisanSoyad"].ToString(), calisanlar["calisanTCKimlik"].ToString(), calisanlar["calisanTelefon"].ToString(), calisanlar["meslekAd"].ToString(), calisanlar["calisanAdres"].ToString(), calisanlar["calisanSaatlikUcret"].ToString()};
+                ListViewItem item = new ListViewItem(satir);
+                lvwCalisanListesi.Items.Add(item);
+            }
+            calisanlar.Close();
         }
 
         private void btnOdaDuzenle_Click(object sender, EventArgs e)
@@ -329,9 +341,7 @@ namespace Otel_Yonetim_Sistemi
             }
             catch (Exception hata)
             {
-                int line = (new StackTrace(hata, true)).GetFrame(0).GetFileLineNumber();
                 MessageBox.Show("Oda Düzenlenirken Hata Oluştu! Hata Mesajı: " + hata.Message);
-                MessageBox.Show("Hata Satırı: " + line.ToString());
             }
 
             OdaListele();
@@ -399,6 +409,51 @@ namespace Otel_Yonetim_Sistemi
         private void calisanEkleMenu_Click(object sender, EventArgs e)
         {
             PanelAc(pnlCalisanEkle);
+            CalisanListele();
+            MeslekListesi.Clear();
+            string commandstring = "SELECT meslekID,meslekAd FROM Meslekler";
+            SqlDataReader reader = baglanti.SorguVeriOku(commandstring);
+            while (reader.Read())
+            {
+                MeslekListesi.Add((int)reader[0], (string)reader[1]);
+            }
+            cmbMeslek.DataSource = MeslekListesi.ToList();
+            cmbMeslek.ValueMember = "Key";
+            cmbMeslek.DisplayMember = "Value";
+            reader.Close();
+        }
+
+
+        private void btnCalisanKaydet_Click(object sender, EventArgs e)
+        {
+            string calisanAd = txtAd.Text;
+            string calisanSoyad = txtSoyad.Text;
+            string calisanTelefon = txtTel.Text;
+            string calisanTCKimlik = txtTC.Text;
+            string calisanAdres = rtxAdres.Text;
+            string calisanIrtibat = txtIrtibat.Text;
+            DateTime iseBaslamaTarih = dtpIseBaslama.Value.Date;
+            //DateTime istenAyrilmaTarih = dtpIstenAyrilma.Value.Date;
+            int calisanMeslekID = (int) cmbMeslek.SelectedValue;
+            decimal calisanSaatlikUcret = nudSaatlikUcret.Value;
+
+            if (CalisanTC.Exists(x => x == calisanTCKimlik))
+            {
+                MessageBox.Show("Bu TC Kimliğine Sahip Bir Çalışan Zaten Var!");
+                return;
+            }
+
+            try
+            {
+                string commandstring = $"INSERT INTO Calisanlar (calisanAd,calisanSoyad,calisanTelefon,calisanTCKimlik,calisanAdres,calisanIrtibatTelefon,calisanIseBaslamaTarihi,calisanMeslekID,calisanSaatlikUcret,calisanAktifMi) VALUES ({calisanAd},{calisanSoyad},{calisanTelefon},{calisanTCKimlik},{calisanAdres},{calisanIrtibat},{iseBaslamaTarih},{calisanMeslekID},{calisanSaatlikUcret},1)";
+
+                baglanti.SorguNonQuery(commandstring);
+            }
+            catch (Exception hata)
+            {
+
+                MessageBox.Show("Çalışan Eklenirken Hata Oluştu! Hata Mesajı: " + hata.Message);
+            }
         }
     }
 }
