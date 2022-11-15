@@ -64,7 +64,7 @@
             this.nudOdaNumara = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.pnlCalisanEkle = new System.Windows.Forms.Panel();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btnCalisanSec = new System.Windows.Forms.Button();
             this.lvwCalisanListesi = new System.Windows.Forms.ListView();
             this.calisanAdSoyad = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.calisanTC = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -73,7 +73,7 @@
             this.calisanAdres = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.calisanUcret = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnCalisanDuzenle = new System.Windows.Forms.Button();
             this.btnCalisanKaydet = new System.Windows.Forms.Button();
             this.nudSaatlikUcret = new System.Windows.Forms.NumericUpDown();
             this.cmbMeslek = new System.Windows.Forms.ComboBox();
@@ -462,10 +462,10 @@
             // 
             // pnlCalisanEkle
             // 
-            this.pnlCalisanEkle.Controls.Add(this.button4);
+            this.pnlCalisanEkle.Controls.Add(this.btnCalisanSec);
             this.pnlCalisanEkle.Controls.Add(this.lvwCalisanListesi);
             this.pnlCalisanEkle.Controls.Add(this.button3);
-            this.pnlCalisanEkle.Controls.Add(this.button2);
+            this.pnlCalisanEkle.Controls.Add(this.btnCalisanDuzenle);
             this.pnlCalisanEkle.Controls.Add(this.btnCalisanKaydet);
             this.pnlCalisanEkle.Controls.Add(this.nudSaatlikUcret);
             this.pnlCalisanEkle.Controls.Add(this.cmbMeslek);
@@ -492,14 +492,15 @@
             this.pnlCalisanEkle.Size = new System.Drawing.Size(800, 426);
             this.pnlCalisanEkle.TabIndex = 11;
             // 
-            // button4
+            // btnCalisanSec
             // 
-            this.button4.Location = new System.Drawing.Point(706, 197);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(82, 23);
-            this.button4.TabIndex = 10;
-            this.button4.Text = "Çalışan Seç";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btnCalisanSec.Location = new System.Drawing.Point(706, 197);
+            this.btnCalisanSec.Name = "btnCalisanSec";
+            this.btnCalisanSec.Size = new System.Drawing.Size(82, 23);
+            this.btnCalisanSec.TabIndex = 10;
+            this.btnCalisanSec.Text = "Çalışan Seç";
+            this.btnCalisanSec.UseVisualStyleBackColor = true;
+            this.btnCalisanSec.Click += new System.EventHandler(this.btnCalisanSec_Click);
             // 
             // lvwCalisanListesi
             // 
@@ -510,8 +511,10 @@
             this.calisanMeslek,
             this.calisanAdres,
             this.calisanUcret});
+            this.lvwCalisanListesi.FullRowSelect = true;
             this.lvwCalisanListesi.HideSelection = false;
             this.lvwCalisanListesi.Location = new System.Drawing.Point(314, 15);
+            this.lvwCalisanListesi.MultiSelect = false;
             this.lvwCalisanListesi.Name = "lvwCalisanListesi";
             this.lvwCalisanListesi.Size = new System.Drawing.Size(474, 176);
             this.lvwCalisanListesi.TabIndex = 9;
@@ -556,14 +559,15 @@
             this.button3.Text = "Temizle";
             this.button3.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btnCalisanDuzenle
             // 
-            this.button2.Location = new System.Drawing.Point(63, 358);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(96, 23);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "Çalışan Düzenle";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnCalisanDuzenle.Location = new System.Drawing.Point(63, 358);
+            this.btnCalisanDuzenle.Name = "btnCalisanDuzenle";
+            this.btnCalisanDuzenle.Size = new System.Drawing.Size(96, 23);
+            this.btnCalisanDuzenle.TabIndex = 8;
+            this.btnCalisanDuzenle.Text = "Çalışan Düzenle";
+            this.btnCalisanDuzenle.UseVisualStyleBackColor = true;
+            this.btnCalisanDuzenle.Click += new System.EventHandler(this.btnCalisanDuzenle_Click);
             // 
             // btnCalisanKaydet
             // 
@@ -744,8 +748,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.pnlCalisanEkle);
             this.Controls.Add(this.pnlOdaEkle);
+            this.Controls.Add(this.pnlCalisanEkle);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FrmYonetici";
             this.Text = "FrmYonetici";
@@ -823,7 +827,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox cmbMeslek;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnCalisanSec;
         private System.Windows.Forms.ListView lvwCalisanListesi;
         private System.Windows.Forms.ColumnHeader calisanAdSoyad;
         private System.Windows.Forms.ColumnHeader calisanTC;
@@ -832,7 +836,7 @@
         private System.Windows.Forms.ColumnHeader calisanAdres;
         private System.Windows.Forms.ColumnHeader calisanUcret;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnCalisanDuzenle;
         private System.Windows.Forms.Button btnCalisanKaydet;
         private System.Windows.Forms.NumericUpDown nudSaatlikUcret;
         private System.Windows.Forms.Label label18;

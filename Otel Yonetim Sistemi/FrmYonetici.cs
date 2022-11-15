@@ -21,7 +21,7 @@ namespace Otel_Yonetim_Sistemi
         List<int> OdaNumaraListe = new List<int>();
         List<string> CalisanTC = new List<string>();
         Dictionary<int,string> MeslekListesi = new Dictionary<int, string>();
-
+        
         int eskiOdaNumara;
 
         public FrmYonetici()
@@ -433,7 +433,6 @@ namespace Otel_Yonetim_Sistemi
             string calisanAdres = rtxAdres.Text;
             string calisanIrtibat = txtIrtibat.Text;
             DateTime iseBaslamaTarih = dtpIseBaslama.Value.Date;
-            //DateTime istenAyrilmaTarih = dtpIstenAyrilma.Value.Date;
             int calisanMeslekID = (int) cmbMeslek.SelectedValue;
             decimal calisanSaatlikUcret = nudSaatlikUcret.Value;
 
@@ -448,12 +447,51 @@ namespace Otel_Yonetim_Sistemi
                 string commandstring = $"INSERT INTO Calisanlar (calisanAd,calisanSoyad,calisanTelefon,calisanTCKimlik,calisanAdres,calisanIrtibatTelefon,calisanIseBaslamaTarihi,calisanMeslekID,calisanSaatlikUcret,calisanAktifMi) VALUES ({calisanAd},{calisanSoyad},{calisanTelefon},{calisanTCKimlik},{calisanAdres},{calisanIrtibat},{iseBaslamaTarih},{calisanMeslekID},{calisanSaatlikUcret},1)";
 
                 baglanti.SorguNonQuery(commandstring);
+
+                MessageBox.Show("Çalışan Eklendi!");
             }
             catch (Exception hata)
             {
 
                 MessageBox.Show("Çalışan Eklenirken Hata Oluştu! Hata Mesajı: " + hata.Message);
+                
             }
+        }
+
+        private void btnCalisanDuzenle_Click(object sender, EventArgs e)
+        {
+            //if(CalisanTC.Exists(x => x == ))
+        }
+
+        private void btnCalisanSec_Click(object sender, EventArgs e)
+        {
+            if(lvwCalisanListesi.SelectedItems.Count != 1)
+            {
+                MessageBox.Show("Bir Çalışan Seçmelisiniz!");
+                return;
+            }
+
+            string calisanTC = lvwCalisanListesi.SelectedItems[0].SubItems[1].Text;
+
+            string commandString = $"SELECT * FROM Calisanlar WHERE calisanTCKimlik = {calisanTC}";
+
+            SqlDataReader calisan = baglanti.SorguVeriOku(commandString);
+
+            while(calisan.Read())
+            {
+                txtAd.Text = calisan[1].ToString();
+                txtSoyad.Text = calisan[2].ToString();
+                txtTel.Text = calisan[3].ToString();
+                txtTC.Text = calisan[4].ToString();
+                rtxAdres.Text = calisan[5].ToString();
+                txtIrtibat.Text = calisan[6].ToString();
+                dtpIseBaslama.Value = calisan.GetDateTime(7);
+                dtpIstenAyrilma.Value = calisan.IsDBNull(8) ? DateTime.Now : calisan.GetDateTime(8);
+                cmbMeslek.SelectedIndex = calisan.GetInt32(9)-1;
+                nudSaatlikUcret.Value = calisan.GetDecimal(10);
+            }
+
+            calisan.Close();
         }
     }
 }
