@@ -37,7 +37,7 @@
             this.btnTemizle = new System.Windows.Forms.Button();
             this.chkKralOdasi = new System.Windows.Forms.CheckBox();
             this.rtxOdaAciklama = new System.Windows.Forms.RichTextBox();
-            this.btnOdaDuzenle = new System.Windows.Forms.Button();
+            this.btnOdaSec = new System.Windows.Forms.Button();
             this.lvwOdaListesi = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -46,7 +46,7 @@
             this.rightClickMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.edit = new System.Windows.Forms.ToolStripMenuItem();
             this.delete = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnOdaDegistir = new System.Windows.Forms.Button();
+            this.btnOdaDuzenle = new System.Windows.Forms.Button();
             this.btnOdaEkle = new System.Windows.Forms.Button();
             this.cklOzellikler = new System.Windows.Forms.CheckedListBox();
             this.nudCiftKisilikYatak = new System.Windows.Forms.NumericUpDown();
@@ -145,9 +145,9 @@
             this.pnlOdaEkle.Controls.Add(this.btnTemizle);
             this.pnlOdaEkle.Controls.Add(this.chkKralOdasi);
             this.pnlOdaEkle.Controls.Add(this.rtxOdaAciklama);
-            this.pnlOdaEkle.Controls.Add(this.btnOdaDuzenle);
+            this.pnlOdaEkle.Controls.Add(this.btnOdaSec);
             this.pnlOdaEkle.Controls.Add(this.lvwOdaListesi);
-            this.pnlOdaEkle.Controls.Add(this.btnOdaDegistir);
+            this.pnlOdaEkle.Controls.Add(this.btnOdaDuzenle);
             this.pnlOdaEkle.Controls.Add(this.btnOdaEkle);
             this.pnlOdaEkle.Controls.Add(this.cklOzellikler);
             this.pnlOdaEkle.Controls.Add(this.nudCiftKisilikYatak);
@@ -200,16 +200,16 @@
             this.rtxOdaAciklama.TabIndex = 8;
             this.rtxOdaAciklama.Text = "";
             // 
-            // btnOdaDuzenle
+            // btnOdaSec
             // 
-            this.btnOdaDuzenle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnOdaDuzenle.Location = new System.Drawing.Point(691, 265);
-            this.btnOdaDuzenle.Name = "btnOdaDuzenle";
-            this.btnOdaDuzenle.Size = new System.Drawing.Size(97, 31);
-            this.btnOdaDuzenle.TabIndex = 7;
-            this.btnOdaDuzenle.Text = "Oda Düzenle";
-            this.btnOdaDuzenle.UseVisualStyleBackColor = true;
-            this.btnOdaDuzenle.Click += new System.EventHandler(this.btnOdaDuzenle_Click);
+            this.btnOdaSec.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnOdaSec.Location = new System.Drawing.Point(691, 265);
+            this.btnOdaSec.Name = "btnOdaSec";
+            this.btnOdaSec.Size = new System.Drawing.Size(97, 31);
+            this.btnOdaSec.TabIndex = 7;
+            this.btnOdaSec.Text = "Oda Seç";
+            this.btnOdaSec.UseVisualStyleBackColor = true;
+            this.btnOdaSec.Click += new System.EventHandler(this.btnOdaSec_Click);
             // 
             // lvwOdaListesi
             // 
@@ -270,16 +270,16 @@
             this.delete.Text = "Sil";
             this.delete.Click += new System.EventHandler(this.delete_Click);
             // 
-            // btnOdaDegistir
+            // btnOdaDuzenle
             // 
-            this.btnOdaDegistir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnOdaDegistir.Location = new System.Drawing.Point(92, 384);
-            this.btnOdaDegistir.Name = "btnOdaDegistir";
-            this.btnOdaDegistir.Size = new System.Drawing.Size(108, 30);
-            this.btnOdaDegistir.TabIndex = 5;
-            this.btnOdaDegistir.Text = "Odayı Değiştir";
-            this.btnOdaDegistir.UseVisualStyleBackColor = true;
-            this.btnOdaDegistir.Click += new System.EventHandler(this.btnOdaDegistir_Click);
+            this.btnOdaDuzenle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnOdaDuzenle.Location = new System.Drawing.Point(92, 384);
+            this.btnOdaDuzenle.Name = "btnOdaDuzenle";
+            this.btnOdaDuzenle.Size = new System.Drawing.Size(108, 30);
+            this.btnOdaDuzenle.TabIndex = 5;
+            this.btnOdaDuzenle.Text = "Odayı Düzenle";
+            this.btnOdaDuzenle.UseVisualStyleBackColor = true;
+            this.btnOdaDuzenle.Click += new System.EventHandler(this.btnOdaDuzenle_Click);
             // 
             // btnOdaEkle
             // 
@@ -780,7 +780,7 @@
         private System.Windows.Forms.ToolStripMenuItem calisanEkleMenu;
         private System.Windows.Forms.ToolStripMenuItem kullaniciEkleDuzenleMenu;
         private System.Windows.Forms.Panel pnlOdaEkle;
-        private System.Windows.Forms.Button btnOdaDuzenle;
+        private System.Windows.Forms.Button btnOdaSec;
         private System.Windows.Forms.ListView lvwOdaListesi;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
@@ -801,7 +801,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown nudOdaNumara;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnOdaDegistir;
+        private System.Windows.Forms.Button btnOdaDuzenle;
         private System.Windows.Forms.RichTextBox rtxOdaAciklama;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.CheckBox chkKralOdasi;

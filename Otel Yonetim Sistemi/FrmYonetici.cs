@@ -90,84 +90,6 @@ namespace Otel_Yonetim_Sistemi
             calisanlar.Close();
         }
 
-        private void btnOdaDuzenle_Click(object sender, EventArgs e)
-        {
-
-            if (lvwOdaListesi.SelectedItems.Count != 1)
-            {
-                MessageBox.Show("Oda Seçin!");
-                return;
-            }
-
-            VerileriTemizle();
-            string odaNumarasi = lvwOdaListesi.SelectedItems[0].SubItems[0].Text;
-            SqlDataReader odalar = baglanti.SorguVeriOku($"SELECT * FROM odalar WHERE odaNumara= {odaNumarasi}");
-
-            while (odalar.Read())
-            {
-                nudOdaNumara.Value = Convert.ToDecimal(odalar["odaNumara"]);
-                nudOdaKat.Value = Convert.ToDecimal(odalar["odaKat"]);
-                nudOdaKisi.Value = Convert.ToDecimal(odalar["odaKisiSayisi"]);
-                nudOdaFiyat.Value = Convert.ToDecimal(odalar["odaFiyat"]);
-                rtxOdaAciklama.Text = (string)odalar["odaAciklama"];
-            }
-
-            odalar.Close();
-
-            SqlDataReader odaOzellikler = baglanti.SorguVeriOku($"SELECT * FROM odalar_odaOzellik WHERE odaNumara = {odaNumarasi}");
-            while (odaOzellikler.Read())
-            {
-                switch ((int)odaOzellikler["ozellikID"])
-                {
-                    case 1:
-                        cklOzellikler.SetItemChecked(0, true);
-                        break;
-                    case 2:
-                        cklOzellikler.SetItemChecked(1, true);
-                        break;
-                    case 3:
-                        cklOzellikler.SetItemChecked(2, true);
-                        break;
-                    case 4:
-                        cklOzellikler.SetItemChecked(3, true);
-                        break;
-                    case 5:
-                        cklOzellikler.SetItemChecked(4, true);
-                        break;
-                    case 6:
-                        cklOzellikler.SetItemChecked(5, true);
-                        break;
-                    default:
-                        break;
-                }
-            }
-            odaOzellikler.Close();
-
-            SqlDataReader odaYataklar = baglanti.SorguVeriOku($"SELECT * FROM odalar_odaYataklar WHERE odaNumara = {odaNumarasi}");
-
-
-
-            while (odaYataklar.Read())
-            {
-                switch ((int)odaYataklar["yatakID"])
-                {
-                    case 1:
-                        nudTekKisilikYatak.Value = Convert.ToDecimal(odaYataklar["yatakAdet"]);
-                        break;
-                    case 2:
-                        nudCiftKisilikYatak.Value = Convert.ToDecimal(odaYataklar["yatakAdet"]);
-                        break;
-                    case 3:
-                        chkKralOdasi.Checked = true;
-                        break;
-                }
-            }
-
-            odaYataklar.Close();
-
-            eskiOdaNumara = Convert.ToInt32(odaNumarasi);
-        }
-
         private void VerileriTemizle()
         {
 
@@ -252,6 +174,112 @@ namespace Otel_Yonetim_Sistemi
         }
 
         private void btnOdaDegistir_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void FrmYonetici_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btnTemizle_Click(object sender, EventArgs e)
+        {
+            VerileriTemizle();
+        }
+
+        private void chkKralOdasi_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkKralOdasi.Checked)
+            {
+                nudCiftKisilikYatak.Enabled = false;
+                nudTekKisilikYatak.Enabled = false;
+            }
+            else
+            {
+                nudCiftKisilikYatak.Enabled = true;
+                nudTekKisilikYatak.Enabled = true;
+            }
+        }
+
+        private void btnOdaSec_Click(object sender, EventArgs e)
+        {
+            if (lvwOdaListesi.SelectedItems.Count != 1)
+            {
+                MessageBox.Show("Oda Seçin!");
+                return;
+            }
+
+            VerileriTemizle();
+            string odaNumarasi = lvwOdaListesi.SelectedItems[0].SubItems[0].Text;
+            SqlDataReader odalar = baglanti.SorguVeriOku($"SELECT * FROM odalar WHERE odaNumara= {odaNumarasi}");
+
+            while (odalar.Read())
+            {
+                nudOdaNumara.Value = Convert.ToDecimal(odalar["odaNumara"]);
+                nudOdaKat.Value = Convert.ToDecimal(odalar["odaKat"]);
+                nudOdaKisi.Value = Convert.ToDecimal(odalar["odaKisiSayisi"]);
+                nudOdaFiyat.Value = Convert.ToDecimal(odalar["odaFiyat"]);
+                rtxOdaAciklama.Text = (string)odalar["odaAciklama"];
+            }
+
+            odalar.Close();
+
+            SqlDataReader odaOzellikler = baglanti.SorguVeriOku($"SELECT * FROM odalar_odaOzellik WHERE odaNumara = {odaNumarasi}");
+            while (odaOzellikler.Read())
+            {
+                switch ((int)odaOzellikler["ozellikID"])
+                {
+                    case 1:
+                        cklOzellikler.SetItemChecked(0, true);
+                        break;
+                    case 2:
+                        cklOzellikler.SetItemChecked(1, true);
+                        break;
+                    case 3:
+                        cklOzellikler.SetItemChecked(2, true);
+                        break;
+                    case 4:
+                        cklOzellikler.SetItemChecked(3, true);
+                        break;
+                    case 5:
+                        cklOzellikler.SetItemChecked(4, true);
+                        break;
+                    case 6:
+                        cklOzellikler.SetItemChecked(5, true);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            odaOzellikler.Close();
+
+            SqlDataReader odaYataklar = baglanti.SorguVeriOku($"SELECT * FROM odalar_odaYataklar WHERE odaNumara = {odaNumarasi}");
+
+
+
+            while (odaYataklar.Read())
+            {
+                switch ((int)odaYataklar["yatakID"])
+                {
+                    case 1:
+                        nudTekKisilikYatak.Value = Convert.ToDecimal(odaYataklar["yatakAdet"]);
+                        break;
+                    case 2:
+                        nudCiftKisilikYatak.Value = Convert.ToDecimal(odaYataklar["yatakAdet"]);
+                        break;
+                    case 3:
+                        chkKralOdasi.Checked = true;
+                        break;
+                }
+            }
+
+            odaYataklar.Close();
+
+            eskiOdaNumara = Convert.ToInt32(odaNumarasi);
+        }
+
+        private void btnOdaDuzenle_Click(object sender, EventArgs e)
         {
             int odaNumara = (int)nudOdaNumara.Value;
             int odaKat = (int)nudOdaKat.Value;
@@ -346,34 +374,9 @@ namespace Otel_Yonetim_Sistemi
 
             OdaListele();
         }
-
-        private void FrmYonetici_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void btnTemizle_Click(object sender, EventArgs e)
-        {
-            VerileriTemizle();
-        }
-
-        private void chkKralOdasi_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkKralOdasi.Checked)
-            {
-                nudCiftKisilikYatak.Enabled = false;
-                nudTekKisilikYatak.Enabled = false;
-            }
-            else
-            {
-                nudCiftKisilikYatak.Enabled = true;
-                nudTekKisilikYatak.Enabled = true;
-            }
-        }
-
         private void edit_Click(object sender, EventArgs e)
         {
-            btnOdaDuzenle.PerformClick();
+            btnOdaSec.PerformClick();
         }
 
         private void delete_Click(object sender, EventArgs e)
@@ -422,7 +425,6 @@ namespace Otel_Yonetim_Sistemi
             cmbMeslek.DisplayMember = "Value";
             reader.Close();
         }
-
 
         private void btnCalisanKaydet_Click(object sender, EventArgs e)
         {
