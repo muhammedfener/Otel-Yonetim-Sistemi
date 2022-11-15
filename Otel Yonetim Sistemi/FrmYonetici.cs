@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -23,6 +24,7 @@ namespace Otel_Yonetim_Sistemi
         Dictionary<int,string> MeslekListesi = new Dictionary<int, string>();
         
         int eskiOdaNumara;
+        string eskiTC;
 
         public FrmYonetici()
         {
@@ -171,11 +173,6 @@ namespace Otel_Yonetim_Sistemi
                 }
                 OdaListele();
             }
-        }
-
-        private void btnOdaDegistir_Click(object sender, EventArgs e)
-        {
-            
         }
 
         private void FrmYonetici_FormClosed(object sender, FormClosedEventArgs e)
@@ -374,6 +371,7 @@ namespace Otel_Yonetim_Sistemi
 
             OdaListele();
         }
+
         private void edit_Click(object sender, EventArgs e)
         {
             btnOdaSec.PerformClick();
@@ -462,7 +460,27 @@ namespace Otel_Yonetim_Sistemi
 
         private void btnCalisanDuzenle_Click(object sender, EventArgs e)
         {
-            //if(CalisanTC.Exists(x => x == ))
+            if(CalisanTC.Exists(x => x == txtTC.Text) && txtTC.Text == eskiTC)
+            {
+                MessageBox.Show("Değiştirmek İstediğiniz Çalışan Zaten Mevcut!");
+            }
+
+            if(!CalisanTC.Exists(x => x == txtTC.Text) && eskiTC != txtTC.Text)
+            {
+                MessageBox.Show("Düzenlemek İstediğiniz Çalışan Mevcut Değil!");
+            }
+
+            string calisanAd = txtAd.Text;
+            string calisanSoyad = txtSoyad.Text;
+            string calisanTelefon = txtTel.Text;
+            string calisanTCKimlik = txtTC.Text;
+            string calisanAdres = rtxAdres.Text;
+            string calisanIrtibat = txtIrtibat.Text;
+            DateTime iseBaslamaTarih = dtpIseBaslama.Value.Date;
+            DateTime istenAyrilmaTarihi = dtpIstenAyrilma.Value.Date;
+            int calisanMeslekID = (int)cmbMeslek.SelectedValue;
+            decimal calisanSaatlikUcret = nudSaatlikUcret.Value;
+            string commandString = $"UPDATE Calisanlar SET calisanAd = '{calisanAd}', calisanSoyad = '{calisanSoyad}'";
         }
 
         private void btnCalisanSec_Click(object sender, EventArgs e)
@@ -492,8 +510,9 @@ namespace Otel_Yonetim_Sistemi
                 cmbMeslek.SelectedIndex = calisan.GetInt32(9)-1;
                 nudSaatlikUcret.Value = calisan.GetDecimal(10);
             }
-
             calisan.Close();
+
+            eskiTC = calisanTC;
         }
     }
 }
