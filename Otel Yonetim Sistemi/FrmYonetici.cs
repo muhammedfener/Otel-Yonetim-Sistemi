@@ -650,12 +650,19 @@ namespace Otel_Yonetim_Sistemi
             string kullaniciSifre = txtKullaniciSifre.Text;
             string kullaniciMail = txtKullaniciMail.Text;
             DateTime kayitTarihi = DateTime.Now;
-            int calisanID = cmbKullaniciCalisan.SelectedIndex == -1 ? null : cmbKullaniciCalisan.SelectedIndex;
+            int calisanID = cmbKullaniciCalisan.SelectedIndex == -1 ? null  : cmbKullaniciCalisan.SelectedIndex;
             int yoneticiID = cmbKullaniciYonetici.SelectedIndex == -1 ? null : cmbKullaniciYonetici.SelectedIndex;
-            
+
+            SqlCommand commandString = new SqlCommand("INSERT INTO kullanicilar(kullaniciAdi, kullaniciSifre, kullaniciMail, kullaniciKayitTarihi, kullaniciCalisanID, kullaniciYoneticiID, kullaniciAktifMi) VALUES(@kullaniciAd, @kullaniciSifre, @kullaniciMail, @kayitTarihi,@calisanID,@yoneticiID,1)");
+            commandString.Parameters.AddWithValue("@kullaniciAd", kullaniciAd);
+            commandString.Parameters.AddWithValue("@kullaniciSifre", kullaniciSifre);
+            commandString.Parameters.AddWithValue("@kullaniciMail", kullaniciMail);
+            commandString.Parameters.AddWithValue("@kayitTarihi", kayitTarihi);
+            commandString.Parameters.AddWithValue("@calisanID", cmbKullaniciCalisan.SelectedIndex == -1 ? DBNull.Value.ToString() : cmbKullaniciCalisan.SelectedIndex.ToString());
+            commandString.Parameters.AddWithValue("@yoneticiID", yoneticiID);
 
 
-            string commandString = $"INSERT INTO kullanicilar (kullaniciAdi,kullaniciSifre,kullaniciMail,kullaniciKayitTarihi,kullaniciCalisanID,kullaniciYoneticiID,kullaniciAktifMi) VALUES ('{kullaniciAd}','{kullaniciSifre}','{kullaniciMail}','{kayitTarihi}',{calisanID},{yoneticiID},1)";
+            //string commandString = $"INSERT INTO kullanicilar (kullaniciAdi,kullaniciSifre,kullaniciMail,kullaniciKayitTarihi,kullaniciCalisanID,kullaniciYoneticiID,kullaniciAktifMi) VALUES ('{kullaniciAd}','{kullaniciSifre}','{kullaniciMail}','{kayitTarihi}',{calisanID},{yoneticiID},1)";
 
 
         }
