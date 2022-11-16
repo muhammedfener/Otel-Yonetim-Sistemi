@@ -34,7 +34,7 @@
             this.calisanEkleMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.kullaniciEkleDuzenleMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlOdaEkle = new System.Windows.Forms.Panel();
-            this.btnTemizle = new System.Windows.Forms.Button();
+            this.btnOdaTemizle = new System.Windows.Forms.Button();
             this.chkKralOdasi = new System.Windows.Forms.CheckBox();
             this.rtxOdaAciklama = new System.Windows.Forms.RichTextBox();
             this.btnOdaSec = new System.Windows.Forms.Button();
@@ -72,7 +72,7 @@
             this.calisanMeslek = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.calisanAdres = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.calisanUcret = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnCalisanTemizle = new System.Windows.Forms.Button();
             this.btnCalisanDuzenle = new System.Windows.Forms.Button();
             this.btnCalisanKaydet = new System.Windows.Forms.Button();
             this.nudSaatlikUcret = new System.Windows.Forms.NumericUpDown();
@@ -95,6 +95,34 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.pnlKullaniciEkleDuzenle = new System.Windows.Forms.Panel();
+            this.lvwKullaniciListe = new System.Windows.Forms.ListView();
+            this.txtKullaniciAd = new System.Windows.Forms.TextBox();
+            this.txtKullaniciSifre = new System.Windows.Forms.TextBox();
+            this.txtKullaniciMail = new System.Windows.Forms.TextBox();
+            this.cmbKullaniciCalisan = new System.Windows.Forms.ComboBox();
+            this.cmbKullaniciYonetici = new System.Windows.Forms.ComboBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.btnKullaniciEkle = new System.Windows.Forms.Button();
+            this.btnKullaniciDuzenle = new System.Windows.Forms.Button();
+            this.btnKullaniciTemizle = new System.Windows.Forms.Button();
+            this.btnKullaniciSec = new System.Windows.Forms.Button();
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.rightClickMenuCalisan = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.düzenleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.silToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rightClickMenuKullanici = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.düzenleToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.silToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.pnlOdaEkle.SuspendLayout();
             this.rightClickMenu.SuspendLayout();
@@ -106,6 +134,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudOdaNumara)).BeginInit();
             this.pnlCalisanEkle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSaatlikUcret)).BeginInit();
+            this.pnlKullaniciEkleDuzenle.SuspendLayout();
+            this.rightClickMenuCalisan.SuspendLayout();
+            this.rightClickMenuKullanici.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -139,10 +170,11 @@
             this.kullaniciEkleDuzenleMenu.Name = "kullaniciEkleDuzenleMenu";
             this.kullaniciEkleDuzenleMenu.Size = new System.Drawing.Size(140, 20);
             this.kullaniciEkleDuzenleMenu.Text = "Kullanıcı Ekle&&Düzenle";
+            this.kullaniciEkleDuzenleMenu.Click += new System.EventHandler(this.kullaniciEkleDuzenleMenu_Click);
             // 
             // pnlOdaEkle
             // 
-            this.pnlOdaEkle.Controls.Add(this.btnTemizle);
+            this.pnlOdaEkle.Controls.Add(this.btnOdaTemizle);
             this.pnlOdaEkle.Controls.Add(this.chkKralOdasi);
             this.pnlOdaEkle.Controls.Add(this.rtxOdaAciklama);
             this.pnlOdaEkle.Controls.Add(this.btnOdaSec);
@@ -170,16 +202,16 @@
             this.pnlOdaEkle.Size = new System.Drawing.Size(800, 450);
             this.pnlOdaEkle.TabIndex = 2;
             // 
-            // btnTemizle
+            // btnOdaTemizle
             // 
-            this.btnTemizle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnTemizle.Location = new System.Drawing.Point(13, 384);
-            this.btnTemizle.Name = "btnTemizle";
-            this.btnTemizle.Size = new System.Drawing.Size(73, 30);
-            this.btnTemizle.TabIndex = 10;
-            this.btnTemizle.Text = "Temizle";
-            this.btnTemizle.UseVisualStyleBackColor = true;
-            this.btnTemizle.Click += new System.EventHandler(this.btnTemizle_Click);
+            this.btnOdaTemizle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnOdaTemizle.Location = new System.Drawing.Point(13, 384);
+            this.btnOdaTemizle.Name = "btnOdaTemizle";
+            this.btnOdaTemizle.Size = new System.Drawing.Size(73, 30);
+            this.btnOdaTemizle.TabIndex = 10;
+            this.btnOdaTemizle.Text = "Temizle";
+            this.btnOdaTemizle.UseVisualStyleBackColor = true;
+            this.btnOdaTemizle.Click += new System.EventHandler(this.btnOdaTemizle_Click);
             // 
             // chkKralOdasi
             // 
@@ -464,7 +496,7 @@
             // 
             this.pnlCalisanEkle.Controls.Add(this.btnCalisanSec);
             this.pnlCalisanEkle.Controls.Add(this.lvwCalisanListesi);
-            this.pnlCalisanEkle.Controls.Add(this.button3);
+            this.pnlCalisanEkle.Controls.Add(this.btnCalisanTemizle);
             this.pnlCalisanEkle.Controls.Add(this.btnCalisanDuzenle);
             this.pnlCalisanEkle.Controls.Add(this.btnCalisanKaydet);
             this.pnlCalisanEkle.Controls.Add(this.nudSaatlikUcret);
@@ -511,6 +543,7 @@
             this.calisanMeslek,
             this.calisanAdres,
             this.calisanUcret});
+            this.lvwCalisanListesi.ContextMenuStrip = this.rightClickMenuCalisan;
             this.lvwCalisanListesi.FullRowSelect = true;
             this.lvwCalisanListesi.HideSelection = false;
             this.lvwCalisanListesi.Location = new System.Drawing.Point(314, 15);
@@ -550,14 +583,14 @@
             this.calisanUcret.Text = "Ücret";
             this.calisanUcret.Width = 67;
             // 
-            // button3
+            // btnCalisanTemizle
             // 
-            this.button3.Location = new System.Drawing.Point(3, 358);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(54, 23);
-            this.button3.TabIndex = 8;
-            this.button3.Text = "Temizle";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnCalisanTemizle.Location = new System.Drawing.Point(3, 358);
+            this.btnCalisanTemizle.Name = "btnCalisanTemizle";
+            this.btnCalisanTemizle.Size = new System.Drawing.Size(54, 23);
+            this.btnCalisanTemizle.TabIndex = 8;
+            this.btnCalisanTemizle.Text = "Temizle";
+            this.btnCalisanTemizle.UseVisualStyleBackColor = true;
             // 
             // btnCalisanDuzenle
             // 
@@ -742,14 +775,251 @@
             this.label9.TabIndex = 1;
             this.label9.Text = "Ad";
             // 
+            // pnlKullaniciEkleDuzenle
+            // 
+            this.pnlKullaniciEkleDuzenle.Controls.Add(this.btnKullaniciSec);
+            this.pnlKullaniciEkleDuzenle.Controls.Add(this.btnKullaniciTemizle);
+            this.pnlKullaniciEkleDuzenle.Controls.Add(this.btnKullaniciDuzenle);
+            this.pnlKullaniciEkleDuzenle.Controls.Add(this.btnKullaniciEkle);
+            this.pnlKullaniciEkleDuzenle.Controls.Add(this.label24);
+            this.pnlKullaniciEkleDuzenle.Controls.Add(this.label23);
+            this.pnlKullaniciEkleDuzenle.Controls.Add(this.label21);
+            this.pnlKullaniciEkleDuzenle.Controls.Add(this.label20);
+            this.pnlKullaniciEkleDuzenle.Controls.Add(this.label19);
+            this.pnlKullaniciEkleDuzenle.Controls.Add(this.cmbKullaniciYonetici);
+            this.pnlKullaniciEkleDuzenle.Controls.Add(this.cmbKullaniciCalisan);
+            this.pnlKullaniciEkleDuzenle.Controls.Add(this.txtKullaniciMail);
+            this.pnlKullaniciEkleDuzenle.Controls.Add(this.txtKullaniciSifre);
+            this.pnlKullaniciEkleDuzenle.Controls.Add(this.txtKullaniciAd);
+            this.pnlKullaniciEkleDuzenle.Controls.Add(this.lvwKullaniciListe);
+            this.pnlKullaniciEkleDuzenle.Location = new System.Drawing.Point(0, 25);
+            this.pnlKullaniciEkleDuzenle.Name = "pnlKullaniciEkleDuzenle";
+            this.pnlKullaniciEkleDuzenle.Size = new System.Drawing.Size(800, 424);
+            this.pnlKullaniciEkleDuzenle.TabIndex = 11;
+            // 
+            // lvwKullaniciListe
+            // 
+            this.lvwKullaniciListe.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader5,
+            this.columnHeader6,
+            this.columnHeader8,
+            this.columnHeader7,
+            this.columnHeader9,
+            this.columnHeader10});
+            this.lvwKullaniciListe.ContextMenuStrip = this.rightClickMenuKullanici;
+            this.lvwKullaniciListe.FullRowSelect = true;
+            this.lvwKullaniciListe.HideSelection = false;
+            this.lvwKullaniciListe.Location = new System.Drawing.Point(314, 16);
+            this.lvwKullaniciListe.MultiSelect = false;
+            this.lvwKullaniciListe.Name = "lvwKullaniciListe";
+            this.lvwKullaniciListe.Size = new System.Drawing.Size(474, 176);
+            this.lvwKullaniciListe.TabIndex = 0;
+            this.lvwKullaniciListe.UseCompatibleStateImageBehavior = false;
+            this.lvwKullaniciListe.View = System.Windows.Forms.View.Details;
+            // 
+            // txtKullaniciAd
+            // 
+            this.txtKullaniciAd.Location = new System.Drawing.Point(105, 19);
+            this.txtKullaniciAd.Name = "txtKullaniciAd";
+            this.txtKullaniciAd.Size = new System.Drawing.Size(135, 20);
+            this.txtKullaniciAd.TabIndex = 1;
+            // 
+            // txtKullaniciSifre
+            // 
+            this.txtKullaniciSifre.Location = new System.Drawing.Point(105, 45);
+            this.txtKullaniciSifre.Name = "txtKullaniciSifre";
+            this.txtKullaniciSifre.Size = new System.Drawing.Size(135, 20);
+            this.txtKullaniciSifre.TabIndex = 1;
+            // 
+            // txtKullaniciMail
+            // 
+            this.txtKullaniciMail.Location = new System.Drawing.Point(105, 71);
+            this.txtKullaniciMail.Name = "txtKullaniciMail";
+            this.txtKullaniciMail.Size = new System.Drawing.Size(135, 20);
+            this.txtKullaniciMail.TabIndex = 1;
+            // 
+            // cmbKullaniciCalisan
+            // 
+            this.cmbKullaniciCalisan.FormattingEnabled = true;
+            this.cmbKullaniciCalisan.Location = new System.Drawing.Point(105, 96);
+            this.cmbKullaniciCalisan.Name = "cmbKullaniciCalisan";
+            this.cmbKullaniciCalisan.Size = new System.Drawing.Size(135, 21);
+            this.cmbKullaniciCalisan.TabIndex = 2;
+            // 
+            // cmbKullaniciYonetici
+            // 
+            this.cmbKullaniciYonetici.FormattingEnabled = true;
+            this.cmbKullaniciYonetici.Location = new System.Drawing.Point(105, 123);
+            this.cmbKullaniciYonetici.Name = "cmbKullaniciYonetici";
+            this.cmbKullaniciYonetici.Size = new System.Drawing.Size(135, 21);
+            this.cmbKullaniciYonetici.TabIndex = 2;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(36, 22);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(64, 13);
+            this.label19.TabIndex = 3;
+            this.label19.Text = "Kullanıcı Adı";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(71, 48);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(28, 13);
+            this.label20.TabIndex = 3;
+            this.label20.Text = "Şifre";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(74, 75);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(26, 13);
+            this.label21.TabIndex = 3;
+            this.label21.Text = "Mail";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(41, 99);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(59, 13);
+            this.label23.TabIndex = 3;
+            this.label23.Text = "Çalışan Adı";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(36, 126);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(63, 13);
+            this.label24.TabIndex = 3;
+            this.label24.Text = "Yönetici Adı";
+            // 
+            // btnKullaniciEkle
+            // 
+            this.btnKullaniciEkle.Location = new System.Drawing.Point(156, 159);
+            this.btnKullaniciEkle.Name = "btnKullaniciEkle";
+            this.btnKullaniciEkle.Size = new System.Drawing.Size(84, 23);
+            this.btnKullaniciEkle.TabIndex = 4;
+            this.btnKullaniciEkle.Text = "Kullanıcı Ekle";
+            this.btnKullaniciEkle.UseVisualStyleBackColor = true;
+            this.btnKullaniciEkle.Click += new System.EventHandler(this.btnKullaniciEkle_Click);
+            // 
+            // btnKullaniciDuzenle
+            // 
+            this.btnKullaniciDuzenle.Location = new System.Drawing.Point(49, 159);
+            this.btnKullaniciDuzenle.Name = "btnKullaniciDuzenle";
+            this.btnKullaniciDuzenle.Size = new System.Drawing.Size(101, 23);
+            this.btnKullaniciDuzenle.TabIndex = 4;
+            this.btnKullaniciDuzenle.Text = "Kullanıcı Düzenle";
+            this.btnKullaniciDuzenle.UseVisualStyleBackColor = true;
+            // 
+            // btnKullaniciTemizle
+            // 
+            this.btnKullaniciTemizle.Location = new System.Drawing.Point(13, 160);
+            this.btnKullaniciTemizle.Name = "btnKullaniciTemizle";
+            this.btnKullaniciTemizle.Size = new System.Drawing.Size(30, 23);
+            this.btnKullaniciTemizle.TabIndex = 5;
+            this.btnKullaniciTemizle.Text = "Temizle";
+            this.btnKullaniciTemizle.UseVisualStyleBackColor = true;
+            // 
+            // btnKullaniciSec
+            // 
+            this.btnKullaniciSec.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnKullaniciSec.Location = new System.Drawing.Point(691, 198);
+            this.btnKullaniciSec.Name = "btnKullaniciSec";
+            this.btnKullaniciSec.Size = new System.Drawing.Size(97, 36);
+            this.btnKullaniciSec.TabIndex = 6;
+            this.btnKullaniciSec.Text = "Kullanıcı Seç";
+            this.btnKullaniciSec.UseVisualStyleBackColor = true;
+            this.btnKullaniciSec.Click += new System.EventHandler(this.btnKullaniciSec_Click);
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Kullanıcı Adı";
+            this.columnHeader5.Width = 79;
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "Şifre";
+            this.columnHeader6.Width = 65;
+            // 
+            // columnHeader7
+            // 
+            this.columnHeader7.Text = "Kayıt Tarihi";
+            this.columnHeader7.Width = 75;
+            // 
+            // columnHeader8
+            // 
+            this.columnHeader8.Text = "Mail";
+            this.columnHeader8.Width = 85;
+            // 
+            // columnHeader9
+            // 
+            this.columnHeader9.Text = "Çalışan Ad";
+            this.columnHeader9.Width = 81;
+            // 
+            // columnHeader10
+            // 
+            this.columnHeader10.Text = "Yönetici Ad";
+            this.columnHeader10.Width = 81;
+            // 
+            // rightClickMenuCalisan
+            // 
+            this.rightClickMenuCalisan.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.düzenleToolStripMenuItem,
+            this.silToolStripMenuItem});
+            this.rightClickMenuCalisan.Name = "rightClickMenuCalisan";
+            this.rightClickMenuCalisan.Size = new System.Drawing.Size(117, 48);
+            // 
+            // düzenleToolStripMenuItem
+            // 
+            this.düzenleToolStripMenuItem.Name = "düzenleToolStripMenuItem";
+            this.düzenleToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.düzenleToolStripMenuItem.Text = "Düzenle";
+            this.düzenleToolStripMenuItem.Click += new System.EventHandler(this.düzenleToolStripMenuItem_Click);
+            // 
+            // silToolStripMenuItem
+            // 
+            this.silToolStripMenuItem.Name = "silToolStripMenuItem";
+            this.silToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.silToolStripMenuItem.Text = "Sil";
+            this.silToolStripMenuItem.Click += new System.EventHandler(this.silToolStripMenuItem_Click);
+            // 
+            // rightClickMenuKullanici
+            // 
+            this.rightClickMenuKullanici.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.düzenleToolStripMenuItem1,
+            this.silToolStripMenuItem1});
+            this.rightClickMenuKullanici.Name = "rightClickMenuKullanici";
+            this.rightClickMenuKullanici.Size = new System.Drawing.Size(117, 48);
+            // 
+            // düzenleToolStripMenuItem1
+            // 
+            this.düzenleToolStripMenuItem1.Name = "düzenleToolStripMenuItem1";
+            this.düzenleToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.düzenleToolStripMenuItem1.Text = "Düzenle";
+            this.düzenleToolStripMenuItem1.Click += new System.EventHandler(this.düzenleToolStripMenuItem1_Click);
+            // 
+            // silToolStripMenuItem1
+            // 
+            this.silToolStripMenuItem1.Name = "silToolStripMenuItem1";
+            this.silToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.silToolStripMenuItem1.Text = "Sil";
+            // 
             // FrmYonetici
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.pnlCalisanEkle);
+            this.Controls.Add(this.pnlKullaniciEkleDuzenle);
             this.Controls.Add(this.pnlOdaEkle);
+            this.Controls.Add(this.pnlCalisanEkle);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FrmYonetici";
             this.Text = "FrmYonetici";
@@ -769,6 +1039,10 @@
             this.pnlCalisanEkle.ResumeLayout(false);
             this.pnlCalisanEkle.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSaatlikUcret)).EndInit();
+            this.pnlKullaniciEkleDuzenle.ResumeLayout(false);
+            this.pnlKullaniciEkleDuzenle.PerformLayout();
+            this.rightClickMenuCalisan.ResumeLayout(false);
+            this.rightClickMenuKullanici.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -805,7 +1079,7 @@
         private System.Windows.Forms.RichTextBox rtxOdaAciklama;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.CheckBox chkKralOdasi;
-        private System.Windows.Forms.Button btnTemizle;
+        private System.Windows.Forms.Button btnOdaTemizle;
         private System.Windows.Forms.ContextMenuStrip rightClickMenu;
         private System.Windows.Forms.ToolStripMenuItem edit;
         private System.Windows.Forms.ToolStripMenuItem delete;
@@ -835,11 +1109,39 @@
         private System.Windows.Forms.ColumnHeader calisanMeslek;
         private System.Windows.Forms.ColumnHeader calisanAdres;
         private System.Windows.Forms.ColumnHeader calisanUcret;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnCalisanTemizle;
         private System.Windows.Forms.Button btnCalisanDuzenle;
         private System.Windows.Forms.Button btnCalisanKaydet;
         private System.Windows.Forms.NumericUpDown nudSaatlikUcret;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Panel pnlKullaniciEkleDuzenle;
+        private System.Windows.Forms.Button btnKullaniciTemizle;
+        private System.Windows.Forms.Button btnKullaniciDuzenle;
+        private System.Windows.Forms.Button btnKullaniciEkle;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.ComboBox cmbKullaniciYonetici;
+        private System.Windows.Forms.ComboBox cmbKullaniciCalisan;
+        private System.Windows.Forms.TextBox txtKullaniciMail;
+        private System.Windows.Forms.TextBox txtKullaniciSifre;
+        private System.Windows.Forms.TextBox txtKullaniciAd;
+        private System.Windows.Forms.ListView lvwKullaniciListe;
+        private System.Windows.Forms.Button btnKullaniciSec;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
+        private System.Windows.Forms.ColumnHeader columnHeader8;
+        private System.Windows.Forms.ColumnHeader columnHeader7;
+        private System.Windows.Forms.ColumnHeader columnHeader9;
+        private System.Windows.Forms.ColumnHeader columnHeader10;
+        private System.Windows.Forms.ContextMenuStrip rightClickMenuCalisan;
+        private System.Windows.Forms.ToolStripMenuItem düzenleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem silToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip rightClickMenuKullanici;
+        private System.Windows.Forms.ToolStripMenuItem düzenleToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem silToolStripMenuItem1;
     }
 }

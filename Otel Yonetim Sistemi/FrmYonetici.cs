@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Data.SqlTypes;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
@@ -22,7 +23,9 @@ namespace Otel_Yonetim_Sistemi
         List<int> OdaNumaraListe = new List<int>();
         List<string> CalisanTC = new List<string>();
         Dictionary<int,string> MeslekListesi = new Dictionary<int, string>();
-        
+        Dictionary<int,string> KullaniciCalisanListesi = new Dictionary<int, string>();
+        Dictionary<int,string> KullaniciYoneticiListesi = new Dictionary<int, string>();
+        List<string> KullaniciAd = new List<string>();
         int eskiOdaNumara;
         string eskiTC;
 
@@ -42,54 +45,12 @@ namespace Otel_Yonetim_Sistemi
             baglanti = new Baglanti(connectionString);
 
 
-            panels = new List<Panel> { pnlOdaEkle,pnlCalisanEkle };
+            panels = new List<Panel> { pnlOdaEkle,pnlCalisanEkle,pnlKullaniciEkleDuzenle };
 
             PanelAc(pnlOdaEkle);
 
             OdaListele();
 
-        }
-
-        private void PanelAc(Panel acilacakPanel)
-        {
-            foreach(Panel panel in panels)
-            {
-                panel.Visible = false;
-            }
-            acilacakPanel.Visible = true;
-        }
-
-        private void OdaListele()
-        {
-            lvwOdaListesi.Items.Clear();
-            OdaNumaraListe.Clear();
-
-            SqlDataReader odalar = baglanti.SorguVeriOku("SELECT * FROM odalar");
-            while (odalar.Read())
-            {
-                OdaNumaraListe.Add((int)odalar["odaNumara"]);
-                string[] satir = { odalar["odaNumara"].ToString(), odalar["odaKat"].ToString(), odalar["odaKisiSayisi"].ToString(), odalar["odaFiyat"].ToString() };
-                var listViewItem = new ListViewItem(satir);
-
-                lvwOdaListesi.Items.Add(listViewItem);
-            }
-            odalar.Close();
-        }
-
-        private void CalisanListele()
-        {
-            lvwCalisanListesi.Items.Clear();
-
-            SqlDataReader calisanlar = baglanti.SorguVeriOku("SELECT calisanAd,calisanSoyad,calisanTelefon,calisanTCKimlik,calisanAdres,calisanIrtibatTelefon,calisanSaatlikUcret,meslekAd FROM calisanlar JOIN meslekler ON meslekler.meslekID = calisanlar.calisanMeslekID");
-
-            while (calisanlar.Read())
-            {
-                CalisanTC.Add(calisanlar["calisanTCKimlik"].ToString());
-                string[] satir = { calisanlar["calisanAd"].ToString() + " " +calisanlar["calisanSoyad"].ToString(), calisanlar["calisanTCKimlik"].ToString(), calisanlar["calisanTelefon"].ToString(), calisanlar["meslekAd"].ToString(), calisanlar["calisanAdres"].ToString(), calisanlar["calisanSaatlikUcret"].ToString()};
-                ListViewItem item = new ListViewItem(satir);
-                lvwCalisanListesi.Items.Add(item);
-            }
-            calisanlar.Close();
         }
 
         private void VerileriTemizle()
@@ -125,6 +86,39 @@ namespace Otel_Yonetim_Sistemi
                 }
 
             }
+        }
+
+        private void PanelAc(Panel acilacakPanel)
+        {
+            foreach(Panel panel in panels)
+            {
+                panel.Visible = false;
+            }
+            acilacakPanel.Visible = true;
+        }
+       
+        private void FrmYonetici_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
+        
+        #region Oda İşlemleri
+
+        private void OdaListele()
+        {
+            lvwOdaListesi.Items.Clear();
+            OdaNumaraListe.Clear();
+
+            SqlDataReader odalar = baglanti.SorguVeriOku("SELECT * FROM odalar");
+            while (odalar.Read())
+            {
+                OdaNumaraListe.Add((int)odalar["odaNumara"]);
+                string[] satir = { odalar["odaNumara"].ToString(), odalar["odaKat"].ToString(), odalar["odaKisiSayisi"].ToString(), odalar["odaFiyat"].ToString() };
+                var listViewItem = new ListViewItem(satir);
+
+                lvwOdaListesi.Items.Add(listViewItem);
+            }
+            odalar.Close();
         }
 
         private void btnOdaEkle_Click(object sender, EventArgs e)
@@ -172,30 +166,6 @@ namespace Otel_Yonetim_Sistemi
                     return;
                 }
                 OdaListele();
-            }
-        }
-
-        private void FrmYonetici_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void btnTemizle_Click(object sender, EventArgs e)
-        {
-            VerileriTemizle();
-        }
-
-        private void chkKralOdasi_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkKralOdasi.Checked)
-            {
-                nudCiftKisilikYatak.Enabled = false;
-                nudTekKisilikYatak.Enabled = false;
-            }
-            else
-            {
-                nudCiftKisilikYatak.Enabled = true;
-                nudTekKisilikYatak.Enabled = true;
             }
         }
 
@@ -372,6 +342,25 @@ namespace Otel_Yonetim_Sistemi
             OdaListele();
         }
 
+        private void btnOdaTemizle_Click(object sender, EventArgs e)
+        {
+            VerileriTemizle();
+        }
+
+        private void chkKralOdasi_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkKralOdasi.Checked)
+            {
+                nudCiftKisilikYatak.Enabled = false;
+                nudTekKisilikYatak.Enabled = false;
+            }
+            else
+            {
+                nudCiftKisilikYatak.Enabled = true;
+                nudTekKisilikYatak.Enabled = true;
+            }
+        }
+
         private void edit_Click(object sender, EventArgs e)
         {
             btnOdaSec.PerformClick();
@@ -405,6 +394,50 @@ namespace Otel_Yonetim_Sistemi
         private void odaDuzenleMenu_Click(object sender, EventArgs e)
         {
             PanelAc(pnlOdaEkle);
+        }
+        #endregion
+
+        #region Çalışan İşlemleri
+        private void düzenleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            btnCalisanSec.PerformClick();
+        }
+
+        private void silToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int calisanTC = Convert.ToInt32(lvwCalisanListesi.SelectedItems[0].SubItems[1].Text);
+
+            try
+            {
+                string commandString = $"UPDATE SET calisanAktifMi = 0 WHERE calisanTCKimlik = {calisanTC}";
+
+                baglanti.SorguNonQuery(commandString);
+
+                MessageBox.Show("Çalışan Başarıyla Silindi!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Çalışan Silinirken Hata Oluştu! Hata Mesajı: "  + ex.Message);
+                return;
+            }
+
+            CalisanListele();
+        }
+
+        private void CalisanListele()
+        {
+            lvwCalisanListesi.Items.Clear();
+
+            SqlDataReader calisanlar = baglanti.SorguVeriOku("SELECT calisanAd,calisanSoyad,calisanTelefon,calisanTCKimlik,calisanAdres,calisanIrtibatTelefon,calisanSaatlikUcret,meslekAd FROM calisanlar JOIN meslekler ON meslekler.meslekID = calisanlar.calisanMeslekID");
+
+            while (calisanlar.Read())
+            {
+                CalisanTC.Add(calisanlar["calisanTCKimlik"].ToString());
+                string[] satir = { calisanlar["calisanAd"].ToString() + " " +calisanlar["calisanSoyad"].ToString(), calisanlar["calisanTCKimlik"].ToString(), calisanlar["calisanTelefon"].ToString(), calisanlar["meslekAd"].ToString(), calisanlar["calisanAdres"].ToString(), calisanlar["calisanSaatlikUcret"].ToString()};
+                ListViewItem item = new ListViewItem(satir);
+                lvwCalisanListesi.Items.Add(item);
+            }
+            calisanlar.Close();
         }
 
         private void calisanEkleMenu_Click(object sender, EventArgs e)
@@ -513,6 +546,118 @@ namespace Otel_Yonetim_Sistemi
             calisan.Close();
 
             eskiTC = calisanTC;
+        }
+
+        #endregion
+
+        #region Kullanıcı İşlemleri
+
+        private void kullaniciEkleDuzenleMenu_Click(object sender, EventArgs e)
+        {
+            PanelAc(pnlKullaniciEkleDuzenle);
+            KullaniciListele();
+            KullanicilarComboboxDoldur();
+        }
+
+        private void KullaniciListele()
+        {
+            string commandString = $"SELECT kullaniciAdi,kullaniciSifre,kullaniciMail,kullaniciKayitTarihi,(calisanAd + ' ' + calisanSoyad) as CalisanAdSoyad,(yoneticiAd + ' ' + yoneticiSoyad) as YoneticiAdSoyad FROM kullanicilar LEFT JOIN calisanlar ON calisanlar.calisanID = kullanicilar.kullaniciCalisanID LEFT JOIN yoneticiler ON yoneticiler.yoneticiID = kullanicilar.kullaniciYoneticiID";
+            SqlDataReader reader = baglanti.SorguVeriOku(commandString);
+
+            while(reader.Read())
+            {
+                KullaniciAd.Add(reader.GetString(0));
+                string[] satir = { reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetDateTime(3).ToString("dd/MM/yyyy"), reader.IsDBNull(4) ? " " : reader.GetString(4), reader.IsDBNull(5) ? " " : reader.GetString(5) };
+
+                var listViewItem = new ListViewItem(satir);
+
+                lvwKullaniciListe.Items.Add(listViewItem);
+            }
+            reader.Close();
+        }
+
+        private void KullanicilarComboboxDoldur()
+        {
+            string commandString = "SELECT calisanID, (calisanAd + ' ' + calisanSoyad) as CalisanAdSoyad FROM calisanlar";
+
+            SqlDataReader reader = baglanti.SorguVeriOku(commandString);
+            while(reader.Read())
+            {
+                KullaniciCalisanListesi.Add(reader.GetInt32(0),reader.GetString(1));
+            }
+            reader.Close();
+
+            cmbKullaniciCalisan.DataSource = KullaniciCalisanListesi.ToList();
+            cmbKullaniciCalisan.ValueMember = "Key";
+            cmbKullaniciCalisan.DisplayMember = "Value";
+
+            commandString = "SELECT yoneticiID, (yoneticiAd + ' ' + yoneticiSoyad) as YoneticiAdSoyad FROM yoneticiler";
+            reader = baglanti.SorguVeriOku(commandString);
+            while(reader.Read())
+            {
+                KullaniciYoneticiListesi.Add(reader.GetInt32(0), reader.GetString(1));
+            }
+            reader.Close();
+
+            cmbKullaniciYonetici.DataSource = KullaniciYoneticiListesi.ToList();
+            cmbKullaniciYonetici.ValueMember = "Key";
+            cmbKullaniciYonetici.DisplayMember = "Value";
+
+        }
+
+        private void btnKullaniciSec_Click(object sender, EventArgs e)
+        {
+            string kullaniciAdi = lvwKullaniciListe.SelectedItems[0].SubItems[0].Text;
+            string commandString = $"SELECT * FROM kullanicilar WHERE kullaniciAdi = '{kullaniciAdi}'";
+
+            SqlDataReader reader = baglanti.SorguVeriOku(commandString);
+            while (reader.Read())
+            {
+                txtKullaniciAd.Text = reader.GetString(1);
+                txtKullaniciSifre.Text = reader.GetString(2);
+                txtKullaniciMail.Text = reader.GetString(3);
+                if (reader.IsDBNull(5))
+                {
+                    cmbKullaniciYonetici.SelectedValue = reader.GetInt32(6);
+                    cmbKullaniciCalisan.SelectedIndex=-1;
+                }
+                else
+                {
+                    cmbKullaniciCalisan.SelectedValue= reader.GetInt32(5);
+                    cmbKullaniciYonetici.SelectedIndex=-1;
+                }
+            }
+            reader.Close();
+        }
+
+        private void düzenleToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            btnKullaniciSec.PerformClick();
+        }
+        #endregion
+
+        private void btnKullaniciEkle_Click(object sender, EventArgs e)
+        {
+            if(cmbKullaniciCalisan.SelectedIndex != -1 && cmbKullaniciYonetici.SelectedIndex != -1)
+            {
+                MessageBox.Show("Kullanıcı Hem Yönetici Hem Çalışan Olamaz!");
+                cmbKullaniciYonetici.SelectedIndex = -1;
+                cmbKullaniciCalisan.SelectedIndex = -1;
+                return;
+            }
+
+            string kullaniciAd = txtKullaniciAd.Text;
+            string kullaniciSifre = txtKullaniciSifre.Text;
+            string kullaniciMail = txtKullaniciMail.Text;
+            DateTime kayitTarihi = DateTime.Now;
+            int calisanID = cmbKullaniciCalisan.SelectedIndex == -1 ? null : cmbKullaniciCalisan.SelectedIndex;
+            int yoneticiID = cmbKullaniciYonetici.SelectedIndex == -1 ? null : cmbKullaniciYonetici.SelectedIndex;
+            
+
+
+            string commandString = $"INSERT INTO kullanicilar (kullaniciAdi,kullaniciSifre,kullaniciMail,kullaniciKayitTarihi,kullaniciCalisanID,kullaniciYoneticiID,kullaniciAktifMi) VALUES ('{kullaniciAd}','{kullaniciSifre}','{kullaniciMail}','{kayitTarihi}',{calisanID},{yoneticiID},1)";
+
+
         }
     }
 }
