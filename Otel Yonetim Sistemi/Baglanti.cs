@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Otel_Yonetim_Sistemi
 {
@@ -12,19 +8,19 @@ namespace Otel_Yonetim_Sistemi
         SqlConnection connection;
         SqlCommand command;
         SqlDataReader reader;
-       // string connectionString = $"Server={Properties.Settings.Default.dbip};Database={Properties.Settings.Default.dbname};User Id={Properties.Settings.Default.dbuser};Password={Properties.Settings.Default.dbpass};";
+        // string connectionString = $"Server={Properties.Settings.Default.dbip};Database={Properties.Settings.Default.dbname};User Id={Properties.Settings.Default.dbuser};Password={Properties.Settings.Default.dbpass};";
 
         public Baglanti(string ConnectionString)
         {
-            try 
-            { 
-                this.connection = new SqlConnection(ConnectionString); 
+            try
+            {
+                this.connection = new SqlConnection(ConnectionString);
                 command = new SqlCommand();
                 connection.Open();
             }
             catch (Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show("Veritabanına Bağlanılamadı! Hata Mesajı: " +ex.Message);
+                System.Windows.Forms.MessageBox.Show("Veritabanına Bağlanılamadı! Hata Mesajı: " + ex.Message);
             }
         }
 
@@ -76,7 +72,7 @@ namespace Otel_Yonetim_Sistemi
             this.command.Connection = this.connection;
             this.command.CommandText = Command.CommandText;
 
-            decimal DonecekDeger = (decimal) this.command.ExecuteScalar();
+            decimal DonecekDeger = (decimal)this.command.ExecuteScalar();
 
             return DonecekDeger;
         }

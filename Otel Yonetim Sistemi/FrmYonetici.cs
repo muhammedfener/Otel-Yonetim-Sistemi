@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Data.SqlClient;
-using System.Data.SqlTypes;
-using System.Diagnostics;
-using System.Drawing;
 using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Otel_Yonetim_Sistemi
@@ -22,9 +13,9 @@ namespace Otel_Yonetim_Sistemi
 
         List<int> OdaNumaraListe = new List<int>();
         List<string> CalisanTC = new List<string>();
-        Dictionary<int,string> MeslekListesi = new Dictionary<int, string>();
-        Dictionary<int,string> KullaniciCalisanListesi = new Dictionary<int, string>();
-        Dictionary<int,string> KullaniciYoneticiListesi = new Dictionary<int, string>();
+        Dictionary<int, string> MeslekListesi = new Dictionary<int, string>();
+        Dictionary<int, string> KullaniciCalisanListesi = new Dictionary<int, string>();
+        Dictionary<int, string> KullaniciYoneticiListesi = new Dictionary<int, string>();
         List<string> KullaniciAdListesi = new List<string>();
         int eskiOdaNumara;
         string eskiTC;
@@ -45,7 +36,7 @@ namespace Otel_Yonetim_Sistemi
             baglanti = new Baglanti(connectionString);
 
 
-            panels = new List<Panel> { pnlOdaEkle,pnlCalisanEkle,pnlKullaniciEkleDuzenle };
+            panels = new List<Panel> { pnlOdaEkle, pnlCalisanEkle, pnlKullaniciEkleDuzenle };
 
             PanelAc(pnlOdaEkle);
 
@@ -55,7 +46,7 @@ namespace Otel_Yonetim_Sistemi
 
         private void VerileriTemizle()
         {
-
+            
             foreach (var item in pnlOdaEkle.Controls)
             {
 
@@ -89,18 +80,18 @@ namespace Otel_Yonetim_Sistemi
 
         private void PanelAc(Panel acilacakPanel)
         {
-            foreach(Panel panel in panels)
+            foreach (Panel panel in panels)
             {
                 panel.Visible = false;
             }
             acilacakPanel.Visible = true;
         }
-       
+
         private void FrmYonetici_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
         }
-        
+
         #region Oda İşlemleri
 
         private void OdaListele()
@@ -382,7 +373,7 @@ namespace Otel_Yonetim_Sistemi
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Oda Silinirken Hata Oluştu! Hata Mesajı: "  + ex.Message);
+                MessageBox.Show("Oda Silinirken Hata Oluştu! Hata Mesajı: " + ex.Message);
                 return;
             }
 
@@ -416,7 +407,7 @@ namespace Otel_Yonetim_Sistemi
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Çalışan Silinirken Hata Oluştu! Hata Mesajı: "  + ex.Message);
+                MessageBox.Show("Çalışan Silinirken Hata Oluştu! Hata Mesajı: " + ex.Message);
                 return;
             }
 
@@ -432,7 +423,7 @@ namespace Otel_Yonetim_Sistemi
             while (calisanlar.Read())
             {
                 CalisanTC.Add(calisanlar["calisanTCKimlik"].ToString());
-                string[] satir = { calisanlar["calisanAd"].ToString() + " " +calisanlar["calisanSoyad"].ToString(), calisanlar["calisanTCKimlik"].ToString(), calisanlar["calisanTelefon"].ToString(), calisanlar["meslekAd"].ToString(), calisanlar["calisanAdres"].ToString(), calisanlar["calisanSaatlikUcret"].ToString()};
+                string[] satir = { calisanlar["calisanAd"].ToString() + " " + calisanlar["calisanSoyad"].ToString(), calisanlar["calisanTCKimlik"].ToString(), calisanlar["calisanTelefon"].ToString(), calisanlar["meslekAd"].ToString(), calisanlar["calisanAdres"].ToString(), calisanlar["calisanSaatlikUcret"].ToString() };
                 ListViewItem item = new ListViewItem(satir);
                 lvwCalisanListesi.Items.Add(item);
             }
@@ -465,7 +456,7 @@ namespace Otel_Yonetim_Sistemi
             string calisanAdres = rtxAdres.Text;
             string calisanIrtibat = txtIrtibat.Text;
             DateTime iseBaslamaTarih = dtpIseBaslama.Value.Date;
-            int calisanMeslekID = (int) cmbMeslek.SelectedValue;
+            int calisanMeslekID = (int)cmbMeslek.SelectedValue;
             decimal calisanSaatlikUcret = nudSaatlikUcret.Value;
 
             if (CalisanTC.Exists(x => x == calisanTCKimlik))
@@ -486,18 +477,18 @@ namespace Otel_Yonetim_Sistemi
             {
 
                 MessageBox.Show("Çalışan Eklenirken Hata Oluştu! Hata Mesajı: " + hata.Message);
-                
+
             }
         }
 
         private void btnCalisanDuzenle_Click(object sender, EventArgs e)
         {
-            if(CalisanTC.Exists(x => x == txtTC.Text) && txtTC.Text == eskiTC)
+            if (CalisanTC.Exists(x => x == txtTC.Text) && txtTC.Text == eskiTC)
             {
                 MessageBox.Show("Değiştirmek İstediğiniz Çalışan Zaten Mevcut!");
             }
 
-            if(!CalisanTC.Exists(x => x == txtTC.Text) && eskiTC != txtTC.Text)
+            if (!CalisanTC.Exists(x => x == txtTC.Text) && eskiTC != txtTC.Text)
             {
                 MessageBox.Show("Düzenlemek İstediğiniz Çalışan Mevcut Değil!");
             }
@@ -517,7 +508,7 @@ namespace Otel_Yonetim_Sistemi
 
         private void btnCalisanSec_Click(object sender, EventArgs e)
         {
-            if(lvwCalisanListesi.SelectedItems.Count != 1)
+            if (lvwCalisanListesi.SelectedItems.Count != 1)
             {
                 MessageBox.Show("Bir Çalışan Seçmelisiniz!");
                 return;
@@ -529,7 +520,7 @@ namespace Otel_Yonetim_Sistemi
 
             SqlDataReader calisan = baglanti.SorguVeriOku(commandString);
 
-            while(calisan.Read())
+            while (calisan.Read())
             {
                 txtAd.Text = calisan[1].ToString();
                 txtSoyad.Text = calisan[2].ToString();
@@ -539,7 +530,7 @@ namespace Otel_Yonetim_Sistemi
                 txtIrtibat.Text = calisan[6].ToString();
                 dtpIseBaslama.Value = calisan.GetDateTime(7);
                 dtpIstenAyrilma.Value = calisan.IsDBNull(8) ? DateTime.Now : calisan.GetDateTime(8);
-                cmbMeslek.SelectedIndex = calisan.GetInt32(9)-1;
+                cmbMeslek.SelectedIndex = calisan.GetInt32(9) - 1;
                 nudSaatlikUcret.Value = calisan.GetDecimal(10);
             }
             calisan.Close();
@@ -564,7 +555,7 @@ namespace Otel_Yonetim_Sistemi
             string commandString = $"SELECT kullaniciAdi,kullaniciSifre,kullaniciMail,kullaniciKayitTarihi,(calisanAd + ' ' + calisanSoyad) as CalisanAdSoyad,(yoneticiAd + ' ' + yoneticiSoyad) as YoneticiAdSoyad FROM kullanicilar LEFT JOIN calisanlar ON calisanlar.calisanID = kullanicilar.kullaniciCalisanID LEFT JOIN yoneticiler ON yoneticiler.yoneticiID = kullanicilar.kullaniciYoneticiID";
             SqlDataReader reader = baglanti.SorguVeriOku(commandString);
 
-            while(reader.Read())
+            while (reader.Read())
             {
                 KullaniciAdListesi.Add(reader.GetString(0));
                 string[] satir = { reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetDateTime(3).ToString("dd/MM/yyyy"), reader.IsDBNull(4) ? " " : reader.GetString(4), reader.IsDBNull(5) ? " " : reader.GetString(5) };
@@ -583,9 +574,9 @@ namespace Otel_Yonetim_Sistemi
             string commandString = "SELECT calisanID, (calisanAd + ' ' + calisanSoyad) as CalisanAdSoyad FROM calisanlar";
 
             SqlDataReader reader = baglanti.SorguVeriOku(commandString);
-            while(reader.Read())
+            while (reader.Read())
             {
-                KullaniciCalisanListesi.Add(reader.GetInt32(0),reader.GetString(1));
+                KullaniciCalisanListesi.Add(reader.GetInt32(0), reader.GetString(1));
             }
             reader.Close();
 
@@ -595,7 +586,7 @@ namespace Otel_Yonetim_Sistemi
 
             commandString = "SELECT yoneticiID, (yoneticiAd + ' ' + yoneticiSoyad) as YoneticiAdSoyad FROM yoneticiler";
             reader = baglanti.SorguVeriOku(commandString);
-            while(reader.Read())
+            while (reader.Read())
             {
                 KullaniciYoneticiListesi.Add(reader.GetInt32(0), reader.GetString(1));
             }
@@ -624,12 +615,12 @@ namespace Otel_Yonetim_Sistemi
                 if (reader.IsDBNull(5))
                 {
                     cmbKullaniciYonetici.SelectedValue = reader.GetInt32(6);
-                    cmbKullaniciCalisan.SelectedIndex=-1;
+                    cmbKullaniciCalisan.SelectedIndex = -1;
                 }
                 else
                 {
-                    cmbKullaniciCalisan.SelectedValue= reader.GetInt32(5);
-                    cmbKullaniciYonetici.SelectedIndex=-1;
+                    cmbKullaniciCalisan.SelectedValue = reader.GetInt32(5);
+                    cmbKullaniciYonetici.SelectedIndex = -1;
                 }
             }
             reader.Close();
@@ -639,17 +630,17 @@ namespace Otel_Yonetim_Sistemi
         {
             btnKullaniciSec.PerformClick();
         }
-        
+
         private void btnKullaniciEkle_Click(object sender, EventArgs e)
         {
-            if(cmbKullaniciCalisan.SelectedIndex != -1 && cmbKullaniciYonetici.SelectedIndex != -1)
+            if (cmbKullaniciCalisan.SelectedIndex != -1 && cmbKullaniciYonetici.SelectedIndex != -1)
             {
                 MessageBox.Show("Kullanıcı Hem Yönetici Hem Çalışan Olamaz!");
                 cmbKullaniciYonetici.SelectedIndex = -1;
                 cmbKullaniciCalisan.SelectedIndex = -1;
                 return;
             }
-            if(KullaniciAdListesi.Exists(x => x == txtKullaniciAd.Text))
+            if (KullaniciAdListesi.Exists(x => x == txtKullaniciAd.Text))
             {
                 MessageBox.Show("Bu Kullanıcı Adına Sahip Bir Üye Zaten Var!");
                 return;

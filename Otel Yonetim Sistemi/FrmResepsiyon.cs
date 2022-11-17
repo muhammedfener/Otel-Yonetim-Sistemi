@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Otel_Yonetim_Sistemi
@@ -29,7 +23,7 @@ namespace Otel_Yonetim_Sistemi
             {
                 gorunum.Visible = false;
             }
-            if(tpnlobj != null)
+            if (tpnlobj != null)
             {
                 tpnlobj.Visible = true;
             }
@@ -57,7 +51,7 @@ namespace Otel_Yonetim_Sistemi
 
         private void SifreGizleGoster(object sender, EventArgs e)
         {
-            TextBox sifrekutulari = (TextBox) sender;
+            TextBox sifrekutulari = (TextBox)sender;
             sifrekutulari.PasswordChar = sifrekutulari.Focused == true ? '\0' : '*';
         }
 
