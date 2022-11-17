@@ -25,7 +25,7 @@ namespace Otel_Yonetim_Sistemi
         Dictionary<int,string> MeslekListesi = new Dictionary<int, string>();
         Dictionary<int,string> KullaniciCalisanListesi = new Dictionary<int, string>();
         Dictionary<int,string> KullaniciYoneticiListesi = new Dictionary<int, string>();
-        List<string> KullaniciAd = new List<string>();
+        List<string> KullaniciAdListesi = new List<string>();
         int eskiOdaNumara;
         string eskiTC;
 
@@ -36,11 +36,11 @@ namespace Otel_Yonetim_Sistemi
 
         private void FrmYonetici_Load(object sender, EventArgs e)
         {
-            string connectionString = $"Server={Properties.Settings.Default.dbip};Database={Properties.Settings.Default.dbname};User Id={Properties.Settings.Default.dbuser};Password={Properties.Settings.Default.dbpass};";
+            //string connectionString = $"Server={Properties.Settings.Default.dbip};Database={Properties.Settings.Default.dbname};User Id={Properties.Settings.Default.dbuser};Password={Properties.Settings.Default.dbpass};";
 
             //string connectionString = $"Server=DESKTOP-RN1H7KK\\SQLEXPRESS;Database=BilgiHotel; User Id=MFener; Password=123;";
 
-            //string connectionString = "Server=DESKTOP-RN1H7KK\\SQLEXPRESS;Database=BilgiHotel;Trusted_Connection=True;";
+            string connectionString = "Server=DESKTOP-RN1H7KK\\SQLEXPRESS;Database=BilgiHotel;Trusted_Connection=True;";
 
             baglanti = new Baglanti(connectionString);
 
@@ -84,7 +84,6 @@ namespace Otel_Yonetim_Sistemi
                 {
                     chkKralOdasi.CheckState = CheckState.Unchecked;
                 }
-
             }
         }
 
@@ -405,11 +404,11 @@ namespace Otel_Yonetim_Sistemi
 
         private void silToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int calisanTC = Convert.ToInt32(lvwCalisanListesi.SelectedItems[0].SubItems[1].Text);
+            string calisanTC = lvwCalisanListesi.SelectedItems[0].SubItems[1].Text;
 
             try
             {
-                string commandString = $"UPDATE SET calisanAktifMi = 0 WHERE calisanTCKimlik = {calisanTC}";
+                string commandString = $"UPDATE calisanlar SET calisanAktifMi = 0 WHERE calisanTCKimlik = '{calisanTC}'";
 
                 baglanti.SorguNonQuery(commandString);
 
@@ -526,7 +525,7 @@ namespace Otel_Yonetim_Sistemi
 
             string calisanTC = lvwCalisanListesi.SelectedItems[0].SubItems[1].Text;
 
-            string commandString = $"SELECT * FROM Calisanlar WHERE calisanTCKimlik = {calisanTC}";
+            string commandString = $"SELECT * FROM Calisanlar WHERE calisanTCKimlik = '{calisanTC}'";
 
             SqlDataReader calisan = baglanti.SorguVeriOku(commandString);
 
@@ -561,12 +560,13 @@ namespace Otel_Yonetim_Sistemi
 
         private void KullaniciListele()
         {
+            lvwKullaniciListe.Items.Clear();
             string commandString = $"SELECT kullaniciAdi,kullaniciSifre,kullaniciMail,kullaniciKayitTarihi,(calisanAd + ' ' + calisanSoyad) as CalisanAdSoyad,(yoneticiAd + ' ' + yoneticiSoyad) as YoneticiAdSoyad FROM kullanicilar LEFT JOIN calisanlar ON calisanlar.calisanID = kullanicilar.kullaniciCalisanID LEFT JOIN yoneticiler ON yoneticiler.yoneticiID = kullanicilar.kullaniciYoneticiID";
             SqlDataReader reader = baglanti.SorguVeriOku(commandString);
 
             while(reader.Read())
             {
-                KullaniciAd.Add(reader.GetString(0));
+                KullaniciAdListesi.Add(reader.GetString(0));
                 string[] satir = { reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetDateTime(3).ToString("dd/MM/yyyy"), reader.IsDBNull(4) ? " " : reader.GetString(4), reader.IsDBNull(5) ? " " : reader.GetString(5) };
 
                 var listViewItem = new ListViewItem(satir);
@@ -578,6 +578,8 @@ namespace Otel_Yonetim_Sistemi
 
         private void KullanicilarComboboxDoldur()
         {
+            KullaniciCalisanListesi.Clear();
+            KullaniciYoneticiListesi.Clear();
             string commandString = "SELECT calisanID, (calisanAd + ' ' + calisanSoyad) as CalisanAdSoyad FROM calisanlar";
 
             SqlDataReader reader = baglanti.SorguVeriOku(commandString);
@@ -603,6 +605,9 @@ namespace Otel_Yonetim_Sistemi
             cmbKullaniciYonetici.ValueMember = "Key";
             cmbKullaniciYonetici.DisplayMember = "Value";
 
+
+            cmbKullaniciCalisan.SelectedIndex = -1;
+            cmbKullaniciYonetici.SelectedIndex = -1;
         }
 
         private void btnKullaniciSec_Click(object sender, EventArgs e)
@@ -634,8 +639,7 @@ namespace Otel_Yonetim_Sistemi
         {
             btnKullaniciSec.PerformClick();
         }
-        #endregion
-
+        
         private void btnKullaniciEkle_Click(object sender, EventArgs e)
         {
             if(cmbKullaniciCalisan.SelectedIndex != -1 && cmbKullaniciYonetici.SelectedIndex != -1)
@@ -645,26 +649,33 @@ namespace Otel_Yonetim_Sistemi
                 cmbKullaniciCalisan.SelectedIndex = -1;
                 return;
             }
+            if(KullaniciAdListesi.Exists(x => x == txtKullaniciAd.Text))
+            {
+                MessageBox.Show("Bu Kullanıcı Adına Sahip Bir Üye Zaten Var!");
+                return;
+            }
 
             string kullaniciAd = txtKullaniciAd.Text;
             string kullaniciSifre = txtKullaniciSifre.Text;
             string kullaniciMail = txtKullaniciMail.Text;
             DateTime kayitTarihi = DateTime.Now;
-            int calisanID = cmbKullaniciCalisan.SelectedIndex == -1 ? null  : cmbKullaniciCalisan.SelectedIndex;
+            /*int calisanID = cmbKullaniciCalisan.SelectedIndex == -1 ? null  : cmbKullaniciCalisan.SelectedIndex;
             int yoneticiID = cmbKullaniciYonetici.SelectedIndex == -1 ? null : cmbKullaniciYonetici.SelectedIndex;
-
-            SqlCommand commandString = new SqlCommand("INSERT INTO kullanicilar(kullaniciAdi, kullaniciSifre, kullaniciMail, kullaniciKayitTarihi, kullaniciCalisanID, kullaniciYoneticiID, kullaniciAktifMi) VALUES(@kullaniciAd, @kullaniciSifre, @kullaniciMail, @kayitTarihi,@calisanID,@yoneticiID,1)");
+            */
+            SqlCommand commandString = new SqlCommand("INSERT INTO kullanicilar (kullaniciAdi, kullaniciSifre, kullaniciMail, kullaniciKayitTarihi, kullaniciCalisanID, kullaniciYoneticiID, kullaniciAktifMi) VALUES(@kullaniciAd, @kullaniciSifre, @kullaniciMail, @kayitTarihi,@calisanID,@yoneticiID,1)");
             commandString.Parameters.AddWithValue("@kullaniciAd", kullaniciAd);
             commandString.Parameters.AddWithValue("@kullaniciSifre", kullaniciSifre);
             commandString.Parameters.AddWithValue("@kullaniciMail", kullaniciMail);
             commandString.Parameters.AddWithValue("@kayitTarihi", kayitTarihi);
             commandString.Parameters.AddWithValue("@calisanID", cmbKullaniciCalisan.SelectedIndex == -1 ? DBNull.Value.ToString() : cmbKullaniciCalisan.SelectedIndex.ToString());
-            commandString.Parameters.AddWithValue("@yoneticiID", yoneticiID);
+            commandString.Parameters.AddWithValue("@yoneticiID", cmbKullaniciYonetici.SelectedIndex == -1 ? DBNull.Value.ToString() : cmbKullaniciYonetici.SelectedIndex.ToString());
 
+            baglanti.SorguNonQuery(commandString);
 
             //string commandString = $"INSERT INTO kullanicilar (kullaniciAdi,kullaniciSifre,kullaniciMail,kullaniciKayitTarihi,kullaniciCalisanID,kullaniciYoneticiID,kullaniciAktifMi) VALUES ('{kullaniciAd}','{kullaniciSifre}','{kullaniciMail}','{kayitTarihi}',{calisanID},{yoneticiID},1)";
 
-
+            KullaniciListele();
         }
+        #endregion
     }
 }

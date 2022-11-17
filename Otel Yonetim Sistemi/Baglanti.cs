@@ -50,8 +50,11 @@ namespace Otel_Yonetim_Sistemi
 
         public int SorguNonQuery(SqlCommand Command)
         {
+            /*this.command.Connection = this.connection;
+            this.command.CommandText = Command.CommandText;*/
+
+            this.command = Command;
             this.command.Connection = this.connection;
-            this.command.CommandText = Command.CommandText;
 
             int DonecekDeger = this.command.ExecuteNonQuery();
 
