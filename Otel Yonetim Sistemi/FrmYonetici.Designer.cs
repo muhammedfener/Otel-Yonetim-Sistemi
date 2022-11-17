@@ -33,7 +33,29 @@
             this.odaDuzenleMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.calisanEkleMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.kullaniciEkleDuzenleMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.kampanyaEkleDüzenleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlOdaEkle = new System.Windows.Forms.Panel();
+            this.pnlKampanyaDuzenle = new System.Windows.Forms.Panel();
+            this.btnKampanyaSec = new System.Windows.Forms.Button();
+            this.dtpKampanyaBitis = new System.Windows.Forms.DateTimePicker();
+            this.dtpKampanyaBaslangic = new System.Windows.Forms.DateTimePicker();
+            this.rtxKampanyaAciklama = new System.Windows.Forms.RichTextBox();
+            this.btnKampanyaTemizle = new System.Windows.Forms.Button();
+            this.btnKampanyaDuzenle = new System.Windows.Forms.Button();
+            this.btnKampanyaKaydet = new System.Windows.Forms.Button();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.txtIndirimOrani = new System.Windows.Forms.TextBox();
+            this.txtKampanyaAd = new System.Windows.Forms.TextBox();
+            this.lvwKampanyalar = new System.Windows.Forms.ListView();
+            this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader14 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader15 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnOdaTemizle = new System.Windows.Forms.Button();
             this.chkKralOdasi = new System.Windows.Forms.CheckBox();
             this.rtxOdaAciklama = new System.Windows.Forms.RichTextBox();
@@ -72,6 +94,9 @@
             this.calisanMeslek = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.calisanAdres = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.calisanUcret = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.rightClickMenuCalisan = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.düzenleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.silToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnCalisanTemizle = new System.Windows.Forms.Button();
             this.btnCalisanDuzenle = new System.Windows.Forms.Button();
             this.btnCalisanKaydet = new System.Windows.Forms.Button();
@@ -96,35 +121,36 @@
             this.label17 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.pnlKullaniciEkleDuzenle = new System.Windows.Forms.Panel();
-            this.lvwKullaniciListe = new System.Windows.Forms.ListView();
-            this.txtKullaniciAd = new System.Windows.Forms.TextBox();
-            this.txtKullaniciSifre = new System.Windows.Forms.TextBox();
-            this.txtKullaniciMail = new System.Windows.Forms.TextBox();
-            this.cmbKullaniciCalisan = new System.Windows.Forms.ComboBox();
-            this.cmbKullaniciYonetici = new System.Windows.Forms.ComboBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.btnKullaniciEkle = new System.Windows.Forms.Button();
-            this.btnKullaniciDuzenle = new System.Windows.Forms.Button();
-            this.btnKullaniciTemizle = new System.Windows.Forms.Button();
             this.btnKullaniciSec = new System.Windows.Forms.Button();
+            this.btnKullaniciTemizle = new System.Windows.Forms.Button();
+            this.btnKullaniciDuzenle = new System.Windows.Forms.Button();
+            this.btnKullaniciEkle = new System.Windows.Forms.Button();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.cmbKullaniciYonetici = new System.Windows.Forms.ComboBox();
+            this.cmbKullaniciCalisan = new System.Windows.Forms.ComboBox();
+            this.txtKullaniciMail = new System.Windows.Forms.TextBox();
+            this.txtKullaniciSifre = new System.Windows.Forms.TextBox();
+            this.txtKullaniciAd = new System.Windows.Forms.TextBox();
+            this.lvwKullaniciListe = new System.Windows.Forms.ListView();
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.rightClickMenuCalisan = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.düzenleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.silToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rightClickMenuKullanici = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.düzenleToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.silToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.rightClickMenuKampanya = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.düzenleToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.silToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.pnlOdaEkle.SuspendLayout();
+            this.pnlKampanyaDuzenle.SuspendLayout();
             this.rightClickMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudCiftKisilikYatak)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudTekKisilikYatak)).BeginInit();
@@ -133,10 +159,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudOdaKat)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudOdaNumara)).BeginInit();
             this.pnlCalisanEkle.SuspendLayout();
+            this.rightClickMenuCalisan.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSaatlikUcret)).BeginInit();
             this.pnlKullaniciEkleDuzenle.SuspendLayout();
-            this.rightClickMenuCalisan.SuspendLayout();
             this.rightClickMenuKullanici.SuspendLayout();
+            this.rightClickMenuKampanya.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -144,7 +171,8 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.odaDuzenleMenu,
             this.calisanEkleMenu,
-            this.kullaniciEkleDuzenleMenu});
+            this.kullaniciEkleDuzenleMenu,
+            this.kampanyaEkleDüzenleToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
@@ -171,6 +199,13 @@
             this.kullaniciEkleDuzenleMenu.Size = new System.Drawing.Size(140, 20);
             this.kullaniciEkleDuzenleMenu.Text = "Kullanıcı Ekle&&Düzenle";
             this.kullaniciEkleDuzenleMenu.Click += new System.EventHandler(this.kullaniciEkleDuzenleMenu_Click);
+            // 
+            // kampanyaEkleDüzenleToolStripMenuItem
+            // 
+            this.kampanyaEkleDüzenleToolStripMenuItem.Name = "kampanyaEkleDüzenleToolStripMenuItem";
+            this.kampanyaEkleDüzenleToolStripMenuItem.Size = new System.Drawing.Size(151, 20);
+            this.kampanyaEkleDüzenleToolStripMenuItem.Text = "Kampanya Ekle&&Düzenle";
+            this.kampanyaEkleDüzenleToolStripMenuItem.Click += new System.EventHandler(this.kampanyaEkleDuzenleToolStripMenuItem_Click);
             // 
             // pnlOdaEkle
             // 
@@ -201,6 +236,192 @@
             this.pnlOdaEkle.Name = "pnlOdaEkle";
             this.pnlOdaEkle.Size = new System.Drawing.Size(800, 450);
             this.pnlOdaEkle.TabIndex = 2;
+            // 
+            // pnlKampanyaDuzenle
+            // 
+            this.pnlKampanyaDuzenle.Controls.Add(this.btnKampanyaSec);
+            this.pnlKampanyaDuzenle.Controls.Add(this.dtpKampanyaBitis);
+            this.pnlKampanyaDuzenle.Controls.Add(this.dtpKampanyaBaslangic);
+            this.pnlKampanyaDuzenle.Controls.Add(this.rtxKampanyaAciklama);
+            this.pnlKampanyaDuzenle.Controls.Add(this.btnKampanyaTemizle);
+            this.pnlKampanyaDuzenle.Controls.Add(this.btnKampanyaDuzenle);
+            this.pnlKampanyaDuzenle.Controls.Add(this.btnKampanyaKaydet);
+            this.pnlKampanyaDuzenle.Controls.Add(this.label28);
+            this.pnlKampanyaDuzenle.Controls.Add(this.label27);
+            this.pnlKampanyaDuzenle.Controls.Add(this.label26);
+            this.pnlKampanyaDuzenle.Controls.Add(this.label25);
+            this.pnlKampanyaDuzenle.Controls.Add(this.label22);
+            this.pnlKampanyaDuzenle.Controls.Add(this.txtIndirimOrani);
+            this.pnlKampanyaDuzenle.Controls.Add(this.txtKampanyaAd);
+            this.pnlKampanyaDuzenle.Controls.Add(this.lvwKampanyalar);
+            this.pnlKampanyaDuzenle.Location = new System.Drawing.Point(0, 25);
+            this.pnlKampanyaDuzenle.Name = "pnlKampanyaDuzenle";
+            this.pnlKampanyaDuzenle.Size = new System.Drawing.Size(800, 425);
+            this.pnlKampanyaDuzenle.TabIndex = 7;
+            // 
+            // btnKampanyaSec
+            // 
+            this.btnKampanyaSec.Location = new System.Drawing.Point(691, 189);
+            this.btnKampanyaSec.Name = "btnKampanyaSec";
+            this.btnKampanyaSec.Size = new System.Drawing.Size(97, 23);
+            this.btnKampanyaSec.TabIndex = 6;
+            this.btnKampanyaSec.Text = "Kampanya Seç";
+            this.btnKampanyaSec.UseVisualStyleBackColor = true;
+            this.btnKampanyaSec.Click += new System.EventHandler(this.btnKampanyaSec_Click);
+            // 
+            // dtpKampanyaBitis
+            // 
+            this.dtpKampanyaBitis.Location = new System.Drawing.Point(140, 103);
+            this.dtpKampanyaBitis.Name = "dtpKampanyaBitis";
+            this.dtpKampanyaBitis.Size = new System.Drawing.Size(105, 20);
+            this.dtpKampanyaBitis.TabIndex = 5;
+            // 
+            // dtpKampanyaBaslangic
+            // 
+            this.dtpKampanyaBaslangic.Location = new System.Drawing.Point(140, 77);
+            this.dtpKampanyaBaslangic.Name = "dtpKampanyaBaslangic";
+            this.dtpKampanyaBaslangic.Size = new System.Drawing.Size(105, 20);
+            this.dtpKampanyaBaslangic.TabIndex = 5;
+            // 
+            // rtxKampanyaAciklama
+            // 
+            this.rtxKampanyaAciklama.Location = new System.Drawing.Point(140, 129);
+            this.rtxKampanyaAciklama.Name = "rtxKampanyaAciklama";
+            this.rtxKampanyaAciklama.Size = new System.Drawing.Size(105, 96);
+            this.rtxKampanyaAciklama.TabIndex = 4;
+            this.rtxKampanyaAciklama.Text = "";
+            // 
+            // btnKampanyaTemizle
+            // 
+            this.btnKampanyaTemizle.Location = new System.Drawing.Point(32, 231);
+            this.btnKampanyaTemizle.Name = "btnKampanyaTemizle";
+            this.btnKampanyaTemizle.Size = new System.Drawing.Size(62, 23);
+            this.btnKampanyaTemizle.TabIndex = 3;
+            this.btnKampanyaTemizle.Text = "Temizle";
+            this.btnKampanyaTemizle.UseVisualStyleBackColor = true;
+            // 
+            // btnKampanyaDuzenle
+            // 
+            this.btnKampanyaDuzenle.Location = new System.Drawing.Point(100, 231);
+            this.btnKampanyaDuzenle.Name = "btnKampanyaDuzenle";
+            this.btnKampanyaDuzenle.Size = new System.Drawing.Size(75, 23);
+            this.btnKampanyaDuzenle.TabIndex = 3;
+            this.btnKampanyaDuzenle.Text = "Düzenle";
+            this.btnKampanyaDuzenle.UseVisualStyleBackColor = true;
+            this.btnKampanyaDuzenle.Click += new System.EventHandler(this.btnKampanyaDuzenle_Click);
+            // 
+            // btnKampanyaKaydet
+            // 
+            this.btnKampanyaKaydet.Location = new System.Drawing.Point(181, 231);
+            this.btnKampanyaKaydet.Name = "btnKampanyaKaydet";
+            this.btnKampanyaKaydet.Size = new System.Drawing.Size(64, 23);
+            this.btnKampanyaKaydet.TabIndex = 3;
+            this.btnKampanyaKaydet.Text = "Kaydet";
+            this.btnKampanyaKaydet.UseVisualStyleBackColor = true;
+            this.btnKampanyaKaydet.Click += new System.EventHandler(this.btnKampanyaKaydet_Click);
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(19, 129);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(103, 13);
+            this.label28.TabIndex = 2;
+            this.label28.Text = "Kampanya Açıklama";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(61, 104);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(61, 13);
+            this.label27.TabIndex = 2;
+            this.label27.Text = "İndirim Bitişi";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(34, 78);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(88, 13);
+            this.label26.TabIndex = 2;
+            this.label26.Text = "İndirim Başlangıcı";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(57, 52);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(65, 13);
+            this.label25.TabIndex = 2;
+            this.label25.Text = "İndirim Oranı";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(47, 26);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(75, 13);
+            this.label22.TabIndex = 2;
+            this.label22.Text = "Kampanya Adı";
+            // 
+            // txtIndirimOrani
+            // 
+            this.txtIndirimOrani.Location = new System.Drawing.Point(140, 48);
+            this.txtIndirimOrani.Name = "txtIndirimOrani";
+            this.txtIndirimOrani.Size = new System.Drawing.Size(105, 20);
+            this.txtIndirimOrani.TabIndex = 1;
+            // 
+            // txtKampanyaAd
+            // 
+            this.txtKampanyaAd.Location = new System.Drawing.Point(140, 22);
+            this.txtKampanyaAd.Name = "txtKampanyaAd";
+            this.txtKampanyaAd.Size = new System.Drawing.Size(105, 20);
+            this.txtKampanyaAd.TabIndex = 1;
+            // 
+            // lvwKampanyalar
+            // 
+            this.lvwKampanyalar.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader11,
+            this.columnHeader14,
+            this.columnHeader12,
+            this.columnHeader13,
+            this.columnHeader15});
+            this.lvwKampanyalar.ContextMenuStrip = this.rightClickMenuKampanya;
+            this.lvwKampanyalar.FullRowSelect = true;
+            this.lvwKampanyalar.HideSelection = false;
+            this.lvwKampanyalar.Location = new System.Drawing.Point(342, 22);
+            this.lvwKampanyalar.MultiSelect = false;
+            this.lvwKampanyalar.Name = "lvwKampanyalar";
+            this.lvwKampanyalar.Size = new System.Drawing.Size(446, 161);
+            this.lvwKampanyalar.TabIndex = 0;
+            this.lvwKampanyalar.UseCompatibleStateImageBehavior = false;
+            this.lvwKampanyalar.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader11
+            // 
+            this.columnHeader11.Text = "Kampanya Adı";
+            this.columnHeader11.Width = 90;
+            // 
+            // columnHeader14
+            // 
+            this.columnHeader14.Text = "İndirim Oranı";
+            this.columnHeader14.Width = 70;
+            // 
+            // columnHeader12
+            // 
+            this.columnHeader12.Text = "Başlangıç Tarihi";
+            this.columnHeader12.Width = 91;
+            // 
+            // columnHeader13
+            // 
+            this.columnHeader13.Text = "Bitiş Tarihi";
+            this.columnHeader13.Width = 82;
+            // 
+            // columnHeader15
+            // 
+            this.columnHeader15.Text = "Kampanya Açıklama";
+            this.columnHeader15.Width = 109;
             // 
             // btnOdaTemizle
             // 
@@ -583,6 +804,28 @@
             this.calisanUcret.Text = "Ücret";
             this.calisanUcret.Width = 67;
             // 
+            // rightClickMenuCalisan
+            // 
+            this.rightClickMenuCalisan.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.düzenleToolStripMenuItem,
+            this.silToolStripMenuItem});
+            this.rightClickMenuCalisan.Name = "rightClickMenuCalisan";
+            this.rightClickMenuCalisan.Size = new System.Drawing.Size(117, 48);
+            // 
+            // düzenleToolStripMenuItem
+            // 
+            this.düzenleToolStripMenuItem.Name = "düzenleToolStripMenuItem";
+            this.düzenleToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.düzenleToolStripMenuItem.Text = "Düzenle";
+            this.düzenleToolStripMenuItem.Click += new System.EventHandler(this.düzenleToolStripMenuItem_Click);
+            // 
+            // silToolStripMenuItem
+            // 
+            this.silToolStripMenuItem.Name = "silToolStripMenuItem";
+            this.silToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.silToolStripMenuItem.Text = "Sil";
+            this.silToolStripMenuItem.Click += new System.EventHandler(this.silToolStripMenuItem_Click);
+            // 
             // btnCalisanTemizle
             // 
             this.btnCalisanTemizle.Location = new System.Drawing.Point(3, 358);
@@ -591,6 +834,7 @@
             this.btnCalisanTemizle.TabIndex = 8;
             this.btnCalisanTemizle.Text = "Temizle";
             this.btnCalisanTemizle.UseVisualStyleBackColor = true;
+            this.btnCalisanTemizle.Click += new System.EventHandler(this.btnCalisanTemizle_Click);
             // 
             // btnCalisanDuzenle
             // 
@@ -797,6 +1041,129 @@
             this.pnlKullaniciEkleDuzenle.Size = new System.Drawing.Size(800, 424);
             this.pnlKullaniciEkleDuzenle.TabIndex = 11;
             // 
+            // btnKullaniciSec
+            // 
+            this.btnKullaniciSec.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnKullaniciSec.Location = new System.Drawing.Point(691, 198);
+            this.btnKullaniciSec.Name = "btnKullaniciSec";
+            this.btnKullaniciSec.Size = new System.Drawing.Size(97, 36);
+            this.btnKullaniciSec.TabIndex = 6;
+            this.btnKullaniciSec.Text = "Kullanıcı Seç";
+            this.btnKullaniciSec.UseVisualStyleBackColor = true;
+            this.btnKullaniciSec.Click += new System.EventHandler(this.btnKullaniciSec_Click);
+            // 
+            // btnKullaniciTemizle
+            // 
+            this.btnKullaniciTemizle.Location = new System.Drawing.Point(13, 160);
+            this.btnKullaniciTemizle.Name = "btnKullaniciTemizle";
+            this.btnKullaniciTemizle.Size = new System.Drawing.Size(30, 23);
+            this.btnKullaniciTemizle.TabIndex = 5;
+            this.btnKullaniciTemizle.Text = "Temizle";
+            this.btnKullaniciTemizle.UseVisualStyleBackColor = true;
+            this.btnKullaniciTemizle.Click += new System.EventHandler(this.btnKullaniciTemizle_Click);
+            // 
+            // btnKullaniciDuzenle
+            // 
+            this.btnKullaniciDuzenle.Location = new System.Drawing.Point(49, 159);
+            this.btnKullaniciDuzenle.Name = "btnKullaniciDuzenle";
+            this.btnKullaniciDuzenle.Size = new System.Drawing.Size(101, 23);
+            this.btnKullaniciDuzenle.TabIndex = 4;
+            this.btnKullaniciDuzenle.Text = "Kullanıcı Düzenle";
+            this.btnKullaniciDuzenle.UseVisualStyleBackColor = true;
+            this.btnKullaniciDuzenle.Click += new System.EventHandler(this.btnKullaniciDuzenle_Click);
+            // 
+            // btnKullaniciEkle
+            // 
+            this.btnKullaniciEkle.Location = new System.Drawing.Point(156, 159);
+            this.btnKullaniciEkle.Name = "btnKullaniciEkle";
+            this.btnKullaniciEkle.Size = new System.Drawing.Size(84, 23);
+            this.btnKullaniciEkle.TabIndex = 4;
+            this.btnKullaniciEkle.Text = "Kullanıcı Ekle";
+            this.btnKullaniciEkle.UseVisualStyleBackColor = true;
+            this.btnKullaniciEkle.Click += new System.EventHandler(this.btnKullaniciEkle_Click);
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(36, 126);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(63, 13);
+            this.label24.TabIndex = 3;
+            this.label24.Text = "Yönetici Adı";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(41, 99);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(59, 13);
+            this.label23.TabIndex = 3;
+            this.label23.Text = "Çalışan Adı";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(74, 75);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(26, 13);
+            this.label21.TabIndex = 3;
+            this.label21.Text = "Mail";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(71, 48);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(28, 13);
+            this.label20.TabIndex = 3;
+            this.label20.Text = "Şifre";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(36, 22);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(64, 13);
+            this.label19.TabIndex = 3;
+            this.label19.Text = "Kullanıcı Adı";
+            // 
+            // cmbKullaniciYonetici
+            // 
+            this.cmbKullaniciYonetici.FormattingEnabled = true;
+            this.cmbKullaniciYonetici.Location = new System.Drawing.Point(105, 123);
+            this.cmbKullaniciYonetici.Name = "cmbKullaniciYonetici";
+            this.cmbKullaniciYonetici.Size = new System.Drawing.Size(135, 21);
+            this.cmbKullaniciYonetici.TabIndex = 2;
+            // 
+            // cmbKullaniciCalisan
+            // 
+            this.cmbKullaniciCalisan.FormattingEnabled = true;
+            this.cmbKullaniciCalisan.Location = new System.Drawing.Point(105, 96);
+            this.cmbKullaniciCalisan.Name = "cmbKullaniciCalisan";
+            this.cmbKullaniciCalisan.Size = new System.Drawing.Size(135, 21);
+            this.cmbKullaniciCalisan.TabIndex = 2;
+            // 
+            // txtKullaniciMail
+            // 
+            this.txtKullaniciMail.Location = new System.Drawing.Point(105, 71);
+            this.txtKullaniciMail.Name = "txtKullaniciMail";
+            this.txtKullaniciMail.Size = new System.Drawing.Size(135, 20);
+            this.txtKullaniciMail.TabIndex = 1;
+            // 
+            // txtKullaniciSifre
+            // 
+            this.txtKullaniciSifre.Location = new System.Drawing.Point(105, 45);
+            this.txtKullaniciSifre.Name = "txtKullaniciSifre";
+            this.txtKullaniciSifre.Size = new System.Drawing.Size(135, 20);
+            this.txtKullaniciSifre.TabIndex = 1;
+            // 
+            // txtKullaniciAd
+            // 
+            this.txtKullaniciAd.Location = new System.Drawing.Point(105, 19);
+            this.txtKullaniciAd.Name = "txtKullaniciAd";
+            this.txtKullaniciAd.Size = new System.Drawing.Size(135, 20);
+            this.txtKullaniciAd.TabIndex = 1;
+            // 
             // lvwKullaniciListe
             // 
             this.lvwKullaniciListe.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -817,127 +1184,6 @@
             this.lvwKullaniciListe.UseCompatibleStateImageBehavior = false;
             this.lvwKullaniciListe.View = System.Windows.Forms.View.Details;
             // 
-            // txtKullaniciAd
-            // 
-            this.txtKullaniciAd.Location = new System.Drawing.Point(105, 19);
-            this.txtKullaniciAd.Name = "txtKullaniciAd";
-            this.txtKullaniciAd.Size = new System.Drawing.Size(135, 20);
-            this.txtKullaniciAd.TabIndex = 1;
-            // 
-            // txtKullaniciSifre
-            // 
-            this.txtKullaniciSifre.Location = new System.Drawing.Point(105, 45);
-            this.txtKullaniciSifre.Name = "txtKullaniciSifre";
-            this.txtKullaniciSifre.Size = new System.Drawing.Size(135, 20);
-            this.txtKullaniciSifre.TabIndex = 1;
-            // 
-            // txtKullaniciMail
-            // 
-            this.txtKullaniciMail.Location = new System.Drawing.Point(105, 71);
-            this.txtKullaniciMail.Name = "txtKullaniciMail";
-            this.txtKullaniciMail.Size = new System.Drawing.Size(135, 20);
-            this.txtKullaniciMail.TabIndex = 1;
-            // 
-            // cmbKullaniciCalisan
-            // 
-            this.cmbKullaniciCalisan.FormattingEnabled = true;
-            this.cmbKullaniciCalisan.Location = new System.Drawing.Point(105, 96);
-            this.cmbKullaniciCalisan.Name = "cmbKullaniciCalisan";
-            this.cmbKullaniciCalisan.Size = new System.Drawing.Size(135, 21);
-            this.cmbKullaniciCalisan.TabIndex = 2;
-            // 
-            // cmbKullaniciYonetici
-            // 
-            this.cmbKullaniciYonetici.FormattingEnabled = true;
-            this.cmbKullaniciYonetici.Location = new System.Drawing.Point(105, 123);
-            this.cmbKullaniciYonetici.Name = "cmbKullaniciYonetici";
-            this.cmbKullaniciYonetici.Size = new System.Drawing.Size(135, 21);
-            this.cmbKullaniciYonetici.TabIndex = 2;
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(36, 22);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(64, 13);
-            this.label19.TabIndex = 3;
-            this.label19.Text = "Kullanıcı Adı";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(71, 48);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(28, 13);
-            this.label20.TabIndex = 3;
-            this.label20.Text = "Şifre";
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(74, 75);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(26, 13);
-            this.label21.TabIndex = 3;
-            this.label21.Text = "Mail";
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(41, 99);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(59, 13);
-            this.label23.TabIndex = 3;
-            this.label23.Text = "Çalışan Adı";
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(36, 126);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(63, 13);
-            this.label24.TabIndex = 3;
-            this.label24.Text = "Yönetici Adı";
-            // 
-            // btnKullaniciEkle
-            // 
-            this.btnKullaniciEkle.Location = new System.Drawing.Point(156, 159);
-            this.btnKullaniciEkle.Name = "btnKullaniciEkle";
-            this.btnKullaniciEkle.Size = new System.Drawing.Size(84, 23);
-            this.btnKullaniciEkle.TabIndex = 4;
-            this.btnKullaniciEkle.Text = "Kullanıcı Ekle";
-            this.btnKullaniciEkle.UseVisualStyleBackColor = true;
-            this.btnKullaniciEkle.Click += new System.EventHandler(this.btnKullaniciEkle_Click);
-            // 
-            // btnKullaniciDuzenle
-            // 
-            this.btnKullaniciDuzenle.Location = new System.Drawing.Point(49, 159);
-            this.btnKullaniciDuzenle.Name = "btnKullaniciDuzenle";
-            this.btnKullaniciDuzenle.Size = new System.Drawing.Size(101, 23);
-            this.btnKullaniciDuzenle.TabIndex = 4;
-            this.btnKullaniciDuzenle.Text = "Kullanıcı Düzenle";
-            this.btnKullaniciDuzenle.UseVisualStyleBackColor = true;
-            // 
-            // btnKullaniciTemizle
-            // 
-            this.btnKullaniciTemizle.Location = new System.Drawing.Point(13, 160);
-            this.btnKullaniciTemizle.Name = "btnKullaniciTemizle";
-            this.btnKullaniciTemizle.Size = new System.Drawing.Size(30, 23);
-            this.btnKullaniciTemizle.TabIndex = 5;
-            this.btnKullaniciTemizle.Text = "Temizle";
-            this.btnKullaniciTemizle.UseVisualStyleBackColor = true;
-            // 
-            // btnKullaniciSec
-            // 
-            this.btnKullaniciSec.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnKullaniciSec.Location = new System.Drawing.Point(691, 198);
-            this.btnKullaniciSec.Name = "btnKullaniciSec";
-            this.btnKullaniciSec.Size = new System.Drawing.Size(97, 36);
-            this.btnKullaniciSec.TabIndex = 6;
-            this.btnKullaniciSec.Text = "Kullanıcı Seç";
-            this.btnKullaniciSec.UseVisualStyleBackColor = true;
-            this.btnKullaniciSec.Click += new System.EventHandler(this.btnKullaniciSec_Click);
-            // 
             // columnHeader5
             // 
             this.columnHeader5.Text = "Kullanıcı Adı";
@@ -948,15 +1194,15 @@
             this.columnHeader6.Text = "Şifre";
             this.columnHeader6.Width = 65;
             // 
-            // columnHeader7
-            // 
-            this.columnHeader7.Text = "Kayıt Tarihi";
-            this.columnHeader7.Width = 75;
-            // 
             // columnHeader8
             // 
             this.columnHeader8.Text = "Mail";
             this.columnHeader8.Width = 85;
+            // 
+            // columnHeader7
+            // 
+            this.columnHeader7.Text = "Kayıt Tarihi";
+            this.columnHeader7.Width = 75;
             // 
             // columnHeader9
             // 
@@ -967,28 +1213,6 @@
             // 
             this.columnHeader10.Text = "Yönetici Ad";
             this.columnHeader10.Width = 81;
-            // 
-            // rightClickMenuCalisan
-            // 
-            this.rightClickMenuCalisan.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.düzenleToolStripMenuItem,
-            this.silToolStripMenuItem});
-            this.rightClickMenuCalisan.Name = "rightClickMenuCalisan";
-            this.rightClickMenuCalisan.Size = new System.Drawing.Size(117, 48);
-            // 
-            // düzenleToolStripMenuItem
-            // 
-            this.düzenleToolStripMenuItem.Name = "düzenleToolStripMenuItem";
-            this.düzenleToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
-            this.düzenleToolStripMenuItem.Text = "Düzenle";
-            this.düzenleToolStripMenuItem.Click += new System.EventHandler(this.düzenleToolStripMenuItem_Click);
-            // 
-            // silToolStripMenuItem
-            // 
-            this.silToolStripMenuItem.Name = "silToolStripMenuItem";
-            this.silToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
-            this.silToolStripMenuItem.Text = "Sil";
-            this.silToolStripMenuItem.Click += new System.EventHandler(this.silToolStripMenuItem_Click);
             // 
             // rightClickMenuKullanici
             // 
@@ -1001,15 +1225,38 @@
             // düzenleToolStripMenuItem1
             // 
             this.düzenleToolStripMenuItem1.Name = "düzenleToolStripMenuItem1";
-            this.düzenleToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.düzenleToolStripMenuItem1.Size = new System.Drawing.Size(116, 22);
             this.düzenleToolStripMenuItem1.Text = "Düzenle";
             this.düzenleToolStripMenuItem1.Click += new System.EventHandler(this.düzenleToolStripMenuItem1_Click);
             // 
             // silToolStripMenuItem1
             // 
             this.silToolStripMenuItem1.Name = "silToolStripMenuItem1";
-            this.silToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.silToolStripMenuItem1.Size = new System.Drawing.Size(116, 22);
             this.silToolStripMenuItem1.Text = "Sil";
+            this.silToolStripMenuItem1.Click += new System.EventHandler(this.silToolStripMenuItem1_Click);
+            // 
+            // rightClickMenuKampanya
+            // 
+            this.rightClickMenuKampanya.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.düzenleToolStripMenuItem2,
+            this.silToolStripMenuItem2});
+            this.rightClickMenuKampanya.Name = "rightClickMenuKampanya";
+            this.rightClickMenuKampanya.Size = new System.Drawing.Size(181, 70);
+            // 
+            // düzenleToolStripMenuItem2
+            // 
+            this.düzenleToolStripMenuItem2.Name = "düzenleToolStripMenuItem2";
+            this.düzenleToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.düzenleToolStripMenuItem2.Text = "Düzenle";
+            this.düzenleToolStripMenuItem2.Click += new System.EventHandler(this.düzenleToolStripMenuItem2_Click);
+            // 
+            // silToolStripMenuItem2
+            // 
+            this.silToolStripMenuItem2.Name = "silToolStripMenuItem2";
+            this.silToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.silToolStripMenuItem2.Text = "Sil";
+            this.silToolStripMenuItem2.Click += new System.EventHandler(this.silToolStripMenuItem2_Click);
             // 
             // FrmYonetici
             // 
@@ -1017,9 +1264,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.pnlKullaniciEkleDuzenle);
+            this.Controls.Add(this.pnlKampanyaDuzenle);
             this.Controls.Add(this.pnlOdaEkle);
             this.Controls.Add(this.pnlCalisanEkle);
+            this.Controls.Add(this.pnlKullaniciEkleDuzenle);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FrmYonetici";
             this.Text = "FrmYonetici";
@@ -1029,6 +1277,8 @@
             this.menuStrip1.PerformLayout();
             this.pnlOdaEkle.ResumeLayout(false);
             this.pnlOdaEkle.PerformLayout();
+            this.pnlKampanyaDuzenle.ResumeLayout(false);
+            this.pnlKampanyaDuzenle.PerformLayout();
             this.rightClickMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nudCiftKisilikYatak)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudTekKisilikYatak)).EndInit();
@@ -1038,11 +1288,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudOdaNumara)).EndInit();
             this.pnlCalisanEkle.ResumeLayout(false);
             this.pnlCalisanEkle.PerformLayout();
+            this.rightClickMenuCalisan.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nudSaatlikUcret)).EndInit();
             this.pnlKullaniciEkleDuzenle.ResumeLayout(false);
             this.pnlKullaniciEkleDuzenle.PerformLayout();
-            this.rightClickMenuCalisan.ResumeLayout(false);
             this.rightClickMenuKullanici.ResumeLayout(false);
+            this.rightClickMenuKampanya.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1143,5 +1394,30 @@
         private System.Windows.Forms.ContextMenuStrip rightClickMenuKullanici;
         private System.Windows.Forms.ToolStripMenuItem düzenleToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem silToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem kampanyaEkleDüzenleToolStripMenuItem;
+        private System.Windows.Forms.Panel pnlKampanyaDuzenle;
+        private System.Windows.Forms.Button btnKampanyaSec;
+        private System.Windows.Forms.DateTimePicker dtpKampanyaBitis;
+        private System.Windows.Forms.DateTimePicker dtpKampanyaBaslangic;
+        private System.Windows.Forms.RichTextBox rtxKampanyaAciklama;
+        private System.Windows.Forms.Button btnKampanyaTemizle;
+        private System.Windows.Forms.Button btnKampanyaDuzenle;
+        private System.Windows.Forms.Button btnKampanyaKaydet;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.TextBox txtIndirimOrani;
+        private System.Windows.Forms.TextBox txtKampanyaAd;
+        private System.Windows.Forms.ListView lvwKampanyalar;
+        private System.Windows.Forms.ColumnHeader columnHeader11;
+        private System.Windows.Forms.ColumnHeader columnHeader14;
+        private System.Windows.Forms.ColumnHeader columnHeader12;
+        private System.Windows.Forms.ColumnHeader columnHeader13;
+        private System.Windows.Forms.ColumnHeader columnHeader15;
+        private System.Windows.Forms.ContextMenuStrip rightClickMenuKampanya;
+        private System.Windows.Forms.ToolStripMenuItem düzenleToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem silToolStripMenuItem2;
     }
 }

@@ -19,6 +19,13 @@ namespace Otel_Yonetim_Sistemi
         List<string> KullaniciAdListesi = new List<string>();
         int eskiOdaNumara;
         string eskiTC;
+        string eskiKullaniciAd;
+
+
+        string eskiKampanyaAd;
+        DateTime eskiKampanyaBaslangicTarih;
+        DateTime eskiKampanyaBitisTarih;
+        bool KampanyaSecildiMi = false;
 
         public FrmYonetici()
         {
@@ -31,12 +38,12 @@ namespace Otel_Yonetim_Sistemi
 
             //string connectionString = $"Server=DESKTOP-RN1H7KK\\SQLEXPRESS;Database=BilgiHotel; User Id=MFener; Password=123;";
 
-            string connectionString = "Server=DESKTOP-RN1H7KK\\SQLEXPRESS;Database=BilgiHotel;Trusted_Connection=True;";
+            //string connectionString = "Server=DESKTOP-RN1H7KK\\SQLEXPRESS;Database=BilgiHotel;Trusted_Connection=True;";
 
-            baglanti = new Baglanti(connectionString);
+            baglanti = new Baglanti();
 
 
-            panels = new List<Panel> { pnlOdaEkle, pnlCalisanEkle, pnlKullaniciEkleDuzenle };
+            panels = new List<Panel> { pnlOdaEkle, pnlCalisanEkle, pnlKullaniciEkleDuzenle, pnlKampanyaDuzenle };
 
             PanelAc(pnlOdaEkle);
 
@@ -44,9 +51,62 @@ namespace Otel_Yonetim_Sistemi
 
         }
 
-        private void VerileriTemizle()
+        private void KullaniciVeriTemizle()
         {
-            
+            foreach (var item in pnlKullaniciEkleDuzenle.Controls)
+            {
+                if (item is TextBox)
+                {
+                    TextBox txt = (TextBox)item;
+                    txt.Text = "";
+                }
+                if (item is ComboBox)
+                {
+                    ComboBox cmb = (ComboBox)item;
+                    cmb.SelectedIndex = -1;
+                }
+            }
+        }
+
+        private void CalisanVeriTemizle()
+        {
+            foreach (var item in pnlCalisanEkle.Controls)
+            {
+                if (item is TextBox)
+                {
+                    TextBox txt = (TextBox)item;
+                    txt.Text = "";
+                }
+
+                if (item is RichTextBox)
+                {
+                    RichTextBox txt = (RichTextBox)item;
+                    txt.Text = "";
+                }
+
+                if (item is DateTimePicker)
+                {
+                    DateTimePicker dtp = (DateTimePicker)item;
+                    dtp.Value = DateTime.Now;
+                }
+
+                if (item is ComboBox)
+                {
+                    ComboBox cmb = (ComboBox)item;
+                    cmb.SelectedIndex = -1;
+                }
+
+                if (item is NumericUpDown)
+                {
+                    NumericUpDown nud = (NumericUpDown)item;
+                    nud.Value = 0;
+                }
+            }
+        }
+
+        private void OdalarVerileriTemizle()
+        {
+
             foreach (var item in pnlOdaEkle.Controls)
             {
 
@@ -74,6 +134,28 @@ namespace Otel_Yonetim_Sistemi
                 if (chkKralOdasi.Checked)
                 {
                     chkKralOdasi.CheckState = CheckState.Unchecked;
+                }
+            }
+        }
+
+        private void KampanyaVerileriTemizle()
+        {
+            foreach(var item in pnlKampanyaDuzenle.Controls)
+            {
+                if(item is TextBox)
+                {
+                    TextBox txt = (TextBox)item;
+                    txt.Text = "";
+                }
+                if(item is DateTimePicker)
+                {
+                    DateTimePicker dtp = (DateTimePicker)item;
+                    dtp.Value = DateTime.Now;
+                }
+                if(item is RichTextBox)
+                {
+                    RichTextBox rtx = (RichTextBox)item;
+                    rtx.Text = "";
                 }
             }
         }
@@ -167,7 +249,7 @@ namespace Otel_Yonetim_Sistemi
                 return;
             }
 
-            VerileriTemizle();
+            OdalarVerileriTemizle();
             string odaNumarasi = lvwOdaListesi.SelectedItems[0].SubItems[0].Text;
             SqlDataReader odalar = baglanti.SorguVeriOku($"SELECT * FROM odalar WHERE odaNumara= {odaNumarasi}");
 
@@ -334,7 +416,7 @@ namespace Otel_Yonetim_Sistemi
 
         private void btnOdaTemizle_Click(object sender, EventArgs e)
         {
-            VerileriTemizle();
+            OdalarVerileriTemizle();
         }
 
         private void chkKralOdasi_CheckedChanged(object sender, EventArgs e)
@@ -479,6 +561,7 @@ namespace Otel_Yonetim_Sistemi
                 MessageBox.Show("Çalışan Eklenirken Hata Oluştu! Hata Mesajı: " + hata.Message);
 
             }
+            CalisanVeriTemizle();
         }
 
         private void btnCalisanDuzenle_Click(object sender, EventArgs e)
@@ -538,6 +621,10 @@ namespace Otel_Yonetim_Sistemi
             eskiTC = calisanTC;
         }
 
+        private void btnCalisanTemizle_Click(object sender, EventArgs e)
+        {
+            CalisanVeriTemizle();
+        }
         #endregion
 
         #region Kullanıcı İşlemleri
@@ -552,6 +639,7 @@ namespace Otel_Yonetim_Sistemi
         private void KullaniciListele()
         {
             lvwKullaniciListe.Items.Clear();
+            KullaniciAdListesi.Clear();
             string commandString = $"SELECT kullaniciAdi,kullaniciSifre,kullaniciMail,kullaniciKayitTarihi,(calisanAd + ' ' + calisanSoyad) as CalisanAdSoyad,(yoneticiAd + ' ' + yoneticiSoyad) as YoneticiAdSoyad FROM kullanicilar LEFT JOIN calisanlar ON calisanlar.calisanID = kullanicilar.kullaniciCalisanID LEFT JOIN yoneticiler ON yoneticiler.yoneticiID = kullanicilar.kullaniciYoneticiID";
             SqlDataReader reader = baglanti.SorguVeriOku(commandString);
 
@@ -603,27 +691,37 @@ namespace Otel_Yonetim_Sistemi
 
         private void btnKullaniciSec_Click(object sender, EventArgs e)
         {
-            string kullaniciAdi = lvwKullaniciListe.SelectedItems[0].SubItems[0].Text;
-            string commandString = $"SELECT * FROM kullanicilar WHERE kullaniciAdi = '{kullaniciAdi}'";
-
-            SqlDataReader reader = baglanti.SorguVeriOku(commandString);
-            while (reader.Read())
+            try
             {
-                txtKullaniciAd.Text = reader.GetString(1);
-                txtKullaniciSifre.Text = reader.GetString(2);
-                txtKullaniciMail.Text = reader.GetString(3);
-                if (reader.IsDBNull(5))
+                string kullaniciAdi = lvwKullaniciListe.SelectedItems[0].SubItems[0].Text;
+                string commandString = $"SELECT * FROM kullanicilar WHERE kullaniciAdi = '{kullaniciAdi}'";
+
+                SqlDataReader reader = baglanti.SorguVeriOku(commandString);
+                while (reader.Read())
                 {
-                    cmbKullaniciYonetici.SelectedValue = reader.GetInt32(6);
-                    cmbKullaniciCalisan.SelectedIndex = -1;
+                    txtKullaniciAd.Text = reader.GetString(1);
+                    txtKullaniciSifre.Text = reader.GetString(2);
+                    txtKullaniciMail.Text = reader.GetString(3);
+                    if (reader.IsDBNull(5))
+                    {
+                        cmbKullaniciYonetici.SelectedValue = reader.GetInt32(6);
+                        cmbKullaniciCalisan.SelectedIndex = -1;
+                    }
+                    else
+                    {
+                        cmbKullaniciCalisan.SelectedValue = reader.GetInt32(5);
+                        cmbKullaniciYonetici.SelectedIndex = -1;
+                    }
                 }
-                else
-                {
-                    cmbKullaniciCalisan.SelectedValue = reader.GetInt32(5);
-                    cmbKullaniciYonetici.SelectedIndex = -1;
-                }
+                reader.Close();
+
+                eskiKullaniciAd = txtKullaniciAd.Text;
             }
-            reader.Close();
+            catch (Exception ex)
+            {
+                MessageBox.Show("Bir Hata Oluştu! Hata Mesajı: " + ex.Message);
+            }
+
         }
 
         private void düzenleToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -658,15 +756,183 @@ namespace Otel_Yonetim_Sistemi
             commandString.Parameters.AddWithValue("@kullaniciSifre", kullaniciSifre);
             commandString.Parameters.AddWithValue("@kullaniciMail", kullaniciMail);
             commandString.Parameters.AddWithValue("@kayitTarihi", kayitTarihi);
-            commandString.Parameters.AddWithValue("@calisanID", cmbKullaniciCalisan.SelectedIndex == -1 ? DBNull.Value.ToString() : cmbKullaniciCalisan.SelectedIndex.ToString());
-            commandString.Parameters.AddWithValue("@yoneticiID", cmbKullaniciYonetici.SelectedIndex == -1 ? DBNull.Value.ToString() : cmbKullaniciYonetici.SelectedIndex.ToString());
+            commandString.Parameters.AddWithValue("@calisanID", cmbKullaniciCalisan.SelectedIndex == -1 ? DBNull.Value : cmbKullaniciCalisan.SelectedValue);
+            commandString.Parameters.AddWithValue("@yoneticiID", cmbKullaniciYonetici.SelectedIndex == -1 ? DBNull.Value : cmbKullaniciYonetici.SelectedValue);
 
             baglanti.SorguNonQuery(commandString);
 
             //string commandString = $"INSERT INTO kullanicilar (kullaniciAdi,kullaniciSifre,kullaniciMail,kullaniciKayitTarihi,kullaniciCalisanID,kullaniciYoneticiID,kullaniciAktifMi) VALUES ('{kullaniciAd}','{kullaniciSifre}','{kullaniciMail}','{kayitTarihi}',{calisanID},{yoneticiID},1)";
 
             KullaniciListele();
+            KullaniciVeriTemizle();
         }
+
+        private void btnKullaniciDuzenle_Click(object sender, EventArgs e)
+        {
+            if (KullaniciAdListesi.Exists(x => x == txtKullaniciAd.Text) && eskiKullaniciAd != txtKullaniciAd.Text)
+            {
+                MessageBox.Show("Kullanıcı Adı Zaten Var!");
+            }
+
+            if (!KullaniciAdListesi.Exists(x => x == eskiKullaniciAd))
+            {
+                MessageBox.Show("Var Olmayan Kullanıcı Düzenlenemez!");
+            }
+
+            SqlCommand commandString = new SqlCommand("UPDATE kullanicilar SET kullaniciAdi = @kullaniciAd, kullaniciSifre = @kullaniciSifre, kullaniciMail = @kullaniciMail, kullaniciCalisanID = @kullaniciCalisanID, kullaniciYoneticiID = @kullaniciYoneticiID WHERE kullaniciAdi = @eskiKullaniciAd");
+            commandString.Parameters.AddWithValue("@kullaniciAd", txtKullaniciAd.Text);
+            commandString.Parameters.AddWithValue("@kullaniciSifre", txtKullaniciSifre.Text);
+            commandString.Parameters.AddWithValue("@kullaniciMail", txtKullaniciMail.Text);
+            commandString.Parameters.AddWithValue("@kullaniciCalisanID", cmbKullaniciCalisan.SelectedIndex == -1 ? DBNull.Value : cmbKullaniciCalisan.SelectedValue);
+            commandString.Parameters.AddWithValue("@kullaniciYoneticiID", cmbKullaniciYonetici.SelectedIndex == -1 ? DBNull.Value : cmbKullaniciYonetici.SelectedValue);
+            commandString.Parameters.AddWithValue("@eskiKullaniciAd", eskiKullaniciAd);
+
+            baglanti.SorguNonQuery(commandString);
+
+            KullaniciListele();
+            eskiKullaniciAd = null;
+        }
+
+        private void silToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string kullaniciAdi = lvwKullaniciListe.SelectedItems[0].SubItems[0].Text;
+
+                SqlCommand commandString = new SqlCommand("DELETE FROM kullanicilar WHERE kullaniciAdi = @kullaniciAd");
+
+                commandString.Parameters.AddWithValue("@kullaniciAd", kullaniciAdi);
+
+                baglanti.SorguNonQuery(commandString);
+                MessageBox.Show("Kullanıcı Başarıyla Silindi!");
+                KullaniciListele();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Kullanıcı Silinirken Hata Oluştu! Hata Mesajı: " + ex.Message);
+            }
+        }
+
+        private void btnKullaniciTemizle_Click(object sender, EventArgs e)
+        {
+            KullaniciVeriTemizle();
+        }
+        #endregion
+
+        #region Kampanya İşlemleri
+
+        private void KampanyaListele()
+        {
+            lvwKampanyalar.Items.Clear();
+            string commandString = "SELECT * FROM Kampanyalar WHERE kampanyaAktifMi = 1";
+
+            SqlDataReader reader = baglanti.SorguVeriOku(commandString);
+            while (reader.Read())
+            {
+                string[] satir = { reader.GetString(1), reader.GetDecimal(2).ToString(), reader.GetDateTime(3).ToString("dd/MM/yyyy"), reader.GetDateTime(4).ToString("dd/MM/yyyy"), reader.GetString(5) };
+                ListViewItem item = new ListViewItem(satir);
+
+                lvwKampanyalar.Items.Add(item);
+            }
+            reader.Close();
+        }
+
+        private void kampanyaEkleDuzenleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PanelAc(pnlKampanyaDuzenle);
+            KampanyaListele();
+        }
+
+        private void btnKampanyaKaydet_Click(object sender, EventArgs e)
+        {
+
+            SqlCommand command = new SqlCommand("INSERT INTO kampanyalar (kampanyaAd,kampanyaIndirimOrani,kampanyaBaslangic,kampanyaBitis,kampanyaAciklama,kampanyaAktifMi) VALUES (@kampanyaAd,@kampanyaOran,@kampanyaBaslangicTarihi,@kampanyaBitisTarihi,@kampanyaAciklama,1)");
+            command.Parameters.AddWithValue("@kampanyaAd", txtKampanyaAd.Text);
+            command.Parameters.AddWithValue("@kampanyaOran", txtIndirimOrani.Text);
+            command.Parameters.AddWithValue("@kampanyaBaslangicTarihi", dtpKampanyaBaslangic.Value.Date);
+            command.Parameters.AddWithValue("@kampanyaBitisTarihi", dtpKampanyaBitis.Value.Date);
+            command.Parameters.AddWithValue("@kampanyaAciklama", rtxKampanyaAciklama.Text);
+
+            baglanti.SorguNonQuery(command);
+
+            KampanyaVerileriTemizle();
+
+            KampanyaListele();
+
+        }
+
+        private void btnKampanyaDuzenle_Click(object sender, EventArgs e)
+        {
+            if (!KampanyaSecildiMi)
+            {
+                MessageBox.Show("Listeden Kampanya Seçip Tekrar Deneyin!");
+                return;
+            }
+            SqlCommand command = new SqlCommand("UPDATE kampanyalar SET kampanyaAd = @kampanyaAd, kampanyaIndirimOrani = @kampanyaIndirimOrani, kampanyaBaslangic = @kampanyaBaslangic, kampanyaBitis = @kampanyaBitis, kampanyaAciklama = @kampanyaAciklama WHERE kampanyaAd = @eskikampanyaAd AND kampanyaBaslangic = @eskiKampanyaBaslangic AND kampanyaBitis = @eskiKampanyaBitis");
+            command.Parameters.AddWithValue("@kampanyaAd",txtKampanyaAd.Text);
+            command.Parameters.AddWithValue("@kampanyaIndirimOrani", Convert.ToDecimal(txtIndirimOrani.Text));
+            command.Parameters.AddWithValue("@kampanyaBaslangic", dtpKampanyaBaslangic.Value);
+            command.Parameters.AddWithValue("@kampanyaBitis", dtpKampanyaBitis.Value);
+            command.Parameters.AddWithValue("@kampanyaAciklama", rtxKampanyaAciklama.Text);
+            command.Parameters.AddWithValue("@eskikampanyaAd", eskiKampanyaAd);
+            command.Parameters.AddWithValue("@eskiKampanyaBaslangic", eskiKampanyaBaslangicTarih);
+            command.Parameters.AddWithValue("@eskiKampanyaBitis", eskiKampanyaBitisTarih);
+
+            baglanti.SorguNonQuery(command);
+
+            KampanyaSecildiMi = false;
+            KampanyaListele();
+        }
+
+        private void btnKampanyaSec_Click(object sender, EventArgs e)
+        {
+            SqlCommand command = new SqlCommand("SELECT * FROM kampanyalar WHERE kampanyaAd = @kampanyaAd AND kampanyaBaslangic = @kampanyaBaslangic AND kampanyaBitis = @kampanyaBitis");
+            command.Parameters.AddWithValue("@kampanyaAd", lvwKampanyalar.SelectedItems[0].SubItems[0].Text);
+            command.Parameters.AddWithValue("@kampanyaBaslangic", Convert.ToDateTime(lvwKampanyalar.SelectedItems[0].SubItems[2].Text));
+            command.Parameters.AddWithValue("@kampanyaBitis", Convert.ToDateTime(lvwKampanyalar.SelectedItems[0].SubItems[3].Text));
+
+            SqlDataReader reader = baglanti.SorguVeriOku(command);
+
+            while (reader.Read())
+            {
+                txtKampanyaAd.Text = reader.GetString(1);
+                txtIndirimOrani.Text = reader.GetDecimal(2).ToString();
+                dtpKampanyaBaslangic.Value = reader.GetDateTime(3);
+                dtpKampanyaBitis.Value = reader.GetDateTime(4);
+                rtxKampanyaAciklama.Text = reader.GetString(5);
+            }
+
+            eskiKampanyaAd = txtKampanyaAd.Text;
+            eskiKampanyaBaslangicTarih = dtpKampanyaBaslangic.Value;
+            eskiKampanyaBitisTarih = dtpKampanyaBitis.Value;
+
+            reader.Close();
+
+            KampanyaSecildiMi = true;
+        }
+
+        private void düzenleToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            btnKampanyaDuzenle.PerformClick();
+        }
+
+        private void silToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            if(lvwKampanyalar.SelectedItems.Count != 1)
+            {
+                MessageBox.Show("Silmek İçin Bir Kampanya Seçin!");
+                return;
+            }
+            SqlCommand command = new SqlCommand("UPDATE kampanyalar SET kampanyaAktifMi = 0 WHERE kampanyaAd = @kampanyaAd AND kampanyaBaslangic = @kampanyaBaslangic AND kampanyaBitis = @kampanyaBitis");
+            command.Parameters.AddWithValue("@kampanyaAd", lvwKampanyalar.SelectedItems[0].SubItems[0].Text);
+            command.Parameters.AddWithValue("@kampanyaBaslangic", Convert.ToDateTime(lvwKampanyalar.SelectedItems[0].SubItems[2].Text));
+            command.Parameters.AddWithValue("@kampanyaBitis", Convert.ToDateTime(lvwKampanyalar.SelectedItems[0].SubItems[3].Text));
+
+            baglanti.SorguNonQuery(command);
+            MessageBox.Show("Kampanya Silindi!");
+            KampanyaListele();
+        }
+
         #endregion
     }
 }

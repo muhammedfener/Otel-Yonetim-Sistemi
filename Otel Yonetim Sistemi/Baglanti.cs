@@ -8,13 +8,20 @@ namespace Otel_Yonetim_Sistemi
         SqlConnection connection;
         SqlCommand command;
         SqlDataReader reader;
-        // string connectionString = $"Server={Properties.Settings.Default.dbip};Database={Properties.Settings.Default.dbname};User Id={Properties.Settings.Default.dbuser};Password={Properties.Settings.Default.dbpass};";
-
-        public Baglanti(string ConnectionString)
+        public string connectionString = $"Server={Properties.Settings.Default.dbip};Database={Properties.Settings.Default.dbname};User Id={Properties.Settings.Default.dbuser};Password={Properties.Settings.Default.dbpass};";
+        //public string connectionString = "Server=DESKTOP-RN1H7KK\\SQLEXPRESS;Database=BilgiHotel;Trusted_Connection=True;";
+        public Baglanti(string ConnectionString = null)
         {
             try
             {
-                this.connection = new SqlConnection(ConnectionString);
+                if(ConnectionString != null)
+                {
+                    this.connection = new SqlConnection(ConnectionString);
+                }
+                else
+                {
+                    this.connection = new SqlConnection(connectionString);
+                }
                 command = new SqlCommand();
                 connection.Open();
             }
@@ -36,10 +43,10 @@ namespace Otel_Yonetim_Sistemi
 
         public SqlDataReader SorguVeriOku(SqlCommand Command)
         {
-            this.command.Connection = connection;
-            this.command.CommandText = Command.CommandText;
+            Command.Connection = this.connection;
+            //this.command.CommandText = Command.CommandText;
 
-            this.reader = this.command.ExecuteReader();
+            this.reader = Command.ExecuteReader();
 
             return reader;
         }
@@ -49,10 +56,9 @@ namespace Otel_Yonetim_Sistemi
             /*this.command.Connection = this.connection;
             this.command.CommandText = Command.CommandText;*/
 
-            this.command = Command;
-            this.command.Connection = this.connection;
+            Command.Connection = this.connection;
 
-            int DonecekDeger = this.command.ExecuteNonQuery();
+            int DonecekDeger = Command.ExecuteNonQuery();
 
             return DonecekDeger;
         }
@@ -69,10 +75,12 @@ namespace Otel_Yonetim_Sistemi
 
         public decimal SorguScalar(SqlCommand Command)
         {
-            this.command.Connection = this.connection;
-            this.command.CommandText = Command.CommandText;
+            /*this.command.Connection = this.connection;
+            this.command.CommandText = Command.CommandText;*/
 
-            decimal DonecekDeger = (decimal)this.command.ExecuteScalar();
+            Command.Connection = this.connection;
+
+            decimal DonecekDeger = (decimal)Command.ExecuteScalar();
 
             return DonecekDeger;
         }
