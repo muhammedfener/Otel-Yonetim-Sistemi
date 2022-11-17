@@ -467,6 +467,11 @@ namespace Otel_Yonetim_Sistemi
         {
             PanelAc(pnlOdaEkle);
         }
+
+        private void lvwOdaListesi_DoubleClick(object sender, EventArgs e)
+        {
+            btnOdaSec.PerformClick();
+        }
         #endregion
 
         #region Çalışan İşlemleri
@@ -624,6 +629,11 @@ namespace Otel_Yonetim_Sistemi
         private void btnCalisanTemizle_Click(object sender, EventArgs e)
         {
             CalisanVeriTemizle();
+        }
+
+        private void lvwCalisanListesi_DoubleClick(object sender, EventArgs e)
+        {
+            btnCalisanSec.PerformClick();
         }
         #endregion
 
@@ -817,6 +827,11 @@ namespace Otel_Yonetim_Sistemi
         {
             KullaniciVeriTemizle();
         }
+
+        private void lvwKullaniciListe_DoubleClick(object sender, EventArgs e)
+        {
+            btnKullaniciSec.PerformClick();
+        }
         #endregion
 
         #region Kampanya İşlemleri
@@ -886,6 +901,12 @@ namespace Otel_Yonetim_Sistemi
 
         private void btnKampanyaSec_Click(object sender, EventArgs e)
         {
+            if (lvwKampanyalar.SelectedItems.Count != 1)
+            {
+                MessageBox.Show("Bir Kampanya Seçmelisiniz!");
+                return;
+            }
+
             SqlCommand command = new SqlCommand("SELECT * FROM kampanyalar WHERE kampanyaAd = @kampanyaAd AND kampanyaBaslangic = @kampanyaBaslangic AND kampanyaBitis = @kampanyaBitis");
             command.Parameters.AddWithValue("@kampanyaAd", lvwKampanyalar.SelectedItems[0].SubItems[0].Text);
             command.Parameters.AddWithValue("@kampanyaBaslangic", Convert.ToDateTime(lvwKampanyalar.SelectedItems[0].SubItems[2].Text));
@@ -933,6 +954,18 @@ namespace Otel_Yonetim_Sistemi
             KampanyaListele();
         }
 
+        private void btnKampanyaTemizle_Click(object sender, EventArgs e)
+        {
+            KampanyaVerileriTemizle();
+        }
+
+        private void lvwKampanyalar_DoubleClick(object sender, EventArgs e)
+        {
+            btnKampanyaSec.PerformClick();
+        }
+
+
         #endregion
+
     }
 }
