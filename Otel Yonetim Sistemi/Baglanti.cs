@@ -1,15 +1,16 @@
 ﻿using System;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace Otel_Yonetim_Sistemi
 {
     public class Baglanti
     {
-        SqlConnection connection;
+        public SqlConnection connection;
         SqlCommand command;
         SqlDataReader reader;
-        //public string connectionString = $"Server={Properties.Settings.Default.dbip};Database={Properties.Settings.Default.dbname};User Id={Properties.Settings.Default.dbuser};Password={Properties.Settings.Default.dbpass};";
-        public string connectionString = "Server=DESKTOP-RN1H7KK\\SQLEXPRESS;Database=BilgiHotel;Trusted_Connection=True;";
+        public string connectionString = $"Server={Properties.Settings.Default.dbip};Database={Properties.Settings.Default.dbname};User Id={Properties.Settings.Default.dbuser};Password={Properties.Settings.Default.dbpass};";
+        //public string connectionString = "Server=DESKTOP-RN1H7KK\\SQLEXPRESS;Database=BilgiHotel;Trusted_Connection=True;";
         public Baglanti(string ConnectionString = null)
         {
             try
@@ -93,6 +94,19 @@ namespace Otel_Yonetim_Sistemi
             decimal DonecekDeger = (decimal)this.command.ExecuteScalar();
 
             return DonecekDeger;
+        }
+
+        public SqlDataAdapter DataAdapterDondur(SqlCommand Command)
+        {
+            Command.Connection = this.connection;
+
+            SqlDataAdapter da = new SqlDataAdapter(Command);
+
+            /*DataSet dt = new DataSet();
+
+            da.Fill(dt);*/
+
+            return da;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Windows.Forms;
@@ -27,6 +28,9 @@ namespace Otel_Yonetim_Sistemi
         DateTime eskiKampanyaBitisTarih;
         bool KampanyaSecildiMi = false;
 
+        List<SqlDataAdapter> DataAdapterler = new List<SqlDataAdapter>();
+        List<DataSet> DataSetler = new List<DataSet>();
+
         public FrmYonetici()
         {
             InitializeComponent();
@@ -43,7 +47,7 @@ namespace Otel_Yonetim_Sistemi
             baglanti = new Baglanti();
 
 
-            panels = new List<Panel> { pnlOdaEkle, pnlCalisanEkle, pnlKullaniciEkleDuzenle, pnlKampanyaDuzenle };
+            panels = new List<Panel> { pnlOdaEkle, pnlCalisanEkle, pnlKullaniciEkleDuzenle, pnlKampanyaDuzenle, pnlAyarlar };
 
             PanelAc(pnlOdaEkle);
 
@@ -966,5 +970,46 @@ namespace Otel_Yonetim_Sistemi
 
 
         #endregion
+
+        private void ayarlarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PanelAc(pnlAyarlar);
+            SqlCommand commandString = new SqlCommand("SELECT * FROM vardiyalar");
+            
+            DataAdapterler.Add(baglanti.DataAdapterDondur(commandString));
+
+            DataSetler.Add(new DataSet());
+
+            DataAdapterler[0].Fill(DataSetler[0]);
+
+            dgvVardiya.DataSource = DataSetler[0].Tables[0];
+            dgvVardiya.AutoGenerateColumns = true;
+            
+            ////////////////////////////////////////////////////////////////
+
+            commandString = new SqlCommand("SELECT * FROM medeniHal");
+
+            DataAdapterler.Add(baglanti.DataAdapterDondur(commandString));
+
+            DataAdapterler[1].Fill(DataSetler[1]);
+            dgvMedeniHal.DataSource = DataSetler[1].Tables[0];
+            dgvMedeniHal.AutoGenerateColumns = true;
+        }
+
+        private void btnVardiyaKaydet_Click(object sender, EventArgs e)
+        {
+            SqlCommandBuilder commandBuilder = new SqlCommandBuilder(DataAdapterler[0]);
+            if (DataAdapterler[0].Update(DataSetler[0]) > 0)
+            {
+                MessageBox.Show("Vardiyalar Güncellendi!");
+            }
+
+            ayarlarToolStripMenuItem_Click(this, EventArgs.Empty);
+        }
+
+        private void btnMedeniHalKaydet_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
