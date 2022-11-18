@@ -505,7 +505,7 @@ namespace Otel_Yonetim_Sistemi
         {
             lvwCalisanListesi.Items.Clear();
 
-            SqlDataReader calisanlar = baglanti.SorguVeriOku("SELECT calisanAd,calisanSoyad,calisanTelefon,calisanTCKimlik,calisanAdres,calisanIrtibatTelefon,calisanSaatlikUcret,meslekAd FROM calisanlar JOIN meslekler ON meslekler.meslekID = calisanlar.calisanMeslekID");
+            SqlDataReader calisanlar = baglanti.SorguVeriOku("SELECT calisanAd,calisanSoyad,calisanTelefon,calisanTCKimlik,calisanAdres,calisanIrtibatTelefon,calisanSaatlikUcret,meslekAd FROM calisanlar JOIN meslekler ON meslekler.meslekID = calisanlar.calisanMeslekID WHERE calisanAktifMi = 1");
 
             while (calisanlar.Read())
             {
@@ -966,6 +966,5 @@ namespace Otel_Yonetim_Sistemi
 
 
         #endregion
-
     }
 }

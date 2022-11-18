@@ -148,6 +148,10 @@
             this.chkKralOdasi = new System.Windows.Forms.CheckBox();
             this.btnOdaTemizle = new System.Windows.Forms.Button();
             this.pnlOdaEkle = new System.Windows.Forms.Panel();
+            this.ayarlarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.meslekleriDüzenleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.vardiyaSaatiDüzenleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.paketDüzenleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.rightClickMenu.SuspendLayout();
             this.pnlKampanyaDuzenle.SuspendLayout();
@@ -172,7 +176,8 @@
             this.odaDuzenleMenu,
             this.calisanEkleMenu,
             this.kullaniciEkleDuzenleMenu,
-            this.kampanyaEkleDüzenleToolStripMenuItem});
+            this.kampanyaEkleDüzenleToolStripMenuItem,
+            this.ayarlarToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
@@ -1263,6 +1268,34 @@
             this.pnlOdaEkle.Size = new System.Drawing.Size(800, 450);
             this.pnlOdaEkle.TabIndex = 2;
             // 
+            // ayarlarToolStripMenuItem
+            // 
+            this.ayarlarToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.meslekleriDüzenleToolStripMenuItem,
+            this.vardiyaSaatiDüzenleToolStripMenuItem,
+            this.paketDüzenleToolStripMenuItem});
+            this.ayarlarToolStripMenuItem.Name = "ayarlarToolStripMenuItem";
+            this.ayarlarToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
+            this.ayarlarToolStripMenuItem.Text = "Ayarlar";
+            // 
+            // meslekleriDüzenleToolStripMenuItem
+            // 
+            this.meslekleriDüzenleToolStripMenuItem.Name = "meslekleriDüzenleToolStripMenuItem";
+            this.meslekleriDüzenleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.meslekleriDüzenleToolStripMenuItem.Text = "Meslekleri Düzenle";
+            // 
+            // vardiyaSaatiDüzenleToolStripMenuItem
+            // 
+            this.vardiyaSaatiDüzenleToolStripMenuItem.Name = "vardiyaSaatiDüzenleToolStripMenuItem";
+            this.vardiyaSaatiDüzenleToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.vardiyaSaatiDüzenleToolStripMenuItem.Text = "Vardiya Saati Düzenle";
+            // 
+            // paketDüzenleToolStripMenuItem
+            // 
+            this.paketDüzenleToolStripMenuItem.Name = "paketDüzenleToolStripMenuItem";
+            this.paketDüzenleToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.paketDüzenleToolStripMenuItem.Text = "Paket Düzenle";
+            // 
             // FrmYonetici
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1424,5 +1457,9 @@
         private System.Windows.Forms.CheckBox chkKralOdasi;
         private System.Windows.Forms.Button btnOdaTemizle;
         private System.Windows.Forms.Panel pnlOdaEkle;
+        private System.Windows.Forms.ToolStripMenuItem ayarlarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem meslekleriDüzenleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem vardiyaSaatiDüzenleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem paketDüzenleToolStripMenuItem;
     }
 }
