@@ -17,11 +17,12 @@ namespace Otel_Yonetim_Sistemi
         Dictionary<int, string> MeslekListesi = new Dictionary<int, string>();
         Dictionary<int, string> KullaniciCalisanListesi = new Dictionary<int, string>();
         Dictionary<int, string> KullaniciYoneticiListesi = new Dictionary<int, string>();
+        Dictionary<int, string> VardiyaListesi = new Dictionary<int, string>();
         List<string> KullaniciAdListesi = new List<string>();
         int eskiOdaNumara;
         string eskiTC;
         string eskiKullaniciAd;
-
+        string calismaSaatiID;
 
         string eskiKampanyaAd;
         DateTime eskiKampanyaBaslangicTarih;
@@ -47,7 +48,7 @@ namespace Otel_Yonetim_Sistemi
             baglanti = new Baglanti();
 
 
-            panels = new List<Panel> { pnlOdaEkle, pnlCalisanEkle, pnlKullaniciEkleDuzenle, pnlKampanyaDuzenle, pnlAyarlar };
+            panels = new List<Panel> { pnlOdaEkle, pnlCalisanEkle, pnlKullaniciEkleDuzenle, pnlKampanyaDuzenle, pnlAyarlar, pnlAylikMaas, pnlCalismaSaatiDuzenle };
 
             PanelAc(pnlOdaEkle);
 
@@ -55,65 +56,10 @@ namespace Otel_Yonetim_Sistemi
 
         }
 
-        private void KullaniciVeriTemizle()
+        private void VerileriTemizle(Panel panel)
         {
-            foreach (var item in pnlKullaniciEkleDuzenle.Controls)
+            foreach (var item in panel.Controls)
             {
-                if (item is TextBox)
-                {
-                    TextBox txt = (TextBox)item;
-                    txt.Text = "";
-                }
-                if (item is ComboBox)
-                {
-                    ComboBox cmb = (ComboBox)item;
-                    cmb.SelectedIndex = -1;
-                }
-            }
-        }
-
-        private void CalisanVeriTemizle()
-        {
-            foreach (var item in pnlCalisanEkle.Controls)
-            {
-                if (item is TextBox)
-                {
-                    TextBox txt = (TextBox)item;
-                    txt.Text = "";
-                }
-
-                if (item is RichTextBox)
-                {
-                    RichTextBox txt = (RichTextBox)item;
-                    txt.Text = "";
-                }
-
-                if (item is DateTimePicker)
-                {
-                    DateTimePicker dtp = (DateTimePicker)item;
-                    dtp.Value = DateTime.Now;
-                }
-
-                if (item is ComboBox)
-                {
-                    ComboBox cmb = (ComboBox)item;
-                    cmb.SelectedIndex = -1;
-                }
-
-                if (item is NumericUpDown)
-                {
-                    NumericUpDown nud = (NumericUpDown)item;
-                    nud.Value = 0;
-                }
-            }
-        }
-
-        private void OdalarVerileriTemizle()
-        {
-
-            foreach (var item in pnlOdaEkle.Controls)
-            {
-
                 if (item is NumericUpDown)
                 {
                     NumericUpDown nud = (NumericUpDown)item;
@@ -129,37 +75,34 @@ namespace Otel_Yonetim_Sistemi
                     }
                 }
 
-                if (item is RichTextBox)
-                {
-                    RichTextBox rich = (RichTextBox)item;
-                    rich.Text = "";
-                }
-
-                if (chkKralOdasi.Checked)
-                {
-                    chkKralOdasi.CheckState = CheckState.Unchecked;
-                }
-            }
-        }
-
-        private void KampanyaVerileriTemizle()
-        {
-            foreach(var item in pnlKampanyaDuzenle.Controls)
-            {
-                if(item is TextBox)
+                if (item is TextBox)
                 {
                     TextBox txt = (TextBox)item;
                     txt.Text = "";
                 }
-                if(item is DateTimePicker)
+
+                if (item is DateTimePicker)
                 {
                     DateTimePicker dtp = (DateTimePicker)item;
                     dtp.Value = DateTime.Now;
                 }
-                if(item is RichTextBox)
+
+                if (item is RichTextBox)
                 {
                     RichTextBox rtx = (RichTextBox)item;
                     rtx.Text = "";
+                }
+
+                if (item is CheckBox)
+                {
+                    CheckBox cb = (CheckBox)item;
+                    cb.Checked = false;
+                }
+
+                if (item is ComboBox)
+                {
+                    ComboBox cmb = (ComboBox)item;
+                    cmb.SelectedIndex = -1;
                 }
             }
         }
@@ -253,7 +196,7 @@ namespace Otel_Yonetim_Sistemi
                 return;
             }
 
-            OdalarVerileriTemizle();
+            VerileriTemizle(pnlOdaEkle);
             string odaNumarasi = lvwOdaListesi.SelectedItems[0].SubItems[0].Text;
             SqlDataReader odalar = baglanti.SorguVeriOku($"SELECT * FROM odalar WHERE odaNumara= {odaNumarasi}");
 
@@ -420,7 +363,7 @@ namespace Otel_Yonetim_Sistemi
 
         private void btnOdaTemizle_Click(object sender, EventArgs e)
         {
-            OdalarVerileriTemizle();
+            VerileriTemizle(pnlOdaEkle);
         }
 
         private void chkKralOdasi_CheckedChanged(object sender, EventArgs e)
@@ -570,7 +513,7 @@ namespace Otel_Yonetim_Sistemi
                 MessageBox.Show("Çalışan Eklenirken Hata Oluştu! Hata Mesajı: " + hata.Message);
 
             }
-            CalisanVeriTemizle();
+            VerileriTemizle(pnlCalisanEkle);
         }
 
         private void btnCalisanDuzenle_Click(object sender, EventArgs e)
@@ -632,7 +575,7 @@ namespace Otel_Yonetim_Sistemi
 
         private void btnCalisanTemizle_Click(object sender, EventArgs e)
         {
-            CalisanVeriTemizle();
+            VerileriTemizle(pnlCalisanEkle);
         }
 
         private void lvwCalisanListesi_DoubleClick(object sender, EventArgs e)
@@ -778,7 +721,7 @@ namespace Otel_Yonetim_Sistemi
             //string commandString = $"INSERT INTO kullanicilar (kullaniciAdi,kullaniciSifre,kullaniciMail,kullaniciKayitTarihi,kullaniciCalisanID,kullaniciYoneticiID,kullaniciAktifMi) VALUES ('{kullaniciAd}','{kullaniciSifre}','{kullaniciMail}','{kayitTarihi}',{calisanID},{yoneticiID},1)";
 
             KullaniciListele();
-            KullaniciVeriTemizle();
+            VerileriTemizle(pnlKullaniciEkleDuzenle);
         }
 
         private void btnKullaniciDuzenle_Click(object sender, EventArgs e)
@@ -829,7 +772,7 @@ namespace Otel_Yonetim_Sistemi
 
         private void btnKullaniciTemizle_Click(object sender, EventArgs e)
         {
-            KullaniciVeriTemizle();
+            VerileriTemizle(pnlKullaniciEkleDuzenle);
         }
 
         private void lvwKullaniciListe_DoubleClick(object sender, EventArgs e)
@@ -874,7 +817,7 @@ namespace Otel_Yonetim_Sistemi
 
             baglanti.SorguNonQuery(command);
 
-            KampanyaVerileriTemizle();
+            VerileriTemizle(pnlKampanyaDuzenle);
 
             KampanyaListele();
 
@@ -960,7 +903,7 @@ namespace Otel_Yonetim_Sistemi
 
         private void btnKampanyaTemizle_Click(object sender, EventArgs e)
         {
-            KampanyaVerileriTemizle();
+            VerileriTemizle(pnlKampanyaDuzenle);
         }
 
         private void lvwKampanyalar_DoubleClick(object sender, EventArgs e)
@@ -971,9 +914,11 @@ namespace Otel_Yonetim_Sistemi
 
         #endregion
 
+        #region Ayarlar
         private void ayarlarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             PanelAc(pnlAyarlar);
+
             SqlCommand commandString = new SqlCommand("SELECT * FROM vardiyalar");
             
             DataAdapterler.Add(baglanti.DataAdapterDondur(commandString));
@@ -983,7 +928,6 @@ namespace Otel_Yonetim_Sistemi
             DataAdapterler[0].Fill(DataSetler[0]);
 
             dgvVardiya.DataSource = DataSetler[0].Tables[0];
-            dgvVardiya.AutoGenerateColumns = true;
             
             ////////////////////////////////////////////////////////////////
 
@@ -991,9 +935,32 @@ namespace Otel_Yonetim_Sistemi
 
             DataAdapterler.Add(baglanti.DataAdapterDondur(commandString));
 
+            DataSetler.Add(new DataSet());
+
             DataAdapterler[1].Fill(DataSetler[1]);
             dgvMedeniHal.DataSource = DataSetler[1].Tables[0];
-            dgvMedeniHal.AutoGenerateColumns = true;
+
+            ////////////////////////////////////////////////////////////////
+
+            commandString = new SqlCommand("SELECT * FROM meslekler");
+
+            DataAdapterler.Add(baglanti.DataAdapterDondur(commandString));
+
+            DataSetler.Add(new DataSet());
+
+            DataAdapterler[2].Fill(DataSetler[2]);
+            dgvMeslekler.DataSource = DataSetler[2].Tables[0];
+
+            ////////////////////////////////////////////////////////////////
+
+            commandString = new SqlCommand("SELECT * FROM paketler");
+
+            DataAdapterler.Add(baglanti.DataAdapterDondur(commandString));
+
+            DataSetler.Add(new DataSet());
+
+            DataAdapterler[3].Fill(DataSetler[3]);
+            dgvPaketler.DataSource = DataSetler[3].Tables[0];
         }
 
         private void btnVardiyaKaydet_Click(object sender, EventArgs e)
@@ -1004,12 +971,224 @@ namespace Otel_Yonetim_Sistemi
                 MessageBox.Show("Vardiyalar Güncellendi!");
             }
 
-            ayarlarToolStripMenuItem_Click(this, EventArgs.Empty);
         }
 
         private void btnMedeniHalKaydet_Click(object sender, EventArgs e)
         {
+            SqlCommandBuilder commandBuilder = new SqlCommandBuilder(DataAdapterler[1]);
+            if (DataAdapterler[1].Update(DataSetler[1]) > 0)
+            {
+                MessageBox.Show("Medeni Haller Güncellendi!");
+            }
 
         }
+        
+        private void btnMeslekKaydet_Click(object sender, EventArgs e)
+        {
+            SqlCommandBuilder commandBuilder = new SqlCommandBuilder(DataAdapterler[2]);
+            if (DataAdapterler[2].Update(DataSetler[2]) > 0)
+            {
+                MessageBox.Show("Meslekler Güncellendi!");
+            }
+        }
+
+        private void btnPaketKaydet_Click(object sender, EventArgs e)
+        {
+            SqlCommandBuilder commandBuilder = new SqlCommandBuilder(DataAdapterler[3]);
+            if (DataAdapterler[3].Update(DataSetler[3]) > 0)
+            {
+                MessageBox.Show("Paketler Güncellendi!");
+            }
+        }
+
+        #endregion
+
+        #region Maaş Hesapları
+
+        private void aylıkMaaşlarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PanelAc(pnlAylikMaas);
+            YoneticiMaasGetir();
+        }
+
+        private void YoneticiMaasGetir()
+        {
+            SqlCommand commandString = new SqlCommand("SELECT yoneticiAd + ' ' + yoneticiSoyad as [Yönetici Ad Soyad], yoneticiMaas,meslekAd FROM yoneticiler JOIN meslekler ON meslekler.meslekID = yoneticiler.yoneticiMeslekID");
+
+            SqlDataReader reader = baglanti.SorguVeriOku(commandString);
+
+            while (reader.Read())
+            {
+                string[] satir = { reader[0].ToString(), reader[2].ToString(), "", "", "", reader[1].ToString() };
+                var listviewitem = new ListViewItem(satir);
+                lvwMaasHesabi.Items.Add(listviewitem);
+            }
+            reader.Close();
+        }
+        private void CalisanAylikMaasHesapla()
+        {
+            SqlCommand commandstring = new SqlCommand("SELECT calisanAd,calisanSoyad,calisanTCKimlik,calisanSaatlikUcret,vardiyaAralik,calismaBaslangicTarihi,calismaBitisTarihi FROM calisanlar JOIN calismaSaatleri ON calismaSaatleri.calisanID = calisanlar.calisanID JOIN vardiyalar ON vardiyalar.vardiyaID = calismaSaatleri.vardiyaID WHERE DATEPART(MONTH,calismaBaslangicTarihi) = DATEPART(MONTH,GETDATE()) OR DATEPART(MONTH,calismaBitisTarihi) = DATEPART(MONTH,GETDATE())");
+
+            //SqlDataReader reader = 
+        }
+
+        #endregion
+
+        #region Çalışma Saatleri
+
+        private void çalışmaSaatiEkleDüzenleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PanelAc(pnlCalismaSaatiDuzenle);
+            CalismaSaatleriGoster();
+            CalismaSaatiComboDoldur();
+        }
+
+        private void CalismaSaatiComboDoldur()
+        {
+            KullaniciCalisanListesi.Clear();
+            VardiyaListesi.Clear();
+            string commandString = "SELECT calisanID, (calisanAd + ' ' + calisanSoyad) as CalisanAdSoyad FROM calisanlar";
+
+            SqlDataReader reader = baglanti.SorguVeriOku(commandString);
+            while (reader.Read())
+            {
+                KullaniciCalisanListesi.Add(reader.GetInt32(0), reader.GetString(1));
+            }
+            reader.Close();
+
+            cmbCalisanlar.DataSource = KullaniciCalisanListesi.ToList();
+            cmbCalisanlar.ValueMember = "Key";
+            cmbCalisanlar.DisplayMember = "Value";
+
+            commandString = "SELECT vardiyaID, vardiyaAralik FROM vardiyalar";
+
+            reader = baglanti.SorguVeriOku(commandString);
+            while (reader.Read())
+            {
+                VardiyaListesi.Add((int)reader[0], (string)reader[1]);
+            }
+            reader.Close();
+
+            cmbVardiyalar.DataSource = VardiyaListesi.ToList();
+            cmbVardiyalar.ValueMember = "Key";
+            cmbVardiyalar.DisplayMember = "Value";
+        }
+
+        private void CalismaSaatleriGoster()
+        {
+            lvwCalismaSaatleri.Items.Clear();
+            SqlCommand commandString = new SqlCommand("SELECT calismaSaatleriID,(calisanAd + ' ' + calisanSoyad) as CalisanAdSoyad, vardiyaAralik, calismaBaslangicTarihi, calismaBitisTarihi FROM calismaSaatleri JOIN calisanlar ON calisanlar.calisanID = calismaSaatleri.calisanID JOIN vardiyalar ON vardiyalar.vardiyaID = calismaSaatleri.vardiyaID WHERE calismaBaslangicTarihi > DATEADD(month,-2,GETDATE())");
+
+            SqlDataReader reader = baglanti.SorguVeriOku(commandString);
+
+            while (reader.Read())
+            {
+                string[] satir = { reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader.GetDateTime(3).ToString("dd/MM/yyyy"), reader.GetDateTime(4).ToString("dd/MM/yyyy") };
+                var listviewitem = new ListViewItem(satir);
+
+                lvwCalismaSaatleri.Items.Add(listviewitem);
+            }
+            reader.Close();
+        }
+
+        private void btnCalismaKaydet_Click(object sender, EventArgs e)
+        {
+            if(cmbCalisanlar.SelectedIndex == -1 || cmbVardiyalar.SelectedIndex == -1)
+            {
+                MessageBox.Show("Çalışan İsmi veya Vardiyayı Boş Bırakamazsınız!");
+                return;
+            }
+
+            try
+            {
+                SqlCommand commandString = new SqlCommand("INSERT INTO calismaSaatleri (calisanID,vardiyaID,calismaBaslangicTarihi,calismaBitisTarihi) VALUES(@calisanID,@vardiyaID,@calismaBaslangic,@calismaBitis)");
+                commandString.Parameters.Add("@calisanID", cmbCalisanlar.SelectedValue);
+                commandString.Parameters.Add("@vardiyaID", cmbVardiyalar.SelectedValue);
+                commandString.Parameters.Add("@calismaBaslangic", dtpCalismaBaslangic.Value.Date);
+                commandString.Parameters.Add("@calismaBitis", dtpCalismaBitis.Value.Date);
+
+                baglanti.SorguNonQuery(commandString);
+                MessageBox.Show("Çalışma Saati Başarıyla Eklendi!");
+                CalismaSaatleriGoster();
+                VerileriTemizle(pnlCalismaSaatiDuzenle);
+            }
+            catch(Exception hata)
+            {
+                MessageBox.Show("Çalışma Saati Eklenirken Hata Oluştu! Hata Mesajı: " + hata.Message);
+            }
+        }
+
+        private void btnCalismaSaatiSec_Click(object sender, EventArgs e)
+        {
+            if(lvwCalismaSaatleri.SelectedItems.Count != 1)
+            {
+                MessageBox.Show("Düzenlemek İçin Bir Satır Seçmelisiniz!");
+                return;
+            }
+
+            calismaSaatiID = lvwCalismaSaatleri.SelectedItems[0].SubItems[0].Text;
+            cmbCalisanlar.SelectedValue = KullaniciCalisanListesi.First(x => x.Value == lvwCalismaSaatleri.SelectedItems[0].SubItems[1].Text).Key;
+            cmbVardiyalar.SelectedValue = VardiyaListesi.First(x => x.Value == lvwCalismaSaatleri.SelectedItems[0].SubItems[2].Text).Key;
+            dtpCalismaBaslangic.Value = Convert.ToDateTime(lvwCalismaSaatleri.SelectedItems[0].SubItems[3].Text);
+            dtpCalismaBitis.Value = Convert.ToDateTime(lvwCalismaSaatleri.SelectedItems[0].SubItems[4].Text);
+        }
+
+        private void btnCalismaGuncelle_Click(object sender, EventArgs e)
+        {
+            if (String.IsNullOrEmpty(calismaSaatiID))
+            {
+                MessageBox.Show("Düzenlenecek Bir Çalışma Saati Seçin!");
+                return;
+            }
+
+            try
+            {
+                SqlCommand commandString = new SqlCommand("UPDATE calismaSaatleri SET calisanID = @calisanID, vardiyaID = @vardiyaID, calismaBaslangicTarihi = @calismaBaslangic, calismaBitisTarihi = @calismaBitis WHERE calismaSaatleriID = @calismaSaatleriID");
+                commandString.Parameters.AddWithValue("@calisanID", cmbCalisanlar.SelectedValue);
+                commandString.Parameters.AddWithValue("@vardiyaID", cmbVardiyalar.SelectedValue);
+                commandString.Parameters.AddWithValue("@calismaBaslangic", dtpCalismaBaslangic.Value.Date);
+                commandString.Parameters.AddWithValue("@calismaBitis", dtpCalismaBitis.Value.Date);
+                commandString.Parameters.AddWithValue("@calismaSaatleriID", calismaSaatiID);
+
+                baglanti.SorguNonQuery(commandString);
+                MessageBox.Show("Çalışma Saati Başarıyla Güncellendi!");
+                calismaSaatiID = "";
+            }
+            catch (Exception hata)
+            {
+                MessageBox.Show("Çalışma Saati Güncellenirken Hata Oluştu! Hata Mesajı: " + hata.Message);
+                calismaSaatiID = "";
+            }
+        }
+
+        private void btnCalismaSaatiTemizle_Click(object sender, EventArgs e)
+        {
+            VerileriTemizle(pnlCalismaSaatiDuzenle);
+        }
+
+        private void lvwCalismaSaatleri_DoubleClick(object sender, EventArgs e)
+        {
+            btnCalisanSec.PerformClick();
+        }
+
+        private void düzenleToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            btnCalisanSec.PerformClick();
+        }
+
+        private void silToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            if(lvwCalismaSaatleri.SelectedItems.Count != 1)
+            {
+                MessageBox.Show("Silmek İçin Bir Satır Seçin!");
+                return;
+            }
+            string calismaID = lvwCalismaSaatleri.SelectedItems[0].SubItems[0].Text;
+
+            SqlCommand commandString = new SqlCommand($"DELETE FROM calismaSaatleri WHERE calismaSaatleriID = '{calismaID}'");
+        }
+
+        #endregion
+
     }
 }
