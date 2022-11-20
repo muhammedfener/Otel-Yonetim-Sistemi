@@ -19,6 +19,7 @@ namespace Otel_Yonetim_Sistemi
         Dictionary<int, string> KullaniciYoneticiListesi = new Dictionary<int, string>();
         Dictionary<int, string> VardiyaListesi = new Dictionary<int, string>();
         List<string> KullaniciAdListesi = new List<string>();
+        List<string> MaasCalisanIDListesi = new List<string>();
         int eskiOdaNumara;
         string eskiTC;
         string eskiKullaniciAd;
@@ -48,7 +49,7 @@ namespace Otel_Yonetim_Sistemi
             baglanti = new Baglanti();
 
 
-            panels = new List<Panel> { pnlOdaEkle, pnlCalisanEkle, pnlKullaniciEkleDuzenle, pnlKampanyaDuzenle, pnlAyarlar, pnlAylikMaas, pnlCalismaSaatiDuzenle };
+            panels = new List<Panel> { pnlOdaEkle, pnlCalisanEkle, pnlKullaniciEkleDuzenle, pnlKampanyaDuzenle, pnlAyarlar, pnlAylikMaas, pnlCalismaSaatiDuzenle, pnlMesaiEkle };
 
             PanelAc(pnlOdaEkle);
 
@@ -162,6 +163,7 @@ namespace Otel_Yonetim_Sistemi
 
                     baglanti.SorguNonQuery(commandstring);
 
+                    
                     foreach (int itemIndices in cklOzellikler.CheckedIndices)
                     {
                         commandstring = $"INSERT INTO odalar_odaOzellik (odaNumara,ozellikID) VALUES({odaNumara},{itemIndices + 1})";
@@ -918,9 +920,15 @@ namespace Otel_Yonetim_Sistemi
         private void ayarlarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             PanelAc(pnlAyarlar);
+            DataAdapterler.Clear();
+            DataSetler.Clear();
+            DgvDoldur();
+        }
 
+        private void DgvDoldur()
+        {
             SqlCommand commandString = new SqlCommand("SELECT * FROM vardiyalar");
-            
+
             DataAdapterler.Add(baglanti.DataAdapterDondur(commandString));
 
             DataSetler.Add(new DataSet());
@@ -928,7 +936,7 @@ namespace Otel_Yonetim_Sistemi
             DataAdapterler[0].Fill(DataSetler[0]);
 
             dgvVardiya.DataSource = DataSetler[0].Tables[0];
-            
+
             ////////////////////////////////////////////////////////////////
 
             commandString = new SqlCommand("SELECT * FROM medeniHal");
@@ -1013,6 +1021,7 @@ namespace Otel_Yonetim_Sistemi
 
         private void YoneticiMaasGetir()
         {
+            lvwMaasHesabi.Items.Clear();
             SqlCommand commandString = new SqlCommand("SELECT yoneticiAd + ' ' + yoneticiSoyad as [Yönetici Ad Soyad], yoneticiMaas,meslekAd FROM yoneticiler JOIN meslekler ON meslekler.meslekID = yoneticiler.yoneticiMeslekID");
 
             SqlDataReader reader = baglanti.SorguVeriOku(commandString);
@@ -1025,11 +1034,53 @@ namespace Otel_Yonetim_Sistemi
             }
             reader.Close();
         }
+
         private void CalisanAylikMaasHesapla()
         {
-            SqlCommand commandstring = new SqlCommand("SELECT calisanAd,calisanSoyad,calisanTCKimlik,calisanSaatlikUcret,vardiyaAralik,calismaBaslangicTarihi,calismaBitisTarihi FROM calisanlar JOIN calismaSaatleri ON calismaSaatleri.calisanID = calisanlar.calisanID JOIN vardiyalar ON vardiyalar.vardiyaID = calismaSaatleri.vardiyaID WHERE DATEPART(MONTH,calismaBaslangicTarihi) = DATEPART(MONTH,GETDATE()) OR DATEPART(MONTH,calismaBitisTarihi) = DATEPART(MONTH,GETDATE())");
+            SqlCommand CalisanIDSorgusu = new SqlCommand("SELECT DISTINCT(calisanlar.calisanID) FROM calisanlar JOIN calismaSaatleri ON calismaSaatleri.calisanID = calisanlar.calisanID WHERE DATEPART(MONTH,calismaBaslangicTarihi) = DATEPART(MONTH,GETDATE()) OR DATEPART(MONTH,calismaBitisTarihi) = DATEPART(MONTH,GETDATE())");
 
-            //SqlDataReader reader = 
+            SqlDataReader reader = baglanti.SorguVeriOku(CalisanIDSorgusu);
+            while (reader.Read())
+            {
+                MaasCalisanIDListesi.Add(reader.GetString(0));
+            }
+            reader.Close();
+
+            foreach(string calisan in MaasCalisanIDListesi)
+            {
+                SqlCommand commandstring = new SqlCommand("SELECT calisanAd,calisanSoyad,calisanTCKimlik,calisanSaatlikUcret,vardiyaAralik,calismaBaslangicTarihi,calismaBitisTarihi FROM calisanlar JOIN calismaSaatleri ON calismaSaatleri.calisanID = calisanlar.calisanID JOIN vardiyalar ON vardiyalar.vardiyaID = calismaSaatleri.vardiyaID WHERE (DATEPART(MONTH,calismaBaslangicTarihi) = DATEPART(MONTH,GETDATE()) OR DATEPART(MONTH,calismaBitisTarihi) = DATEPART(MONTH,GETDATE())) AND calisanlar.calisanID = @calisanID");
+                commandstring.Parameters.AddWithValue("@calisanID", calisan);
+
+                reader = baglanti.SorguVeriOku(commandstring);
+                while (reader.Read())
+                {
+
+                }
+
+            }
+
+
+        }
+
+        private decimal CalisanAylikMaas(SqlDataReader reader)
+        {
+            decimal maas = 0;
+
+            while (reader.Read())
+            {
+                foreach(DateTime day in EachDay(reader.GetDateTime(5), reader.GetDateTime(6)))
+                {
+                    //if()
+                }
+            }
+
+            return maas;
+        }
+
+        public IEnumerable<DateTime> EachDay(DateTime from, DateTime thru)
+        {
+            for (var day = from.Date; day.Date <= thru.Date; day = day.AddDays(1))
+                yield return day;
         }
 
         #endregion
@@ -1098,7 +1149,11 @@ namespace Otel_Yonetim_Sistemi
                 MessageBox.Show("Çalışan İsmi veya Vardiyayı Boş Bırakamazsınız!");
                 return;
             }
-
+            if(dtpCalismaBaslangic.Value.Date.Month != dtpCalismaBitis.Value.Date.Month)
+            {
+                MessageBox.Show("Gireceğiniz Çalışma Tarihinin Bitiş ve Başlangıcı Aynı Ay İçerisinde Olmalı! Daha Uzun Süreler Eklemek İçin İşlemlerinizi Bölerek Gerçekleştirin!");
+                return;
+            }
             try
             {
                 SqlCommand commandString = new SqlCommand("INSERT INTO calismaSaatleri (calisanID,vardiyaID,calismaBaslangicTarihi,calismaBitisTarihi) VALUES(@calisanID,@vardiyaID,@calismaBaslangic,@calismaBitis)");
@@ -1188,7 +1243,42 @@ namespace Otel_Yonetim_Sistemi
             SqlCommand commandString = new SqlCommand($"DELETE FROM calismaSaatleri WHERE calismaSaatleriID = '{calismaID}'");
         }
 
+
         #endregion
 
+        #region Mesai İşlemleri
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            PanelAc(pnlMesaiEkle);
+            MesaiComboboxDoldur();
+        }
+
+        private void MesaiComboboxDoldur()
+        {
+            KullaniciCalisanListesi.Clear();
+            string commandString = "SELECT calisanID, (calisanAd + ' ' + calisanSoyad) as CalisanAdSoyad FROM calisanlar";
+
+            SqlDataReader reader = baglanti.SorguVeriOku(commandString);
+            while (reader.Read())
+            {
+                KullaniciCalisanListesi.Add(reader.GetInt32(0), reader.GetString(1));
+            }
+            reader.Close();
+
+            cmbMesaiCalisanlar.DataSource = KullaniciCalisanListesi.ToList();
+            cmbMesaiCalisanlar.ValueMember = "Key";
+            cmbMesaiCalisanlar.DisplayMember = "Value";
+
+            for(int i = 0; i < 24; i++)
+            {
+                cmbBaslangicSaatler.Items.Add(i.ToString("00") + ":00");
+                cmbBaslangicSaatler.SelectedIndex = 0;
+                cmbBitisSaatler.Items.Add(i.ToString("00") + ":00");
+                cmbBitisSaatler.SelectedIndex = 0;
+            }
+        }
+
+        #endregion
     }
 }
