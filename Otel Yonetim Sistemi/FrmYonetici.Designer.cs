@@ -36,6 +36,7 @@
             this.kullaniciEkleDuzenleMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.kampanyaEkleDüzenleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.çalışmaSaatiEkleDüzenleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.aylıkMaaşlarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.ayarlarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -196,24 +197,23 @@
             this.label33 = new System.Windows.Forms.Label();
             this.cmbVardiyalar = new System.Windows.Forms.ComboBox();
             this.cmbCalisanlar = new System.Windows.Forms.ComboBox();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlMesaiEkle = new System.Windows.Forms.Panel();
-            this.cmbMesaiCalisanlar = new System.Windows.Forms.ComboBox();
-            this.label37 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.label38 = new System.Windows.Forms.Label();
-            this.label39 = new System.Windows.Forms.Label();
-            this.cmbBaslangicSaatler = new System.Windows.Forms.ComboBox();
-            this.cmbBitisSaatler = new System.Windows.Forms.ComboBox();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.btnMesaiTemizle = new System.Windows.Forms.Button();
+            this.btnMesaiDuzenle = new System.Windows.Forms.Button();
+            this.btnMesaiKaydet = new System.Windows.Forms.Button();
+            this.btnMesaiSec = new System.Windows.Forms.Button();
+            this.lvwMesaiListe = new System.Windows.Forms.ListView();
             this.columnHeader27 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader28 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader29 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.dtpMesaiBitis = new System.Windows.Forms.DateTimePicker();
+            this.dtpMesaiBaslangic = new System.Windows.Forms.DateTimePicker();
+            this.label39 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
+            this.cmbBitisSaatler = new System.Windows.Forms.ComboBox();
+            this.cmbBaslangicSaatler = new System.Windows.Forms.ComboBox();
+            this.cmbMesaiCalisanlar = new System.Windows.Forms.ComboBox();
             this.menuStrip1.SuspendLayout();
             this.rightClickMenu.SuspendLayout();
             this.pnlKampanyaDuzenle.SuspendLayout();
@@ -301,6 +301,13 @@
             this.çalışmaSaatiEkleDüzenleToolStripMenuItem.Size = new System.Drawing.Size(165, 20);
             this.çalışmaSaatiEkleDüzenleToolStripMenuItem.Text = "Çalışma Saati Ekle&&Düzenle";
             this.çalışmaSaatiEkleDüzenleToolStripMenuItem.Click += new System.EventHandler(this.çalışmaSaatiEkleDüzenleToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(126, 20);
+            this.toolStripMenuItem2.Text = "Mesai Ekle&&Düzenle";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
             // aylıkMaaşlarToolStripMenuItem
             // 
@@ -1760,22 +1767,15 @@
             this.cmbCalisanlar.Size = new System.Drawing.Size(161, 21);
             this.cmbCalisanlar.TabIndex = 0;
             // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(126, 20);
-            this.toolStripMenuItem2.Text = "Mesai Ekle&&Düzenle";
-            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
-            // 
             // pnlMesaiEkle
             // 
-            this.pnlMesaiEkle.Controls.Add(this.button4);
-            this.pnlMesaiEkle.Controls.Add(this.button3);
-            this.pnlMesaiEkle.Controls.Add(this.button2);
-            this.pnlMesaiEkle.Controls.Add(this.button1);
-            this.pnlMesaiEkle.Controls.Add(this.listView1);
-            this.pnlMesaiEkle.Controls.Add(this.dateTimePicker2);
-            this.pnlMesaiEkle.Controls.Add(this.dateTimePicker1);
+            this.pnlMesaiEkle.Controls.Add(this.btnMesaiTemizle);
+            this.pnlMesaiEkle.Controls.Add(this.btnMesaiDuzenle);
+            this.pnlMesaiEkle.Controls.Add(this.btnMesaiKaydet);
+            this.pnlMesaiEkle.Controls.Add(this.btnMesaiSec);
+            this.pnlMesaiEkle.Controls.Add(this.lvwMesaiListe);
+            this.pnlMesaiEkle.Controls.Add(this.dtpMesaiBitis);
+            this.pnlMesaiEkle.Controls.Add(this.dtpMesaiBaslangic);
             this.pnlMesaiEkle.Controls.Add(this.label39);
             this.pnlMesaiEkle.Controls.Add(this.label38);
             this.pnlMesaiEkle.Controls.Add(this.label37);
@@ -1787,45 +1787,88 @@
             this.pnlMesaiEkle.Size = new System.Drawing.Size(800, 427);
             this.pnlMesaiEkle.TabIndex = 11;
             // 
-            // cmbMesaiCalisanlar
+            // btnMesaiTemizle
             // 
-            this.cmbMesaiCalisanlar.FormattingEnabled = true;
-            this.cmbMesaiCalisanlar.Location = new System.Drawing.Point(128, 25);
-            this.cmbMesaiCalisanlar.Name = "cmbMesaiCalisanlar";
-            this.cmbMesaiCalisanlar.Size = new System.Drawing.Size(175, 21);
-            this.cmbMesaiCalisanlar.TabIndex = 0;
+            this.btnMesaiTemizle.Location = new System.Drawing.Point(66, 110);
+            this.btnMesaiTemizle.Name = "btnMesaiTemizle";
+            this.btnMesaiTemizle.Size = new System.Drawing.Size(75, 23);
+            this.btnMesaiTemizle.TabIndex = 4;
+            this.btnMesaiTemizle.Text = "Temizle";
+            this.btnMesaiTemizle.UseVisualStyleBackColor = true;
+            this.btnMesaiTemizle.Click += new System.EventHandler(this.btnMesaiTemizle_Click);
             // 
-            // label37
+            // btnMesaiDuzenle
             // 
-            this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(32, 29);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(90, 13);
-            this.label37.TabIndex = 1;
-            this.label37.Text = "Çalışan Ad Soyad";
+            this.btnMesaiDuzenle.Location = new System.Drawing.Point(147, 110);
+            this.btnMesaiDuzenle.Name = "btnMesaiDuzenle";
+            this.btnMesaiDuzenle.Size = new System.Drawing.Size(75, 23);
+            this.btnMesaiDuzenle.TabIndex = 4;
+            this.btnMesaiDuzenle.Text = "Güncelle";
+            this.btnMesaiDuzenle.UseVisualStyleBackColor = true;
             // 
-            // dateTimePicker1
+            // btnMesaiKaydet
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(128, 54);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(112, 20);
-            this.dateTimePicker1.TabIndex = 2;
+            this.btnMesaiKaydet.Location = new System.Drawing.Point(228, 110);
+            this.btnMesaiKaydet.Name = "btnMesaiKaydet";
+            this.btnMesaiKaydet.Size = new System.Drawing.Size(75, 23);
+            this.btnMesaiKaydet.TabIndex = 4;
+            this.btnMesaiKaydet.Text = "Kaydet";
+            this.btnMesaiKaydet.UseVisualStyleBackColor = true;
+            this.btnMesaiKaydet.Click += new System.EventHandler(this.btnMesaiKaydet_Click);
             // 
-            // dateTimePicker2
+            // btnMesaiSec
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(128, 79);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(112, 20);
-            this.dateTimePicker2.TabIndex = 2;
+            this.btnMesaiSec.Location = new System.Drawing.Point(711, 188);
+            this.btnMesaiSec.Name = "btnMesaiSec";
+            this.btnMesaiSec.Size = new System.Drawing.Size(75, 23);
+            this.btnMesaiSec.TabIndex = 4;
+            this.btnMesaiSec.Text = "Mesai Seç";
+            this.btnMesaiSec.UseVisualStyleBackColor = true;
             // 
-            // label38
+            // lvwMesaiListe
             // 
-            this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(9, 58);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(113, 13);
-            this.label38.TabIndex = 1;
-            this.label38.Text = "Mesai Başlangıç Tarihi";
+            this.lvwMesaiListe.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader27,
+            this.columnHeader28,
+            this.columnHeader29});
+            this.lvwMesaiListe.FullRowSelect = true;
+            this.lvwMesaiListe.HideSelection = false;
+            this.lvwMesaiListe.Location = new System.Drawing.Point(405, 25);
+            this.lvwMesaiListe.MultiSelect = false;
+            this.lvwMesaiListe.Name = "lvwMesaiListe";
+            this.lvwMesaiListe.Size = new System.Drawing.Size(381, 157);
+            this.lvwMesaiListe.TabIndex = 3;
+            this.lvwMesaiListe.UseCompatibleStateImageBehavior = false;
+            this.lvwMesaiListe.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader27
+            // 
+            this.columnHeader27.Text = "Çalışan Ad Soyad";
+            this.columnHeader27.Width = 125;
+            // 
+            // columnHeader28
+            // 
+            this.columnHeader28.Text = "Mesai Başlangıç Tarihi";
+            this.columnHeader28.Width = 140;
+            // 
+            // columnHeader29
+            // 
+            this.columnHeader29.Text = "Mesai Bitiş Tarihi";
+            this.columnHeader29.Width = 100;
+            // 
+            // dtpMesaiBitis
+            // 
+            this.dtpMesaiBitis.Location = new System.Drawing.Point(128, 79);
+            this.dtpMesaiBitis.Name = "dtpMesaiBitis";
+            this.dtpMesaiBitis.Size = new System.Drawing.Size(104, 20);
+            this.dtpMesaiBitis.TabIndex = 2;
+            // 
+            // dtpMesaiBaslangic
+            // 
+            this.dtpMesaiBaslangic.Location = new System.Drawing.Point(128, 54);
+            this.dtpMesaiBaslangic.Name = "dtpMesaiBaslangic";
+            this.dtpMesaiBaslangic.Size = new System.Drawing.Size(104, 20);
+            this.dtpMesaiBaslangic.TabIndex = 2;
             // 
             // label39
             // 
@@ -1836,82 +1879,47 @@
             this.label39.TabIndex = 1;
             this.label39.Text = "Mesai Bitiş Tarihi";
             // 
-            // cmbBaslangicSaatler
+            // label38
             // 
-            this.cmbBaslangicSaatler.FormattingEnabled = true;
-            this.cmbBaslangicSaatler.Location = new System.Drawing.Point(246, 52);
-            this.cmbBaslangicSaatler.Name = "cmbBaslangicSaatler";
-            this.cmbBaslangicSaatler.Size = new System.Drawing.Size(57, 21);
-            this.cmbBaslangicSaatler.TabIndex = 0;
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(9, 58);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(113, 13);
+            this.label38.TabIndex = 1;
+            this.label38.Text = "Mesai Başlangıç Tarihi";
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(32, 29);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(90, 13);
+            this.label37.TabIndex = 1;
+            this.label37.Text = "Çalışan Ad Soyad";
             // 
             // cmbBitisSaatler
             // 
             this.cmbBitisSaatler.FormattingEnabled = true;
-            this.cmbBitisSaatler.Location = new System.Drawing.Point(246, 79);
+            this.cmbBitisSaatler.Location = new System.Drawing.Point(238, 79);
             this.cmbBitisSaatler.Name = "cmbBitisSaatler";
-            this.cmbBitisSaatler.Size = new System.Drawing.Size(57, 21);
+            this.cmbBitisSaatler.Size = new System.Drawing.Size(65, 21);
             this.cmbBitisSaatler.TabIndex = 0;
             // 
-            // listView1
+            // cmbBaslangicSaatler
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader27,
-            this.columnHeader28,
-            this.columnHeader29});
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(405, 25);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(381, 157);
-            this.listView1.TabIndex = 3;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.cmbBaslangicSaatler.FormattingEnabled = true;
+            this.cmbBaslangicSaatler.Location = new System.Drawing.Point(238, 52);
+            this.cmbBaslangicSaatler.Name = "cmbBaslangicSaatler";
+            this.cmbBaslangicSaatler.Size = new System.Drawing.Size(65, 21);
+            this.cmbBaslangicSaatler.TabIndex = 0;
             // 
-            // columnHeader27
+            // cmbMesaiCalisanlar
             // 
-            this.columnHeader27.Text = "Çalışan Ad Soyad";
-            // 
-            // columnHeader28
-            // 
-            this.columnHeader28.Text = "Mesai Başlangıç Tarihi";
-            // 
-            // columnHeader29
-            // 
-            this.columnHeader29.Text = "Mesai Bitiş Tarihi";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(711, 188);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(228, 110);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "button1";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(147, 110);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "button1";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(66, 110);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 4;
-            this.button4.Text = "button1";
-            this.button4.UseVisualStyleBackColor = true;
+            this.cmbMesaiCalisanlar.FormattingEnabled = true;
+            this.cmbMesaiCalisanlar.Location = new System.Drawing.Point(128, 25);
+            this.cmbMesaiCalisanlar.Name = "cmbMesaiCalisanlar";
+            this.cmbMesaiCalisanlar.Size = new System.Drawing.Size(175, 21);
+            this.cmbMesaiCalisanlar.TabIndex = 0;
             // 
             // FrmYonetici
             // 
@@ -2140,16 +2148,16 @@
         private System.Windows.Forms.ToolStripMenuItem silToolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.Panel pnlMesaiEkle;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.Button btnMesaiTemizle;
+        private System.Windows.Forms.Button btnMesaiDuzenle;
+        private System.Windows.Forms.Button btnMesaiKaydet;
+        private System.Windows.Forms.Button btnMesaiSec;
+        private System.Windows.Forms.ListView lvwMesaiListe;
         private System.Windows.Forms.ColumnHeader columnHeader27;
         private System.Windows.Forms.ColumnHeader columnHeader28;
         private System.Windows.Forms.ColumnHeader columnHeader29;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dtpMesaiBitis;
+        private System.Windows.Forms.DateTimePicker dtpMesaiBaslangic;
         private System.Windows.Forms.Label label39;
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.Label label37;

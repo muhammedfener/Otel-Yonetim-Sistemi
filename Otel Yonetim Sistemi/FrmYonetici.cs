@@ -40,11 +40,13 @@ namespace Otel_Yonetim_Sistemi
 
         private void FrmYonetici_Load(object sender, EventArgs e)
         {
+            #region Connection Eski kodları
             //string connectionString = $"Server={Properties.Settings.Default.dbip};Database={Properties.Settings.Default.dbname};User Id={Properties.Settings.Default.dbuser};Password={Properties.Settings.Default.dbpass};";
 
             //string connectionString = $"Server=DESKTOP-RN1H7KK\\SQLEXPRESS;Database=BilgiHotel; User Id=MFener; Password=123;";
 
             //string connectionString = "Server=DESKTOP-RN1H7KK\\SQLEXPRESS;Database=BilgiHotel;Trusted_Connection=True;";
+            #endregion
 
             baglanti = new Baglanti();
 
@@ -57,7 +59,7 @@ namespace Otel_Yonetim_Sistemi
 
         }
 
-        private void VerileriTemizle(Panel panel)
+        private void VerileriTemizle(Panel panel)//Veri Temizleme 
         {
             foreach (var item in panel.Controls)
             {
@@ -1238,9 +1240,16 @@ namespace Otel_Yonetim_Sistemi
                 MessageBox.Show("Silmek İçin Bir Satır Seçin!");
                 return;
             }
+
             string calismaID = lvwCalismaSaatleri.SelectedItems[0].SubItems[0].Text;
 
-            SqlCommand commandString = new SqlCommand($"DELETE FROM calismaSaatleri WHERE calismaSaatleriID = '{calismaID}'");
+            SqlCommand commandString = new SqlCommand($"DELETE FROM calismaSaatleri WHERE calismaSaatleriID = {calismaID}");
+
+            baglanti.SorguNonQuery(commandString);
+
+            MessageBox.Show("Çalışma Saati Başarıyla Silindi!");
+            CalismaSaatleriGoster();
+
         }
 
 
@@ -1272,13 +1281,51 @@ namespace Otel_Yonetim_Sistemi
 
             for(int i = 0; i < 24; i++)
             {
-                cmbBaslangicSaatler.Items.Add(i.ToString("00") + ":00");
+                cmbBaslangicSaatler.Items.Add(i.ToString() + ":00");
                 cmbBaslangicSaatler.SelectedIndex = 0;
-                cmbBitisSaatler.Items.Add(i.ToString("00") + ":00");
+                cmbBitisSaatler.Items.Add(i.ToString() + ":00");
                 cmbBitisSaatler.SelectedIndex = 0;
             }
         }
 
+        private void MesaiListele()
+        {
+            lvwMesaiListe.Items.Clear();
+
+            SqlDataReader mesailer = baglanti.SorguVeriOku("SELECT (calisanAd + ' ' + calisanSoyad) as CalisanAdSoyad, mesaiBaslangicTarihi, mesaiBitisTarihi  FROM mesailer JOIN calisanlar ON calisanlar.calisanID = mesailer.calisanID");
+            while (mesailer.Read())
+            {
+                string[] satir = { mesailer["CalisanAdSoyad"].ToString(), mesailer.GetDateTime(1).ToString(), mesailer.GetDateTime(2).ToString() };
+                var listViewItem = new ListViewItem(satir);
+
+                lvwMesaiListe.Items.Add(listViewItem);
+            }
+            mesailer.Close();
+        }
+
+        private void btnMesaiTemizle_Click(object sender, EventArgs e)
+        {
+            VerileriTemizle(pnlMesaiEkle);
+        }
+
+        private void btnMesaiKaydet_Click(object sender, EventArgs e)
+        {
+            int baslangicSaat = Convert.ToInt32(cmbBaslangicSaatler.Items[cmbBaslangicSaatler.SelectedIndex].ToString()[0]);
+            DateTime mesaiBaslangicTarihi = dtpMesaiBaslangic.Value.Date.AddHours(baslangicSaat);
+
+            int bitisSaat = Convert.ToInt32(cmbBitisSaatler.Items[cmbBitisSaatler.SelectedIndex].ToString()[0]);
+            DateTime mesaiBitisTarihi = dtpMesaiBaslangic.Value.Date.AddHours(baslangicSaat);
+            SqlCommand commandString = new SqlCommand("INSERT INTO mesailer (calisanID,mesaiBaslangicTarihi,mesaiBitisTarihi) VALUES (@calisanID,@mesaiBaslangic,@mesaiBitis)");
+            commandString.Parameters.AddWithValue("@calisanID",cmbMesaiCalisanlar.SelectedValue);
+            commandString.Parameters.AddWithValue("@mesaiBaslangic", mesaiBaslangicTarihi);
+            commandString.Parameters.AddWithValue("@mesaiBitis", mesaiBitisTarihi);
+
+            baglanti.SorguNonQuery(commandString);
+            MessageBox.Show("Mesai Başarıyla Eklendi");
+            VerileriTemizle(pnlMesaiEkle);
+            MesaiListele();
+        }
         #endregion
+
     }
 }
