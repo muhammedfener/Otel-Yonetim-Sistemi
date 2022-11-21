@@ -1302,7 +1302,7 @@ namespace Otel_Yonetim_Sistemi
             }
             mesailer.Close();
         }
-
+        
         private void btnMesaiTemizle_Click(object sender, EventArgs e)
         {
             VerileriTemizle(pnlMesaiEkle);
