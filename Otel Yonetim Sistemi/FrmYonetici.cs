@@ -20,6 +20,7 @@ namespace Otel_Yonetim_Sistemi
         Dictionary<int, string> VardiyaListesi = new Dictionary<int, string>();
         List<string> KullaniciAdListesi = new List<string>();
         List<string> MaasCalisanIDListesi = new List<string>();
+        List<string> MesaiSaatlerID = new List<string>();
         int eskiOdaNumara;
         string eskiTC;
         string eskiKullaniciAd;
@@ -57,6 +58,7 @@ namespace Otel_Yonetim_Sistemi
 
             OdaListele();
 
+            MesaiComboboxSaatDoldur();
         }
 
         private void VerileriTemizle(Panel panel)//Veri Temizleme 
@@ -1059,7 +1061,6 @@ namespace Otel_Yonetim_Sistemi
                 commandstring = new SqlCommand("");
             }
 
-
         }
 
         private decimal[] CalisanAylikMaas(SqlDataReader reader)
@@ -1263,6 +1264,18 @@ namespace Otel_Yonetim_Sistemi
         {
             PanelAc(pnlMesaiEkle);
             MesaiComboboxDoldur();
+            MesaiListele();
+        }
+
+        private void MesaiComboboxSaatDoldur()
+        {
+            for (int i = 0; i < 24; i++)
+            {
+                cmbBaslangicSaatler.Items.Add(i.ToString() + ":00");
+                cmbBaslangicSaatler.SelectedIndex = 0;
+                cmbBitisSaatler.Items.Add(i.ToString() + ":00");
+                cmbBitisSaatler.SelectedIndex = 0;
+            }
         }
 
         private void MesaiComboboxDoldur()
@@ -1280,24 +1293,17 @@ namespace Otel_Yonetim_Sistemi
             cmbMesaiCalisanlar.DataSource = KullaniciCalisanListesi.ToList();
             cmbMesaiCalisanlar.ValueMember = "Key";
             cmbMesaiCalisanlar.DisplayMember = "Value";
-
-            for(int i = 0; i < 24; i++)
-            {
-                cmbBaslangicSaatler.Items.Add(i.ToString() + ":00");
-                cmbBaslangicSaatler.SelectedIndex = 0;
-                cmbBitisSaatler.Items.Add(i.ToString() + ":00");
-                cmbBitisSaatler.SelectedIndex = 0;
-            }
         }
 
         private void MesaiListele()
         {
             lvwMesaiListe.Items.Clear();
-
-            SqlDataReader mesailer = baglanti.SorguVeriOku("SELECT (calisanAd + ' ' + calisanSoyad) as CalisanAdSoyad, mesaiBaslangicTarihi, mesaiBitisTarihi  FROM mesailer JOIN calisanlar ON calisanlar.calisanID = mesailer.calisanID");
+            MesaiSaatlerID.Clear();
+            SqlDataReader mesailer = baglanti.SorguVeriOku("SELECT mesaiID,(calisanAd + ' ' + calisanSoyad) as CalisanAdSoyad, mesaiBaslangicTarihi, mesaiBitisTarihi  FROM mesailer JOIN calisanlar ON calisanlar.calisanID = mesailer.calisanID");
             while (mesailer.Read())
             {
-                string[] satir = { mesailer["CalisanAdSoyad"].ToString(), mesailer.GetDateTime(1).ToString(), mesailer.GetDateTime(2).ToString() };
+                MesaiSaatlerID.Add(mesailer.GetString(0));
+                string[] satir = { mesailer["CalisanAdSoyad"].ToString(), mesailer.GetDateTime(2).ToString(), mesailer.GetDateTime(3).ToString() };
                 var listViewItem = new ListViewItem(satir);
 
                 lvwMesaiListe.Items.Add(listViewItem);
@@ -1327,7 +1333,27 @@ namespace Otel_Yonetim_Sistemi
             VerileriTemizle(pnlMesaiEkle);
             MesaiListele();
         }
-        #endregion
+        
+        private void düzenleToolStripMenuItem4_Click(object sender, EventArgs e)
+        {
+            btnMesaiSec.PerformClick();
+        }
 
+        private void silToolStripMenuItem4_Click(object sender, EventArgs e)
+        {
+            if(lvwMesaiListe.SelectedItems.Count != 0)
+            {
+                MessageBox.Show("Bir Mesai Satırı Seçin!");
+                return;
+            }
+
+            string mesaiID = MesaiSaatlerID[lvwMesaiListe.SelectedIndices[0]];
+
+            SqlCommand cmd = new SqlCommand("DELETE FROM mesailer WHERE mesaiID = @mesaiID");
+            cmd.Parameters.AddWithValue("@mesaiID", mesaiID);
+
+            baglanti.SorguNonQuery(cmd);
+        }
+        #endregion
     }
 }

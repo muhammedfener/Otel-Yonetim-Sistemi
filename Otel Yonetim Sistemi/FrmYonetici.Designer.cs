@@ -214,6 +214,9 @@
             this.cmbBitisSaatler = new System.Windows.Forms.ComboBox();
             this.cmbBaslangicSaatler = new System.Windows.Forms.ComboBox();
             this.cmbMesaiCalisanlar = new System.Windows.Forms.ComboBox();
+            this.rightClickMenuMesai = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.düzenleToolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.silToolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.rightClickMenu.SuspendLayout();
             this.pnlKampanyaDuzenle.SuspendLayout();
@@ -239,6 +242,7 @@
             this.pnlCalismaSaatiDuzenle.SuspendLayout();
             this.rightClickMenuCalismaSaatleri.SuspendLayout();
             this.pnlMesaiEkle.SuspendLayout();
+            this.rightClickMenuMesai.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -1831,6 +1835,7 @@
             this.columnHeader27,
             this.columnHeader28,
             this.columnHeader29});
+            this.lvwMesaiListe.ContextMenuStrip = this.rightClickMenuMesai;
             this.lvwMesaiListe.FullRowSelect = true;
             this.lvwMesaiListe.HideSelection = false;
             this.lvwMesaiListe.Location = new System.Drawing.Point(405, 25);
@@ -1921,13 +1926,35 @@
             this.cmbMesaiCalisanlar.Size = new System.Drawing.Size(175, 21);
             this.cmbMesaiCalisanlar.TabIndex = 0;
             // 
+            // rightClickMenuMesai
+            // 
+            this.rightClickMenuMesai.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.düzenleToolStripMenuItem4,
+            this.silToolStripMenuItem4});
+            this.rightClickMenuMesai.Name = "rightClickMenuMesai";
+            this.rightClickMenuMesai.Size = new System.Drawing.Size(117, 48);
+            // 
+            // düzenleToolStripMenuItem4
+            // 
+            this.düzenleToolStripMenuItem4.Name = "düzenleToolStripMenuItem4";
+            this.düzenleToolStripMenuItem4.Size = new System.Drawing.Size(180, 22);
+            this.düzenleToolStripMenuItem4.Text = "Düzenle";
+            this.düzenleToolStripMenuItem4.Click += new System.EventHandler(this.düzenleToolStripMenuItem4_Click);
+            // 
+            // silToolStripMenuItem4
+            // 
+            this.silToolStripMenuItem4.Name = "silToolStripMenuItem4";
+            this.silToolStripMenuItem4.Size = new System.Drawing.Size(180, 22);
+            this.silToolStripMenuItem4.Text = "Sil";
+            this.silToolStripMenuItem4.Click += new System.EventHandler(this.silToolStripMenuItem4_Click);
+            // 
             // FrmYonetici
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.pnlMesaiEkle);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.pnlMesaiEkle);
             this.Controls.Add(this.pnlOdaEkle);
             this.Controls.Add(this.pnlCalisanEkle);
             this.Controls.Add(this.pnlKullaniciEkleDuzenle);
@@ -1973,6 +2000,7 @@
             this.rightClickMenuCalismaSaatleri.ResumeLayout(false);
             this.pnlMesaiEkle.ResumeLayout(false);
             this.pnlMesaiEkle.PerformLayout();
+            this.rightClickMenuMesai.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2153,7 +2181,6 @@
         private System.Windows.Forms.Button btnMesaiKaydet;
         private System.Windows.Forms.Button btnMesaiSec;
         private System.Windows.Forms.ListView lvwMesaiListe;
-        private System.Windows.Forms.ColumnHeader columnHeader27;
         private System.Windows.Forms.ColumnHeader columnHeader28;
         private System.Windows.Forms.ColumnHeader columnHeader29;
         private System.Windows.Forms.DateTimePicker dtpMesaiBitis;
@@ -2164,5 +2191,9 @@
         private System.Windows.Forms.ComboBox cmbBitisSaatler;
         private System.Windows.Forms.ComboBox cmbBaslangicSaatler;
         private System.Windows.Forms.ComboBox cmbMesaiCalisanlar;
+        private System.Windows.Forms.ContextMenuStrip rightClickMenuMesai;
+        private System.Windows.Forms.ToolStripMenuItem düzenleToolStripMenuItem4;
+        private System.Windows.Forms.ToolStripMenuItem silToolStripMenuItem4;
+        private System.Windows.Forms.ColumnHeader columnHeader27;
     }
 }
