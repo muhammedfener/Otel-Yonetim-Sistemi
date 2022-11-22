@@ -1054,29 +1054,31 @@ namespace Otel_Yonetim_Sistemi
                 commandstring.Parameters.AddWithValue("@calisanID", calisan);
 
                 reader = baglanti.SorguVeriOku(commandstring);
-                while (reader.Read())
-                {
+                decimal[] donendegerler = CalisanAylikMaas(reader);
 
-                }
-
+                commandstring = new SqlCommand("");
             }
 
 
         }
 
-        private decimal CalisanAylikMaas(SqlDataReader reader)
+        private decimal[] CalisanAylikMaas(SqlDataReader reader)
         {
-            decimal maas = 0;
-
+            decimal[] degerler = new decimal[] {0,0};
             while (reader.Read())
             {
-                foreach(DateTime day in EachDay(reader.GetDateTime(5), reader.GetDateTime(6)))
-                {
-                    //if()
-                }
-            }
+                string vardiyaBaslangic = reader.GetString(4).Substring(0,5);
+                string vardiyaBitis = reader.GetString(4).Substring(7, 5);
 
-            return maas;
+                int vardiyaSaat = DateTime.Parse(vardiyaBaslangic).Subtract(DateTime.Parse(vardiyaBitis)).Hours;
+                decimal saatlikUcret = reader.GetDecimal(3);
+                int haftalikCalismaGunu = reader.GetDateTime(5).Subtract(reader.GetDateTime(5)).Days;
+
+                degerler[0] += vardiyaSaat * saatlikUcret * haftalikCalismaGunu;
+                degerler[1] += vardiyaSaat * haftalikCalismaGunu;
+            }
+            reader.Close();
+            return degerler;
         }
 
         public IEnumerable<DateTime> EachDay(DateTime from, DateTime thru)
@@ -1225,7 +1227,7 @@ namespace Otel_Yonetim_Sistemi
 
         private void lvwCalismaSaatleri_DoubleClick(object sender, EventArgs e)
         {
-            btnCalisanSec.PerformClick();
+            btnCalismaSaatiSec.PerformClick();
         }
 
         private void düzenleToolStripMenuItem3_Click(object sender, EventArgs e)
