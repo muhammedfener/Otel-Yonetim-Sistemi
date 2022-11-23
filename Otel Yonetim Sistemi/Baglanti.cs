@@ -45,7 +45,6 @@ namespace Otel_Yonetim_Sistemi
         public SqlDataReader SorguVeriOku(SqlCommand Command)
         {
             Command.Connection = this.connection;
-            //this.command.CommandText = Command.CommandText;
 
             this.reader = Command.ExecuteReader();
 
@@ -54,8 +53,6 @@ namespace Otel_Yonetim_Sistemi
 
         public int SorguNonQuery(SqlCommand Command)
         {
-            /*this.command.Connection = this.connection;
-            this.command.CommandText = Command.CommandText;*/
 
             Command.Connection = this.connection;
 
@@ -76,8 +73,6 @@ namespace Otel_Yonetim_Sistemi
 
         public decimal SorguScalar(SqlCommand Command)
         {
-            /*this.command.Connection = this.connection;
-            this.command.CommandText = Command.CommandText;*/
 
             Command.Connection = this.connection;
 

@@ -1302,7 +1302,7 @@ namespace Otel_Yonetim_Sistemi
             SqlDataReader mesailer = baglanti.SorguVeriOku("SELECT mesaiID,(calisanAd + ' ' + calisanSoyad) as CalisanAdSoyad, mesaiBaslangicTarihi, mesaiBitisTarihi  FROM mesailer JOIN calisanlar ON calisanlar.calisanID = mesailer.calisanID");
             while (mesailer.Read())
             {
-                MesaiSaatlerID.Add(mesailer.GetString(0));
+                MesaiSaatlerID.Add(mesailer.GetInt32(0).ToString());
                 string[] satir = { mesailer["CalisanAdSoyad"].ToString(), mesailer.GetDateTime(2).ToString(), mesailer.GetDateTime(3).ToString() };
                 var listViewItem = new ListViewItem(satir);
 
@@ -1341,7 +1341,7 @@ namespace Otel_Yonetim_Sistemi
 
         private void silToolStripMenuItem4_Click(object sender, EventArgs e)
         {
-            if(lvwMesaiListe.SelectedItems.Count != 0)
+            if(lvwMesaiListe.SelectedItems.Count != 1)
             {
                 MessageBox.Show("Bir Mesai Satırı Seçin!");
                 return;
@@ -1353,6 +1353,10 @@ namespace Otel_Yonetim_Sistemi
             cmd.Parameters.AddWithValue("@mesaiID", mesaiID);
 
             baglanti.SorguNonQuery(cmd);
+
+            MesaiSaatlerID.Remove(mesaiID);
+            MesaiListele();
+            MessageBox.Show("Mesai Başarıyla Silindi!");
         }
         #endregion
     }
